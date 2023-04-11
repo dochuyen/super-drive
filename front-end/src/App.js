@@ -9,6 +9,7 @@ import Contact from "./component/Contact/Contact";
 import Checkout from "./component/Buy/Checkout/Checkout";
 import Shopdetail from "./component/Buy/Shopdetail/Shopdetail";
 import Login from "./offpage/Login/Login";
+import Register from "./offpage/Register/Register";
 
 const App = () => {
   const publics = [
@@ -58,6 +59,7 @@ const App = () => {
           );
         })}
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </div>
   );

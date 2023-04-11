@@ -4,10 +4,10 @@ import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
-import { BiUser } from "react-icons/bi";
-import { BsBoxArrowRight, BsBoxArrowLeft } from "react-icons/bs";
+import { BiUser, BiLogIn, BiRegistered, BiLogOut } from "react-icons/bi";
 import { Children, useState, useRef, useEffect, useContext } from "react";
-
+import Offcanvas from './Offcanvas/Offcanvas'
+import Canvas from "./Offcanvas/Offcanvas";
 const cx = classNames.bind(styles);
 function Header() {
   const items = [
@@ -22,22 +22,6 @@ function Header() {
       to: "/shop",
       type: "Shop",
       text: false,
-    },
-    {
-      id: 3,
-      to: "/checkout",
-      type: "Buy",
-      text: true,
-      children: [
-        {
-          to: "/shopdetail",
-          type: "Shop detail",
-        },
-        {
-          to: "/checkout",
-          type: "Check out",
-        },
-      ],
     },
     {
       id: 4,
@@ -71,7 +55,7 @@ function Header() {
     }
   }, [local]);
 
-  console.log(localStorage.getItem("cartItems"));
+  
 
   useEffect(() => {
     if (cartItem === null) {
@@ -89,113 +73,126 @@ function Header() {
   };
 
   return (
-    
-      <div
-        className={cx("wrapper")}
-        style={{
-          top: "0",
-          position: "fixed",
-          zIndex: "100",
-          width: "100%",
-        }}
-      >
-        <Container>
-         <div className={cx('header')}>
-            <div className={cx("header-logo")}>
-              <Link to="/" className={cx("logo")}>
-                <img className={cx("logo-avt")} src={logo} />
-              </Link>
-              <Link to="/" className={cx("title")}>
-                SuperDrive
-              </Link>
+    <div
+      className={cx("wrapper")}
+      style={{
+        top: "0",
+        position: "fixed",
+        zIndex: "100",
+        width: "100%",
+      }}
+    >
+      <Container>
+        <div className={cx("header")}>
+          <div className={cx("header-logo")}>
+            <Link to="/" className={cx("logo")}>
+              <img className={cx("logo-avt")} src={logo} />
+            </Link>
+            <Link to="/" className={cx("title")}>
+              SuperDrive
+            </Link>
+          </div>
+
+          <div className={cx("header-after")}>
+            <div className={cx("header-item")}>
+              {items.map((item) => (
+                <Link
+                  key={item.id}
+                  to={item.to}
+                  className={cx("item")}
+                  style={
+                    types === item.type
+                      ? {
+                          borderBottom: "2px solid #ff9950",
+                          borderRadius: "3px",
+                          color: "#ff9950",
+                        }
+                      : {}
+                  }
+                  onClick={() => {
+                    setTypes(item.type);
+                  }}
+                >
+                  {item.type}
+                  {item.type === "Buy" && item.children && (
+                    <div className={cx("list-buy")}>
+                      {item.children.map((child, index) => (
+                        <Link
+                          className={cx("buy-item")}
+                          to={child.to}
+                          key={index}
+                        >
+                          {child.type}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </Link>
+              ))}
             </div>
-  
-            <div className={cx('header-after')}>
-              <div className={cx("header-item")}>
-                {items.map((item) => (
-                  <Link
-                    key={item.id}
-                    to={item.to}
-                    className={cx("item")}
-                    style={
-                      types === item.type
-                        ? {
-                            borderBottom: "2px solid #ff9950",
-                            borderRadius: "3px",
-                            color: "#ff9950",
-                          }
-                        : {}
-                    }
-                    onClick={() => {
-                      setTypes(item.type);
-                    }}
-                  >
-                    {item.type}
-                    {item.type === "Buy" && item.children && (
-                      <div className={cx("list-buy")}>
-                        {item.children.map((child, index) => (
-                          <Link
-                            className={cx("buy-item")}
-                            to={child.to}
-                            key={index}
-                          >
-                            {child.type}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </Link>
-                ))}
-              </div>
-    
-        
-                <div className={cx("nav-search")}>
-                  <input className={cx("search")} type="search" />
-                </div>
-      
-              <div className={cx("btn-log")}>
-                <BiUser />
-    
-                <div className={cx("user")}>
-                  {localUsername ? (
+
+            <div className={cx("nav-search")}>
+              <input className={cx("search")} type="search" />
+            </div>
+
+            <div className={cx("btn-log")}>
+              <BiUser />
+
+              <div className={cx("user")}>
+                {localUsername ? (
+                  <>
                     <Link className={cx("user-login")} to="/login">
                       <span>
-                        <BsBoxArrowLeft />
+                        <BiLogIn />
                       </span>
                       Login
                     </Link>
-                  ) : (
-                    <>
-                      <Link className={cx("btn-user")}>
-                        <span>
-                          <BiUser />
-                        </span>
-                        {paserUsername}
-                      </Link>
-                      <Link onClick={handleLogOut} className={cx("btn-log")}>
-                        <span>
-                          <BsBoxArrowRight />
-                        </span>
-                        Log out
-                      </Link>
-                    </>
-                  )}
-                </div>
-              </div>
-              <div className={cx("nav")}>
-                <Link
-                  to="/checkout"
-                  style={{ position: "relative", cursor: "pointer" }}
-                >
-                  <AiOutlineShoppingCart className={cx("icon-nav")} />
-                  <div className={cx("child-icon")}>{lengthCartItem}</div>
-                </Link>
+                    <Link className={cx("user-register")} to="/register">
+                      <span>
+                        <BiRegistered />
+                      </span>
+                      Register
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link className={cx("btn-user")}>
+                      <span>
+                        <BiUser />
+                      </span>
+                      {paserUsername}
+                    </Link>
+                    <Link onClick={handleLogOut} className={cx("btn-log")}>
+                      <span>
+                        <BiLogOut />
+                      </span>
+                      Log out
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
-         </div>
-        </Container>
-      </div>
-
+            <div
+              className={cx("nav")}
+              onClick={() => {
+                setTypes('AiOutlineShoppingCart');
+              }}
+            >
+              <Link
+                to="/checkout"
+                style={{ position: "relative", cursor: "pointer" }}
+              >
+                <AiOutlineShoppingCart className={cx("icon-nav")} style={types==='AiOutlineShoppingCart'&&{color: "#ff9950",}}/>
+                <div className={cx("child-icon")}>{lengthCartItem}</div>
+              </Link>
+            </div>
+          </div>
+          <div className={cx('offcanvas')}>
+            <Canvas localUsername={localUsername} paserUsername={paserUsername} handleLogOut={handleLogOut} lengthCartItem={lengthCartItem} />
+          </div>
+        </div>
+      </Container>
+    </div>
   );
 }
 

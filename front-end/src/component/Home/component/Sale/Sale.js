@@ -20,10 +20,7 @@ const Sale = () => {
               className={cx("cover-image")}
             />
           </div>
-          {/* <img
-            src="https://ggayane.github.io/css-experiments/cards/dark_rider-title.png"
-            className={cx("title")}
-          /> */}
+       
           <img
             src={img1}
             className={cx("character")}
@@ -42,10 +39,7 @@ const Sale = () => {
               className={cx("cover-image")}
             />
           </div>
-          {/* <img
-            src="https://ggayane.github.io/css-experiments/cards/dark_rider-title.png"
-            className={cx("title")}
-          /> */}
+          
           <img
             src={img1}
             className={cx("character")}

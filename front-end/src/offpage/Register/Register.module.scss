@@ -67,7 +67,8 @@ a {
   align-items: center;
   justify-content: center;
 }
-.btn-register, .ghost {
+.btn-register,
+.ghost {
   position: relative;
   border-radius: 20px !important;
   border: 1px solid #4bb6b7;
@@ -90,7 +91,7 @@ a {
     outline: none;
   }
 }
-.btn-login{
+.btn-login {
   position: relative;
   border-radius: 20px !important;
   border: 1px solid #4bb6b7;
@@ -106,8 +107,7 @@ a {
   transition: 0.3s ease-in-out;
   &:hover {
     letter-spacing: 3px;
-  color: #fff;
-
+    color: #fff;
   }
   :active {
     transform: scale(0.95);
@@ -122,7 +122,7 @@ a {
   background-color: rgba(225, 225, 225, 0.2);
   border: 2px solid #fff;
   color: #fff;
-  &:hover{
+  &:hover {
     color: #fff;
   }
   &:hover .icon-login {
@@ -146,7 +146,6 @@ a {
 .icon-login {
   left: 70px;
 }
-
 
 .container {
   background-color: #fff;
@@ -196,10 +195,8 @@ a {
   z-index: 1;
 }
 .register {
-
   opacity: 1;
   z-index: 5;
-  animation: show 0.6s;
 }
 @keyframes show {
   0%,
@@ -213,7 +210,8 @@ a {
     z-index: 5;
   }
 }
-.overlay-boxlog, .overlay-boxreg {
+.overlay-boxlog,
+.overlay-boxreg {
   position: absolute;
   top: 0;
   left: 50%;
@@ -226,8 +224,8 @@ a {
 .container.right-panel-action.overlay-box {
   transform: translate(-100%);
 }
-.overlay-reg, .overlay-log {
- 
+.overlay-reg,
+.overlay-log {
   background-position: 0 0;
   color: #fff;
   position: relative;
@@ -253,7 +251,8 @@ a {
 .overlay {
   transform: translateX(50%);
 }
-.over-right, .over-left {
+.over-right,
+.over-left {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -297,18 +296,18 @@ a {
 .social-box a:hover {
   border: 1px solid #4bb6b7;
 }
-.pass-show{
+.pass-show {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
-.icon-show{
+.icon-show {
   position: absolute;
   right: 15px;
 }
-.error{
+.error {
   color: red;
   font-size: 11px;
   height: auto;

@@ -1,35 +1,124 @@
-import { useState } from 'react';
-import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
-import Offcanvas from 'react-bootstrap/Offcanvas';
+import { useState } from "react";
+import Alert from "react-bootstrap/Alert";
+import Button from "react-bootstrap/Button";
+import Offcanvas from "react-bootstrap/Offcanvas";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { BiUser, BiLogIn, BiRegistered, BiLogOut } from "react-icons/bi";
+import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
 
-const Offcanvas = () => {
-    const [show, setShow] = useState(false);
+import { Link } from "react-router-dom";
+import classNames from "classnames/bind";
+import styles from "./Offcanvas.module.scss";
 
+const cx = classNames.bind(styles);
+function Canvas({
+  localUsername,
+  paserUsername,
+  handleLogOut,
+  lengthCartItem,
+}) {
+  const items = [
+    {
+      id: 1,
+      to: "/",
+      type: "Home",
+    },
+    {
+      id: 2,
+      to: "/shop",
+      type: "Shop",
+    },
+    {
+      id: 4,
+      to: "/blog",
+      type: "Blog",
+    },
+
+    {
+      id: 5,
+      to: "/contact",
+      type: "Contact",
+    },
+  ];
+
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   return (
     <>
-      <Button variant="primary" className="d-lg-none" onClick={handleShow}>
-        Launch
-      </Button>
-
-      <Alert variant="info" className="d-none d-lg-block">
-        Resize your browser to show the responsive offcanvas toggle.
-      </Alert>
-
+      <button className={cx("btn-canvas")} onClick={handleShow}>
+        <RxHamburgerMenu />
+      </button>
       <Offcanvas show={show} onHide={handleClose} responsive="lg">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Responsive offcanvas</Offcanvas.Title>
+          <Offcanvas.Title>Super Drive</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <p className="mb-0">
-            This is content within an <code>.offcanvas-lg</code>.
-          </p>
+          <>
+            {items.map((item) => (
+              <div className={cx("items")}>
+                <Link className={cx("item")} to={item.to}>
+                  {" "}
+                  {item.type}
+                </Link>
+              </div>
+            ))}
+          </>
+          <div className={cx("nav-search")}>
+            <input className={cx("search")} type="search" />
+          </div>
+          <div>
+            <div className={cx("btn-log")}>
+              <BiUser />
+              <div className={cx("user")}>
+                {localUsername ? (
+                  <>
+                    <Link className={cx("user-login")} to="/login">
+                      <span>
+                        <BiLogIn />
+                      </span>
+                      Login
+                    </Link>
+                    <Link className={cx("user-register")} to="/register">
+                      <span>
+                        <BiRegistered />
+                      </span>
+                      Register
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link className={cx("btn-user")}>
+                      <span>
+                        <BiUser />
+                      </span>
+                      {paserUsername}
+                    </Link>
+                    <Link onClick={handleLogOut} className={cx("btn-log")}>
+                      <span>
+                        <BiLogOut />
+                      </span>
+                      Log out
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+            <div className={cx("nav")}>
+              <Link
+                to="/checkout"
+                style={{ position: "relative", cursor: "pointer" }}
+              >
+                <AiOutlineShoppingCart className={cx("icon-nav")} />
+                <div className={cx("child-icon")}>{lengthCartItem}</div>
+              </Link>
+            </div>
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
     </>
-  )
+  );
 }
 
-export default Offcanvas
+export default Canvas;

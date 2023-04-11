@@ -14,7 +14,7 @@ const cx = classNames.bind(styles);
 const Home = () => {
   return (
     <div className={cx("home")}>
-      <Carousel  className={cx("banner")} fade>
+      <Carousel className={cx("banner")} fade>
         <Carousel.Item interval={1000}>
           <img
             className={cx("d-block w-100 banner-avt")}
@@ -69,15 +69,13 @@ const Home = () => {
 
       <Container>
         <div className={cx("new-arrivals")}>
-          <p className={cx('small-title')}>LATEST PRODUCTS</p>
+          <p className={cx("small-title")}>LATEST PRODUCTS</p>
           <h2 className={cx("new-title")}>New arrivals</h2>
           <div className={cx("new-box")}>
             <ListNewCar />
           </div>
         </div>
-      </Container>
 
-      <Container>
         <div className={cx("trend")}>
           <Trend />
         </div>
