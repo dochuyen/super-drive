@@ -1,8 +1,7 @@
 .wrapper {
-  margin: 30px 0;
+  margin: 30px 20px;
 }
 .box {
-  max-width: 250px;
   height: 360px;
   border-radius: 5px;
   object-fit: cover;
@@ -15,10 +14,10 @@
 
 .img-car {
   border-radius: 5px;
-  width: 250px;
+  width: 100%;
 }
 .picture {
-  max-width: 250px;
+  width: 100%;
   height: 200px;
   border-radius: 3px;
 }
@@ -30,11 +29,12 @@
   font-size: 15px;
   margin-bottom: 0;
 }
-.icons{
+.icons {
   padding-bottom: 10px;
   border-bottom: 1px solid #c1c1c1db;
 }
-.eye, .heart{
+.eye,
+.heart {
   font-size: 20px;
   margin-left: 0;
   margin-right: 15px;
@@ -54,15 +54,17 @@
   object-fit: cover;
   color: #717171;
 }
-.info{
+.info {
   text-align: center;
   margin-top: 20px;
 }
-.title, .price-car, .sale-price{
-  font-family: Montserrat,sans-serif;
+.title,
+.price-car,
+.sale-price {
+  font-family: Montserrat, sans-serif;
   font-size: 13px;
   font-weight: 700;
 }
-.sale-price{
+.sale-price {
   text-decoration: line-through;
 }

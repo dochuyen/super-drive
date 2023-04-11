@@ -89,113 +89,110 @@ function Header() {
   };
 
   return (
-    
-      <div
-        className={cx("wrapper")}
-        style={{
-          top: "0",
-          position: "fixed",
-          zIndex: "100",
-          width: "100%",
-        }}
-      >
-        <Container>
-         <div className={cx('header')}>
-            <div className={cx("header-logo")}>
-              <Link to="/" className={cx("logo")}>
-                <img className={cx("logo-avt")} src={logo} />
-              </Link>
-              <Link to="/" className={cx("title")}>
-                SuperDrive
-              </Link>
-            </div>
-  
-            <div className={cx('header-after')}>
-              <div className={cx("header-item")}>
-                {items.map((item) => (
-                  <Link
-                    key={item.id}
-                    to={item.to}
-                    className={cx("item")}
-                    style={
-                      types === item.type
-                        ? {
-                            borderBottom: "2px solid #ff9950",
-                            borderRadius: "3px",
-                            color: "#ff9950",
-                          }
-                        : {}
-                    }
-                    onClick={() => {
-                      setTypes(item.type);
-                    }}
-                  >
-                    {item.type}
-                    {item.type === "Buy" && item.children && (
-                      <div className={cx("list-buy")}>
-                        {item.children.map((child, index) => (
-                          <Link
-                            className={cx("buy-item")}
-                            to={child.to}
-                            key={index}
-                          >
-                            {child.type}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </Link>
-                ))}
-              </div>
-    
-        
-                <div className={cx("nav-search")}>
-                  <input className={cx("search")} type="search" />
-                </div>
-      
-              <div className={cx("btn-log")}>
-                <BiUser />
-    
-                <div className={cx("user")}>
-                  {localUsername ? (
-                    <Link className={cx("user-login")} to="/login">
-                      <span>
-                        <BsBoxArrowLeft />
-                      </span>
-                      Login
-                    </Link>
-                  ) : (
-                    <>
-                      <Link className={cx("btn-user")}>
-                        <span>
-                          <BiUser />
-                        </span>
-                        {paserUsername}
-                      </Link>
-                      <Link onClick={handleLogOut} className={cx("btn-log")}>
-                        <span>
-                          <BsBoxArrowRight />
-                        </span>
-                        Log out
-                      </Link>
-                    </>
-                  )}
-                </div>
-              </div>
-              <div className={cx("nav")}>
-                <Link
-                  to="/checkout"
-                  style={{ position: "relative", cursor: "pointer" }}
-                >
-                  <AiOutlineShoppingCart className={cx("icon-nav")} />
-                  <div className={cx("child-icon")}>{lengthCartItem}</div>
-                </Link>
-              </div>
-            </div>
-         </div>
-        </Container>
-      </div>
+    <div
+      className={cx("wrapper")}
+      style={{
+        top: "0",
+        position: "fixed",
+        zIndex: "100",
+        width: "100%",
+      }}
+    >
+      <Container>
+        <div className={cx("header")}>
+          <div className={cx("header-logo md:hidden")}>
+            <Link to="/" className={cx("logo")}>
+              <img className={cx("logo-avt")} src={logo} />
+            </Link>
+            <Link to="/" className={cx("title ")}>
+              SuperDrive
+            </Link>
+          </div>
 
+          <div className={cx("header-after")}>
+            <div className={cx("header-item")}>
+              {items.map((item) => (
+                <Link
+                  key={item.id}
+                  to={item.to}
+                  className={cx("item")}
+                  style={
+                    types === item.type
+                      ? {
+                          borderBottom: "2px solid #ff9950",
+                          borderRadius: "3px",
+                          color: "#ff9950",
+                        }
+                      : {}
+                  }
+                  onClick={() => {
+                    setTypes(item.type);
+                  }}
+                >
+                  {item.type}
+                  {item.type === "Buy" && item.children && (
+                    <div className={cx("list-buy")}>
+                      {item.children.map((child, index) => (
+                        <Link
+                          className={cx("buy-item")}
+                          to={child.to}
+                          key={index}
+                        >
+                          {child.type}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </Link>
+              ))}
+            </div>
+
+            <div className={cx("nav-search")}>
+              <input className={cx("search")} type="search" />
+            </div>
+
+            <div className={cx("btn-log")}>
+              <BiUser />
+
+              <div className={cx("user")}>
+                {localUsername ? (
+                  <Link className={cx("user-login")} to="/login">
+                    <span>
+                      <BsBoxArrowLeft />
+                    </span>
+                    Login
+                  </Link>
+                ) : (
+                  <>
+                    <Link className={cx("btn-user")}>
+                      <span>
+                        <BiUser />
+                      </span>
+                      {paserUsername}
+                    </Link>
+                    <Link onClick={handleLogOut} className={cx("btn-log")}>
+                      <span>
+                        <BsBoxArrowRight />
+                      </span>
+                      Log out
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+            <div className={cx("nav")}>
+              <Link
+                to="/checkout"
+                style={{ position: "relative", cursor: "pointer" }}
+              >
+                <AiOutlineShoppingCart className={cx("icon-nav")} />
+                <div className={cx("child-icon")}>{lengthCartItem}</div>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </div>
   );
 }
 

@@ -15,6 +15,7 @@ const ListNewCar = () => {
           <img
             className={cx("picture")}
             src="https://tse2.mm.bing.net/th?id=OIP.jP1affsIOeZfzgBUNECqrAHaE7&pid=Api&P=0"
+            width="100%"
           />
         </div>
         <div className={cx("car")}>
@@ -29,12 +30,12 @@ const ListNewCar = () => {
           <button className={cx("add")}>
             <BsCartPlus />
           </button>
-          <div className={cx('info')}>
-            <div className={cx('title')}>BMW</div>
+          <div className={cx("info")}>
+            <div className={cx("title")}>BMW</div>
             <p className={cx("name-car")}>GTR</p>
             <div className={cx("price-car")}>
-            <span className={cx('sale-price')}>$20.000</span>
-             - $15,730*</div>
+              <span className={cx("sale-price")}>$20.000</span>- $15,730*
+            </div>
           </div>
         </div>
       </div>

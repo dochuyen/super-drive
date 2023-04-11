@@ -2,21 +2,18 @@
   --card-height: 250px;
   --card-width: 350px;
 }
-.container{
-  display: flex;
-  justify-content: center;
 
-}
 .card {
   width: var(--card-width);
   height: var(--card-height);
   position: relative;
   display: flex;
+
   justify-content: center;
   align-items: flex-end;
-  padding: 0 36px;
+
   perspective: 2500px;
-  margin: 0 50px;
+  margin: 20px 60px;
 }
 
 .cover-image {
