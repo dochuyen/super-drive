@@ -56,17 +56,11 @@ const Home = () => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-
       <Container>
-        <div className={cx("sale")}>
-          <Sale />
-        </div>
-      </Container>
+        <Sale />
 
-      <div className={cx("lucky-game")}>
         <Lucky />
-      </div>
-
+      </Container>
       <Container>
         <div className={cx("new-arrivals")}>
           <p className={cx("small-title")}>LATEST PRODUCTS</p>

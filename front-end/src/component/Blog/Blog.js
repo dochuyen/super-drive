@@ -11,6 +11,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import classNames from "classnames/bind";
 import styles from "./Blog.module.scss";
+import ListNewCar from "../Home/component/ListNewCar/ListNewCar";
 
 const cx = classNames.bind(styles);
 const Blog = () => {
@@ -65,8 +66,8 @@ const Blog = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    centerPadding: '200px',
+    slidesToShow: 4,
+    centerPadding: "200px",
     slidesToScroll: 1,
     autoplay: true,
     autoplayspeed: 1000,
@@ -74,12 +75,12 @@ const Blog = () => {
       {
         breakpoint: 500,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
         },
       },
 
       {
-        breakpoint: 768,
+        breakpoint: 772,
         settings: {
           slidesToShow: 3,
         },
@@ -97,7 +98,7 @@ const Blog = () => {
         />
       </div>
       <Container>
-        <Row 
+        <Row
           style={{
             position: "relative",
             top: -120,
@@ -105,12 +106,7 @@ const Blog = () => {
         >
           <Slider {...settings}>
             {cardDatas.map((cardData, index) => (
-              <div className={cx("slider-box")} key={index}>
-                
-                <div>
-                  <h1>lambogifi</h1>
-                </div>
-              </div>
+              <ListNewCar />
             ))}
           </Slider>
         </Row>
@@ -137,47 +133,10 @@ const Blog = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col xs={12} md={6} lg={4} className={cx("blog")}>
-            <Card style={{ width: "100%", marginTop: "20px" }}>
-              <Card.Img
-                variant="top"
-                width="100px"
-                height="200px"
-                src="https://sohanews.sohacdn.com/thumb_w/660/2018/10/2/image-12-1538483239360278266980-1538485472308424302289.png"
-              />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs={12} md={6} lg={4} className={cx("blog")}>
-            <Card style={{ width: "100%", marginTop: "20px" }}>
-              <Card.Img
-                variant="top"
-                width="100px"
-                height="200px"
-                src="https://sohanews.sohacdn.com/thumb_w/660/2018/10/2/image-12-1538483239360278266980-1538485472308424302289.png"
-              />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </Col>
         </Row>
         <Row>
-          <h1>Comment</h1>
-
           <Col md={{ span: 6, offset: 3 }}>
+            <h1>Comment</h1>
             <Form>
               <input
                 type="text"
