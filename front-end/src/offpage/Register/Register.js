@@ -10,7 +10,7 @@ import {
 import { BsFillEyeSlashFill, BsFacebook } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 const Register = () => {
@@ -34,10 +34,12 @@ const Register = () => {
   const [hiddenRegister, setHiddenRegister] = useState(false);
   const [passValid, setPassValid] = useState(true);
   const [name, setName] = useState(true);
-  const input = useRef();
+const next=useNavigate()
 
   const submitRegister = async (e) => {
-    if ({ email, password, username }) {
+    if ( email===''&& password===''&& username==='' ) {
+      alert('Bạn phải nhập đầy đủ username, email, password!')
+    }else{
       e.preventDefault();
       const res = await fetch(
         "https://63fb4ba12027a45d8d63d560.mockapi.io/account",
@@ -50,9 +52,8 @@ const Register = () => {
         }
       );
       const data = await res.json();
-      input.current.focus();
-      alert("Bạn đã đăng ký thành công, mời bạn đăng nhập!");
-      
+      alert("Bạn đã đăng ký thành công!");
+      next('/login')
     }
   };
 
@@ -89,7 +90,6 @@ const Register = () => {
                   <h1 className={cx("big-title")}>Register hire.</h1>
                   <input
                     type="text"
-                    ref={input}
                     value={username}
                     onChange={changeUser}
                     placeholder="Name"

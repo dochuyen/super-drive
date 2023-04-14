@@ -11,7 +11,7 @@ import { BsFillEyeSlashFill,BsFacebook } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
 
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 const Login = () => {
@@ -34,9 +34,9 @@ const Login = () => {
   const [login, setLogin] = useState([]);
   const [emailLogin, setEmailLogin] = useState("");
   const [passwordLogin, setPasswordLogin] = useState("");
-  const [linkLogin, setLinkLogin] = useState(false);
   const [localAccount, setLocalAccount]=useState([])
   const [hidden, setHidden] = useState(false);
+  const next=useNavigate();
 
   localStorage.getItem('localAccount')
   const validUser = login.find(
@@ -49,17 +49,15 @@ const Login = () => {
         setLogin(data);
       });
   }, []);
-  useEffect(() => {
+ 
+  const submitLogin=()=>{
     if (validUser) {
-      setLinkLogin(true);
-    } else {
-      setLinkLogin(false)
-    }
-  }, [emailLogin && passwordLogin]);
-  const pushLocal=()=>{
+      next('/')
       localAccount.push(validUser.id)
       localStorage.setItem('validUser', JSON.stringify(validUser.username))
-      console.log(localAccount.id)
+    } else {
+      alert('Tài khoản mật khẩu không đúng!')
+    }
   }
 
   const handleShow = () => {
@@ -71,7 +69,7 @@ const Login = () => {
       <div className={cx("wrapper")}>
           <div className={cx("container")}>
             <div className={cx("login")}>
-              <form>
+              <form onSubmit={submitLogin}>
                 <h1 className={cx("big-title")}>Login hire.</h1>
                 <input
                   value={emailLogin}
@@ -105,13 +103,11 @@ const Login = () => {
                     <a href="#">Forgot password?</a>
                   </div>
                 </div>
-                {!linkLogin ? (
-                  <Link className={cx("btn-login")}>Login</Link>
-                ) : (
-                  <Link onClick={pushLocal} to="/" className={cx("btn-login")}>
+               
+                  <button onClick={submitLogin} className={cx("btn-login")}>
                     Login
-                  </Link>
-                )}
+                  </button>
+                
                 <span className={cx("or")}>or use your account</span>
                 <div className={cx("social-box")}>
                   {socials.map((social, index) => (
