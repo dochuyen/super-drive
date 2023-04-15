@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Lucky.module.scss";
 import classNames from "classnames/bind";
-import picturelucky from "../../../../accets/lucky/lamborgini-lucky.jpg";
+import picturelucky from "../../../../assets/lucky/lamborgini-lucky.jpg";
 import { Col, Row } from "react-bootstrap";
 
 const cx = classNames.bind(styles);

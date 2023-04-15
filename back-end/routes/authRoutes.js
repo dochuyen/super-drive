@@ -25,26 +25,6 @@ authRouter.post("/login", async (req, res) => {
     });
   }
 
-  // handle login succsess
-  // create token
-
-  // xxx.yyy.zzz
-  /*
-  xxx: header: base64 encoded
-  {
-    exp: // thoi gian het han
-  }
-  ____
-  yyy: payload: base64 encoded
-  {
-    email,
-    userId,
-    role,
-    permission
-  }
-  ____
-  zzz: signature: "ajhfjkafjhahjflafjhahjf"
-  */
 
   const token = jwt.sign(
     {
@@ -67,8 +47,8 @@ authRouter.post("/login", async (req, res) => {
 });
 
 authRouter.post("/register", async (req, res) => {
+  const {username, email, password } = req.body;
   try {
-    const { email, password } = req.body;
     const passwordHash = bcrypt.hashSync(password, 10);
 
     const user = await authCollection.findOne({ email });
@@ -90,6 +70,8 @@ authRouter.post("/register", async (req, res) => {
       data: {
         _id: newUser.insertedId,
         email,
+        password:passwordHash,
+        cartitem:{img, }
       },
     });
   } catch (error) {

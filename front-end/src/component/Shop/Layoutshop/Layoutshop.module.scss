@@ -5,6 +5,12 @@
 .nav-bar{
     margin-right: 30px;
 }
+
 .product{
     width: 100%;
+}
+@media (max-width:768px) {
+    .wrapper{
+        display: grid;
+    }
 }

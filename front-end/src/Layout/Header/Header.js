@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import logo from "../../accets/logo/logo.png";
+import logo from "../../assets/logo/logo.png";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
