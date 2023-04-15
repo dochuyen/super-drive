@@ -5,7 +5,7 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import gifFerrari from "../../../../accets/gif/trend1.gif";
 import gifGtr from "../../../../accets/gif/gtr-trend.gif";
 import gifLamborghini from "../../../../accets/gif/lambogini-trend.gif";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 const cx = classNames.bind(styles);
 const Trend = () => {
@@ -25,7 +25,7 @@ const Trend = () => {
   ];
 
   return (
-    <div className={cx("wrapper")}>
+    <Container>
       <div className={cx("title")}>
         <h5 className={cx("small-title")}>LATEST NEWS</h5>
         <h2 className={cx("big-title")}>New Trends</h2>
@@ -47,7 +47,7 @@ const Trend = () => {
           </Col>
         ))}
       </Row>
-    </div>
+    </Container>
   );
 };
 
