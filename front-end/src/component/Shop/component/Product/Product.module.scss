@@ -11,6 +11,9 @@
 .wrapper {
   margin: 10px 0;
 }
+.product{
+  display: flex;
+  }
 .box {
   max-width: 250px;
   height: 360px;
@@ -107,6 +110,10 @@
 .icon-heart{
   color: rgb(255, 40, 111);
 }
-.product{
-display: flex;
+
+@media (max-width:576px) {
+  .product{
+    display: grid;
+    justify-content: center;
+  }
 }

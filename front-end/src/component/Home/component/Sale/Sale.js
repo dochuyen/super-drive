@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Sale.module.scss";
 import classNames from "classnames/bind";
 import { Row, Col, Container } from "react-bootstrap";
-import img1 from "../../../../accets/homecar/1.png";
+import img1 from "../../../../assets/homecar/1.png";
 
 const cx = classNames.bind(styles);
 const Sale = () => (

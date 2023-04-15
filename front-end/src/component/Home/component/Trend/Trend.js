@@ -2,9 +2,9 @@ import React from "react";
 import classNames from "classnames/bind";
 import styles from "./Trend.module.scss";
 import { AiOutlineCalendar } from "react-icons/ai";
-import gifFerrari from "../../../../accets/gif/trend1.gif";
-import gifGtr from "../../../../accets/gif/gtr-trend.gif";
-import gifLamborghini from "../../../../accets/gif/lambogini-trend.gif";
+import gifFerrari from "../../../../assets/gif/trend1.gif";
+import gifGtr from "../../../../assets/gif/gtr-trend.gif";
+import gifLamborghini from "../../../../assets/gif/lambogini-trend.gif";
 import { Col, Row } from "react-bootstrap";
 
 const cx = classNames.bind(styles);
