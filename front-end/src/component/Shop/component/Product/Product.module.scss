@@ -1,6 +1,8 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  margin: 10px 0;
+
 }
 .option {
   display: flex;
@@ -8,12 +10,8 @@
   padding-bottom: 5px;
   border-bottom: 2px solid #c0c0c0;
 }
-.wrapper {
-  margin: 10px 0;
-}
-.product{
-  display: flex;
-  }
+
+
 .box {
   max-width: 250px;
   height: 360px;

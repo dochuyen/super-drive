@@ -60,11 +60,11 @@ const Product = () => {
         <GrFormNextLink /> Showing page <span className={cx("action")}>1</span>
       </p>
 
-      <Row>
         <div className={cx("product")}>
+      <Row>
           {products.map((product, index) => (
-            <Col lg={3}>
-              <div key={index} className={cx("box")}>
+            <Col key={index} lg={4}>
+              <div  className={cx("box")}>
                 <div className={cx("img-car")}>
                   <img className={cx("picture")} src={product.picture} />
                 </div>
@@ -98,8 +98,8 @@ const Product = () => {
               </div>
             </Col>
           ))}
-        </div>
       </Row>
+        </div>
 
       <div className={cx("page")}>
         {pages.map((page, index) => (

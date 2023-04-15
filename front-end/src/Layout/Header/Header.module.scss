@@ -233,6 +233,9 @@
   }
 }
 @media (max-width: 992px) {
+  .title{
+    display: inline;
+  }
   .offcanvas{
     display: block;
   }

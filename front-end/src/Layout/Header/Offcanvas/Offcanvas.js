@@ -56,8 +56,8 @@ function Canvas({
         </Offcanvas.Header>
         <Offcanvas.Body>
           <>
-            {items.map((item) => (
-              <div className={cx("items")}>
+            {items.map((item, index) => (
+              <div key={index} className={cx("items")}>
                 <Link className={cx("item")} to={item.to}>
                   {" "}
                   {item.type}
