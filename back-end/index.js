@@ -19,7 +19,7 @@ async function main() {
     app.use(express.json());
     app.use("/api/v1/students", studentRoutes);
     app.use("/api/v1/auth", authRoutes);
-
+    
     // run server
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
