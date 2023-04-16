@@ -59,8 +59,8 @@ const Home = () => {
       <Container>
         <Sale />
 
-        <Lucky />
       </Container>
+        <Lucky />
       <Container>
         <div className={cx("new-arrivals")}>
           <p className={cx("small-title")}>LATEST PRODUCTS</p>
