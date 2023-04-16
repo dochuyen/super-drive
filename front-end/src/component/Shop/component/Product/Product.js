@@ -5,6 +5,7 @@ import { GrFormNextLink } from "react-icons/gr";
 import { AiOutlineHeart, AiOutlineEye, AiFillHeart } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
 import { Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 const Product = () => {
@@ -60,11 +61,11 @@ const Product = () => {
         <GrFormNextLink /> Showing page <span className={cx("action")}>1</span>
       </p>
 
-        <div className={cx("product")}>
-      <Row>
+     <div className={cx("product")}>
+        <Row >
           {products.map((product, index) => (
-            <Col key={index} lg={4}>
-              <div  className={cx("box")}>
+            <Col xs={12} sm={6} md={6} lg={4} xl={3}>
+              <Link to='/shopdetail' key={index} className={cx("box")}>
                 <div className={cx("img-car")}>
                   <img className={cx("picture")} src={product.picture} />
                 </div>
@@ -95,11 +96,12 @@ const Product = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </Col>
           ))}
-      </Row>
-        </div>
+        </Row>
+  
+     </div>
 
       <div className={cx("page")}>
         {pages.map((page, index) => (

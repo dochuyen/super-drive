@@ -44,7 +44,12 @@
   color: #111;
   border-color: #ccc;
 }
+.product-involve{
+  padding-top: 15px;
+}
+
 .box {
+  text-decoration: none;
   max-width: 250px;
   height: 360px;
   border-radius: 5px;
@@ -52,7 +57,10 @@
   transition: transform 400ms;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   margin-bottom: 4rem;
+  color: #111;
+  background-color: #fff;
   &:hover {
+    color: #111;
     transform: scale(1.05);
   }
 }
@@ -178,7 +186,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 .involve-text{
   font-size: 23px;
@@ -204,4 +212,20 @@
 .list-product{
   display: flex;
   width: 100%;
+}
+@media (max-width:768px) {
+  .img{
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .img-list{
+    display: flex;
+    margin-top: 10px;
+  }
+  .img-big{
+    margin-bottom: 10px;
+  }
+}
+.random-product{
+  padding-bottom: 30px;
 }

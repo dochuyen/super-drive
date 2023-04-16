@@ -149,7 +149,7 @@ const Contact = () => {
             </Card.Body>
             <Card.Img
               variant="bottom"
-              src="https://ktsvanlam.com/cach-ve-o-to-dep-nhat-the-gioi/imager_4_1230_700.jpg"
+              
             />
           </Card>
         </Row>

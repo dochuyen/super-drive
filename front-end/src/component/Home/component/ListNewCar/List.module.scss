@@ -2,12 +2,18 @@
   margin: 30px 20px;
 }
 .box {
+  text-decoration: none;
+  max-width: 250px;
   height: 360px;
   border-radius: 5px;
   object-fit: cover;
   transition: transform 400ms;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 4rem;
+  color: #111;
+  background-color: #fff;
   &:hover {
+    color: #111;
     transform: scale(1.05);
   }
 }

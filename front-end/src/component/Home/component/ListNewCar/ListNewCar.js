@@ -5,12 +5,13 @@ import styles from "./List.module.scss";
 import { IoIosAddCircle } from "react-icons/io";
 import { AiFillHeart, AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 const ListNewCar = () => {
   return (
     <div className={cx("wrapper")}>
-      <div className={cx("box")}>
+      <Link to="/shopdetail" className={cx("box")}>
         <div className={cx("img-car")}>
           <img
             className={cx("picture")}
@@ -38,7 +39,7 @@ const ListNewCar = () => {
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

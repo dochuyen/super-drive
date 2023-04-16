@@ -91,7 +91,7 @@ const Footer = () => {
               </div>
             ))}
 
-            <ContactForm />
+            {/* <ContactForm /> */}
           </div>
 
           <div className={cx("social")}>
