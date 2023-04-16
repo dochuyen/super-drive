@@ -1,7 +1,6 @@
 import { config } from "dotenv";
 config();
 import express from "express";
-
 import { client } from "./configs/connectDB.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import authRoutes from "./routes/authRoutes.js";

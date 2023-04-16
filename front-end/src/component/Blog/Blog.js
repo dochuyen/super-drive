@@ -4,14 +4,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Slider from "react-slick";
+
 import Form from "react-bootstrap/Form";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import classNames from "classnames/bind";
 import styles from "./Blog.module.scss";
-import ListNewCar from "../Home/component/ListNewCar/ListNewCar";
+
 
 const cx = classNames.bind(styles);
 const Blog = () => {
