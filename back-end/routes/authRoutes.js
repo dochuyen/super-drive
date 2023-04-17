@@ -32,7 +32,7 @@ authRouter.post("/login", async (req, res) => {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "1h",
+      expiresIn: "1d",
     }
   );
 
@@ -47,13 +47,15 @@ authRouter.post("/login", async (req, res) => {
 });
 
 authRouter.post("/register", async (req, res) => {
-  const {username, email, password } = req.body;
+  // const {username, email, password } = req.body;
+  const { email, password } = req.body;
+
   try {
     const passwordHash = bcrypt.hashSync(password, 10);
 
     const user = await authCollection.findOne({ email });
     if (user) {
-      throw new Error("Email is already taken");
+      throw new Error("Email is already token");
     }
 
     const newUser = await authCollection.insertOne({
