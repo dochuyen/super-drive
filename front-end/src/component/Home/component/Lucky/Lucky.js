@@ -46,11 +46,11 @@ const Lucky = () => {
     setIsClicked(true);
   };
   return (
-   <Row>
+    
       <div className={cx("wrapper")}>
         <img className={cx("picture")} src={picturelucky}></img>
         <div className={cx("interact")}></div>
-       <Col md={12}>
+
           <div className={cx("content")}>
             <h1 className={cx("title")}>LUCKY GIFT</h1>
             <p className={cx("text")}>Randomly a surprise will come to you</p>
@@ -71,9 +71,8 @@ const Lucky = () => {
               <p className={cx("text-random")}>{random.type}</p>
             </div>
           </div>
-       </Col>
+ 
       </div>
-   </Row>
   );
 };
 
