@@ -25,6 +25,7 @@ const Trend = () => {
   ];
 
   return (
+    
     <Container>
       <div className={cx("title")}>
         <h5 className={cx("small-title")}>LATEST NEWS</h5>
