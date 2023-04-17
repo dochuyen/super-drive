@@ -1,9 +1,10 @@
 .footer{
+    display: flex;
+    align-items: center;
     width: 100%;
     background-color: black;
     color: #fff;
-    padding-top: 20px;
-    padding-bottom: 10px;
+    height: 14rem;
 }
 .wrapper{
 
@@ -30,8 +31,10 @@ ul{
 }
 .social{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+
     & span{
         line-height: 1px;
         margin: 0 5px;
@@ -45,6 +48,7 @@ ul{
 .icon{
     font-size: 30px;
     margin: 0 5px;
+    margin-bottom: 10px;
     cursor: pointer;
     color: #606060;
     &:hover{
@@ -52,4 +56,6 @@ ul{
 
     }
 }
-
+.icons{
+    margin-bottom: 10px;
+}

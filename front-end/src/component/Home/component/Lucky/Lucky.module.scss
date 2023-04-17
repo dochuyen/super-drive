@@ -61,11 +61,16 @@
     display: grid ;
     
   }
-  .content{
-    position: static;
- display: grid;
- justify-content: center;
-    width: 100%;
-  }
- 
+.content{
+  display: grid;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
+  margin: 0;
+  background: aliceblue;
+}
+.title{
+  margin-top: 25px;
+}
 }
