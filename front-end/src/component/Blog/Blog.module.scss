@@ -1,23 +1,123 @@
-.slide-list {
-  border-radius: 10px;
-  object-fit: fill;
+.toolbar {
+  display: flex;
+  align-items: center;
+  background-color: #f3f2ee;
+  padding: 40px 0;
+}
+.directional {
+  & span {
+    font-weight: 400;
+  }
+}
+.icon-tool {
+  font-size: 12px;
 }
 
-.slider-box {
-  background-color: dodgerblue;
-  border-radius: 10px;
-  object-fit: none;
-  width: 250px;
-  margin: 0 30px;
-}
-.slick-next-custom {
-  background-color: #ff0000; /* Màu nền mới cho nút "Next" */
-  color: #333; /* Màu chữ mới cho nút "Next" */
-}
-.slick-arrow{
-  background-color: #ff0000;
+.blog {
+  height: 100%;
+  margin: 20px 20px 20px 0;
 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+
+  .blog-title {
+    margin: 20px 20px;
+  }
+  .blog-post {
+    display: flex;
+    align-items: center;
+
+    span {
+      display: flex;
+      align-items: center;
+      margin-right: 50px;
+      font-size: 16px;
+
+      h6 {
+        margin-left: 10px;
+        margin-bottom: 0;
+      }
+    }
+  }
+  .blog-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 10px 0;
+  }
+  button {
+    float: right;
+    margin-right: 30px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    color: white;
+    border: none;
+    padding: 3px 10px;
+    background-color: #f6b024;
+  }
 }
-.slick-next{
-  color: #ff0000 !important;
+.blog-nav {
+  margin: 20px 20px 20px 0;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+
+  .nav-title {
+    display: flex;
+    margin-bottom: 5px;
+    p {
+      margin-left: 10px;
+      font-weight: bold;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .blog {
+    margin: 20px 0 20px 0;
+  }
+  .blog-nav {
+    display: none;
+  }
+}
+.comment {
+  margin-bottom: 50px;
+  padding: 0 !important;
+  .comment-form {
+    img {
+      border-radius: 50%;
+    }
+    input {
+      width: 90%;
+      height: 50px;
+      margin-left: 10px;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+    input:focus {
+      outline: none;
+    }
+  }
+  .list-comment {
+    float: left;
+    margin: 30px;
+
+    img {
+      border-radius: 50%;
+    }
+    .comment-box {
+      display: flex;
+      img {
+        margin-right: 20px;
+      }
+    }
+  }
 }
