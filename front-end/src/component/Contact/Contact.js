@@ -7,6 +7,7 @@ import CardGroup from "react-bootstrap/CardGroup";
 import Button from "react-bootstrap/Button";
 import classNames from "classnames/bind";
 import styles from "./Contact.module.scss";
+import ContactForm from "./ContactForm/ContactForm";
 
 const cx = classNames.bind(styles);
 const Contact = () => {
@@ -84,7 +85,7 @@ const Contact = () => {
             md={5}
             style={{ justifyContent: "center", alignItems: "center" }}
           >
-            <Card className={cx("card-prev")} style={{ margin: "40px 5%" }}>
+            <Card className={cx("card-support")} >
               <Card.Header style={{ background: "violet" }} as="h3">
                 Support team
               </Card.Header>
@@ -94,6 +95,8 @@ const Contact = () => {
                 <Button variant="primary">Contact</Button>
               </Card.Body>
             </Card>
+
+          <ContactForm />
           </Col>
         </Row>
         <Row xs={1} md={1} lg={1}>
@@ -133,24 +136,6 @@ const Contact = () => {
                 </Card>
               ))}
             </CardGroup>
-          </Card>
-        </Row>
-
-        <Row>
-          <Card
-            style={{
-              width: "80%",
-              margin: "0 10% 100px 10%",
-              border: "none",
-            }}
-          >
-            <Card.Body>
-              <Card.Title>Some quick example</Card.Title>
-            </Card.Body>
-            <Card.Img
-              variant="bottom"
-              
-            />
           </Card>
         </Row>
       </Container>

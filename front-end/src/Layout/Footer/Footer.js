@@ -8,7 +8,6 @@ import {
   AiOutlineGithub
 } from "react-icons/ai";
 import {FaFacebookF} from 'react-icons/fa'
-import ContactForm from "../ContactForm/ContactForm";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
@@ -91,9 +90,7 @@ const Footer = () => {
               </div>
             ))}
 
-            {/* <ContactForm /> */}
-          </div>
-
+  
           <div className={cx("social")}>
             <div className={cx("icons")}>
               {socials.map((social, index) => (
@@ -103,6 +100,8 @@ const Footer = () => {
             
               <span>@SUPER DRIVER</span>
           </div>
+          </div>
+
         </div>
       </Container>
     </div>

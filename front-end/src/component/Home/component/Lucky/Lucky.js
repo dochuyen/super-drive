@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./Lucky.module.scss";
 import classNames from "classnames/bind";
 import picturelucky from "../../../../assets/lucky/lamborgini-lucky.jpg";
+import {Row, Col} from 'react-bootstrap'
 
 const cx = classNames.bind(styles);
 const Lucky = () => {
@@ -45,30 +46,33 @@ const Lucky = () => {
     setIsClicked(true);
   };
   return (
-    <div className={cx("wrapper")}>
-      <img className={cx("picture")} src={picturelucky}></img>
-      <div className={cx("interact")}></div>
-      <div className={cx("content")}>
-        <h1 className={cx("title")}>LUCKY GIFT</h1>
-        <p className={cx("text")}>Randomly a surprise will come to you</p>
-        <div className={cx("btn")}>
-          <button
-            className={cx("btn-click")}
-            disabled={isClicked}
-            onClick={handleRandom}
-          >
-            Click random!
-          </button>
-        </div>
+    
+      <div className={cx("wrapper")}>
+        <img className={cx("picture")} src={picturelucky}></img>
+        <div className={cx("interact")}></div>
 
-        <div className={cx("result")}>
-          {random.hidden && (
-            <img className={cx("img-random")} src={random.img} />
-          )}
-          <p className={cx("text-random")}>{random.type}</p>
-        </div>
+          <div className={cx("content")}>
+            <h1 className={cx("title")}>LUCKY GIFT</h1>
+            <p className={cx("text")}>Randomly a surprise will come to you</p>
+            <div className={cx("btn")}>
+              <button
+                className={cx("btn-click")}
+                disabled={isClicked}
+                onClick={handleRandom}
+              >
+                Click random!
+              </button>
+            </div>
+    
+            <div className={cx("result")}>
+              {random.hidden && (
+                <img className={cx("img-random")} src={random.img} />
+              )}
+              <p className={cx("text-random")}>{random.type}</p>
+            </div>
+          </div>
+ 
       </div>
-    </div>
   );
 };
 

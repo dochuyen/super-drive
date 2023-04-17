@@ -1,8 +1,12 @@
 .wrapper {
-  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAfdO854LahJCdnHZS2IR9SUakZ3Th6znSBqet7JtADRTGb4Rq);
-  .figure,
+
   & h1 {
     text-align: center;
     padding: 10px 0 30px 0;
+  }
+}
+@media (max-width:768px) {
+  .card-support{
+    margin-top: 20px;
   }
 }
