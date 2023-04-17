@@ -52,7 +52,11 @@ const Lucky = () => {
         <h1 className={cx("title")}>LUCKY GIFT</h1>
         <p className={cx("text")}>Randomly a surprise will come to you</p>
         <div className={cx("btn")}>
-          <button className={cx("btn-click")} disabled={isClicked} onClick={handleRandom}>
+          <button
+            className={cx("btn-click")}
+            disabled={isClicked}
+            onClick={handleRandom}
+          >
             Click random!
           </button>
         </div>
@@ -61,7 +65,7 @@ const Lucky = () => {
           {random.hidden && (
             <img className={cx("img-random")} src={random.img} />
           )}
-          <p className={cx('text-random')}>{random.type}</p>
+          <p className={cx("text-random")}>{random.type}</p>
         </div>
       </div>
     </div>

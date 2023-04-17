@@ -16,7 +16,6 @@ const ListNewCar = () => {
           <img
             className={cx("picture")}
             src="https://tse2.mm.bing.net/th?id=OIP.jP1affsIOeZfzgBUNECqrAHaE7&pid=Api&P=0"
-            width="100%"
           />
         </div>
         <div className={cx("car")}>

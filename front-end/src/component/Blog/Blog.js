@@ -12,10 +12,8 @@ import "slick-carousel/slick/slick-theme.css";
 import classNames from "classnames/bind";
 import styles from "./Blog.module.scss";
 
-
 const cx = classNames.bind(styles);
 const Blog = () => {
-
   const blogData = [
     {
       title: "Blog 1",
@@ -35,64 +33,17 @@ const Blog = () => {
         />
       </div>
       <Container>
-       
-        <Row
-          style={{
-            position: "static",
-          }}
-        >
-          <Col xs={12} md={6} lg={4}>
-            <Card style={{ width: "100%", marginTop: "20px" }}>
-              <Card.Img
-                variant="top"
-                width="150px"
-                height="200px"
-                src="https://sohanews.sohacdn.com/thumb_w/660/2018/10/2/image-12-1538483239360278266980-1538485472308424302289.png"
-              />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
         <Row>
-          <Col md={{ span: 6, offset: 3 }}>
-            <h1>Comment</h1>
-            <Form>
-              <input
-                type="text"
-                placeholder="UserName"
-                style={{
-                  width: "100%",
-                  height: "50px",
-                  borderRadius: "10px",
-                  padding: "10px",
-                  marginBottom: "10px",
-                }}
-              />
-
-              <textarea
-                name=""
-                id=""
-                placeholder="Nội dung "
-                style={{
-                  width: "100%",
-                  height: "100px",
-                  borderRadius: "10px",
-                  padding: "10px",
-                }}
-              ></textarea>
-              <br />
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </Form>
+          <Col md={8}>
+            <div>
+              <img src="" alt="" />
+              <h3>
+                Dolorum optio tempore voluptas dignissimos cumque fuga qui
+                quibusdam quia
+              </h3>
+            </div>
           </Col>
+          <Col md={4}>2</Col>
         </Row>
       </Container>
     </>

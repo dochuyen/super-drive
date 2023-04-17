@@ -2,18 +2,21 @@
   --card-height: 250px;
   --card-width: 350px;
 }
-
+.container{
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
 .card {
   width: var(--card-width);
   height: var(--card-height);
   position: relative;
   display: flex;
-
   justify-content: center;
   align-items: flex-end;
-
+  padding: 0 36px;
   perspective: 2500px;
-  margin: 20px 60px;
+  margin: 0 50px;
 }
 
 .cover-image {
@@ -95,4 +98,18 @@
 .card:hover .character {
   opacity: 1;
   transform: translate3d(0%, -30%, 100px);
+}
+@media (max-width:576px) {
+  .container{
+    flex-direction: column;
+  }
+  .card{
+    margin: 0;
+  }
+}
+@media (max-width:768px) {
+  .container{
+    flex-direction: column;
+    align-items: center;
+  }
 }

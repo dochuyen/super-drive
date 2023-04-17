@@ -1,51 +1,62 @@
 import React from "react";
 import styles from "./Sale.module.scss";
 import classNames from "classnames/bind";
-import { Row, Col, Container } from "react-bootstrap";
-import img1 from "../../../../assets/homecar/1.png";
+import img1 from '../../../../assets/homecar/1.png'
+import img2 from '../../../../assets/homecar/2.png'
+
+
+
 
 const cx = classNames.bind(styles);
-const Sale = () => (
-  <Container>
-    <Row>
-      <Col sm="12" md="6">
-        <a
-          alt="Mythrill"
-          target="_blank"
-          style={{ textAlign: "center", alignItems: "center" }}
-        >
-          <div className={cx("card")}>
-            <div className={cx("wrapper")}>
-              <img
-                src="https://images.pexels.com/photos/905554/pexels-photo-905554.jpeg?auto=compress&cs=tinysrgb&w=600"
-                className={cx("cover-image")}
-              />
-            </div>
-
-            <img src={img1} className={cx("character")} />
-          </div>
-        </a>
-      </Col>
-
-      <Col
-        sm="12 "
-        md="6"
-        style={{ textAlign: "center", alignItems: "center" }}
+const Sale = () => {
+  return (
+    <div className={cx('container')}>
+      <a
+        alt="Mythrill"
+        target="_blank"
       >
-        <a alt="Mythrill" target="_blank">
-          <div className={cx("card")}>
-            <div className={cx("wrapper")}>
-              <img
-                src="https://images.pexels.com/photos/11921988/pexels-photo-11921988.jpeg?auto=compress&cs=tinysrgb&w=600"
-                className={cx("cover-image")}
-              />
-            </div>
-            <img src={img1} className={cx("character")} />
+        <div className={cx("card")}>
+          <div className={cx("wrapper")}>
+            <img
+              src="https://images.pexels.com/photos/905554/pexels-photo-905554.jpeg?auto=compress&cs=tinysrgb&w=600"
+              className={cx("cover-image")}
+            />
           </div>
-        </a>
-      </Col>
-    </Row>
-  </Container>
-);
+          {/* <img
+            src="https://ggayane.github.io/css-experiments/cards/dark_rider-title.png"
+            className={cx("title")}
+          /> */}
+          <img
+            src={img1}
+            className={cx("character")}
+          />
+        </div>
+      </a>
+
+      <a
+        alt="Mythrill"
+        target="_blank"
+      >
+        <div className={cx("card")}>
+          <div className={cx("wrapper")}>
+            <img
+              src="https://images.pexels.com/photos/11921988/pexels-photo-11921988.jpeg?auto=compress&cs=tinysrgb&w=600"
+              className={cx("cover-image")}
+            />
+          </div>
+          {/* <img
+            src="https://ggayane.github.io/css-experiments/cards/dark_rider-title.png"
+            className={cx("title")}
+          /> */}
+          <img
+            src={img2}
+            className={cx("character")}
+          />
+        </div>
+      </a>
+
+    </div>
+  );
+};
 
 export default Sale;
