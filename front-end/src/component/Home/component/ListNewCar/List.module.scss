@@ -60,6 +60,11 @@
 .info{
   text-align: center;
   margin-top: 20px;
+  text-decoration: none;
+  color: #111;
+  &:hover{
+    color: #111;
+  }
 }
 .title, .price-car, .sale-price{
   font-family: Montserrat,sans-serif;
@@ -68,4 +73,13 @@
 }
 .sale-price{
   text-decoration: line-through;
+}
+.icon-heart {
+  color: rgb(255, 40, 111);
+}
+.eye{
+  color: #111;
+  &:hover{
+    color: #111;
+  }
 }

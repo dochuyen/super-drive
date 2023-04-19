@@ -65,15 +65,15 @@ const Product = () => {
         <Row >
           {products.map((product, index) => (
             <Col xs={12} sm={6} md={6} lg={4} xl={3}>
-              <Link to='/shopdetail' key={index} className={cx("box")}>
-                <div className={cx("img-car")}>
+              <div  key={index} className={cx("box")}>
+                <Link to='/shopdetail' className={cx("img-car")}>
                   <img className={cx("picture")} src={product.picture} />
-                </div>
+                </Link>
                 <div className={cx("car")}>
                   <div className={cx("icons")}>
-                    <span className={cx("eye")}>
+                    <Link to='/shopdetail' className={cx("eye")}>
                       <AiOutlineEye />
-                    </span>
+                    </Link>
                     <span onClick={handleHeart} className={cx("heart")}>
                       {!heart ? (
                         <AiOutlineHeart />
@@ -88,15 +88,15 @@ const Product = () => {
                   >
                     <BsCartPlus />
                   </button>
-                  <div className={cx("info")}>
+                  <Link to='/shopdetail' className={cx("info")}>
                     <div className={cx("title")}>BMW</div>
                     <p className={cx("name-car")}>GTR</p>
                     <div className={cx("price-car")}>
                       <span className={cx("sale-price")}>$20.000</span>- $15.730
                     </div>
-                  </div>
+                  </Link>
                 </div>
-              </Link>
+              </div>
             </Col>
           ))}
         </Row>

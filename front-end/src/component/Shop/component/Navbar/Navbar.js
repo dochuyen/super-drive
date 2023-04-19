@@ -16,7 +16,7 @@ const Navbar = () => {
           type: "FERRARI",
         },
         {
-          type: "GTR",
+          type: "AUDI",
         },
       ],
     },

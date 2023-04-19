@@ -75,9 +75,14 @@
   object-fit: cover;
   color: #717171;
 }
-.info {
+.info{
   text-align: center;
   margin-top: 20px;
+  text-decoration: none;
+  color: #111;
+  &:hover{
+    color: #111;
+  }
 }
 .title,
 .price-car,
@@ -115,6 +120,12 @@
 }
 .icon-heart {
   color: rgb(255, 40, 111);
+}
+.eye{
+  color: #111;
+  &:hover{
+    color: #111;
+  }
 }
 @media (max-width: 576px) {
   .box {
