@@ -73,7 +73,7 @@ authRouter.post("/register", async (req, res) => {
         _id: newUser.insertedId,
         email,
         password:passwordHash,
-        cartitem:{img, }
+        // cartitem:{img, }
       },
     });
   } catch (error) {

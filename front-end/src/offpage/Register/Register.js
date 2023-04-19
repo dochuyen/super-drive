@@ -61,7 +61,7 @@ const next=useNavigate()
     setHiddenRegister(hiddenRegister === false ? true : false);
   };
 
-  const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+  // const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
   const changeUser = (e) => {
     const { value } = e.target;
     setUserName(value);
@@ -75,7 +75,7 @@ const next=useNavigate()
   const changePass = (e) => {
     const { value } = e.target;
     setPassword(value);
-    if (value.match(passw) && value.length >= 8) {
+    if ( value.length >= 8) {
       setPassValid(true);
     } else {
       setPassValid(false);
@@ -126,8 +126,7 @@ const next=useNavigate()
                   </div>
                   {!passValid ? (
                     <span className={cx("error")}>
-                      Mật khẩu phải đủ 8 ký tự trở lên và gồm ký tự như chữ hoa, ký tự
-                      đặc biệt, từ 0-9!
+                      Mật khẩu phải đủ 8 ký tự trở lên!
                     </span>
                   ) : (
                     <></>

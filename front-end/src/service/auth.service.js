@@ -1,9 +1,31 @@
 export const getLogin= async()=>{
-    const res={
+    const request={
         headers:{
             "Content-Type": "application/json",
             Authorization: 
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNodXllbiIsImlhdCI6MTY4MTcyMzYxMSwiZXhwIjoxNjgxODEwMDExfQ.IlYwOoFq961wLCitOsxei9rvMuJMmSMpsHI91wJHZa8"
-        }
-    }
+            `Bearer ${localStorage.getItem('token')}` 
+        },
+
+    };
+    const response=await fetch(
+        "http://localhost:8080/api/v1/students",request
+    );
+    const {data}= await response.json();
+    return data
+}
+export const createUser= async(user)=>{
+    const request={
+        method:"POST",
+        headers:{
+            "Content-Type": "application/json",
+            Authorization: 
+            `Bearer ${localStorage.getItem('token')}` 
+        },
+        body:JSON.stringify(user)
+    };
+    const response=await fetch(
+        "http://localhost:8080/api/v1/students",request
+    );
+    const {data}= await response.json();
+    return data
 }
