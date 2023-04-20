@@ -6,8 +6,8 @@ import { authCollection } from "../configs/connectDB.js";
 const authRouter = express.Router();
 
 authRouter.post("/login", async (req, res) => {
-  console.log('ok');
-  const { email, password } = req.body;
+
+  const {username, email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({
       message: "Email or password is missing",
@@ -44,6 +44,7 @@ authRouter.post("/login", async (req, res) => {
     data: {
       token,
       email,
+      username: user.username,
     },
   });
 });

@@ -2,7 +2,7 @@ import { config } from "dotenv";
 config();
 import express from "express";
 import { client } from "./configs/connectDB.js";
-import studentRoutes from "./routes/studentRoutes.js";
+import usesRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import cors from 'cors'
 
@@ -19,7 +19,7 @@ async function main() {
 
     // set up middlewares
     app.use(express.json());
-    app.use("/api/v1/students", studentRoutes);
+    app.use("/api/v1/users", usesRoutes);
     app.use("/api/v1/auth", authRoutes);
     
     // run server

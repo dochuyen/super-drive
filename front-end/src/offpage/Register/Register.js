@@ -31,77 +31,48 @@ const Register = () => {
   const [input, setInput] = useState({username:'', email:'', password:''});
   const [hiddenRegister, setHiddenRegister] = useState(false);
   const [passValid, setPassValid] = useState(true);
-  const [name, setName] = useState(true);
+
 const next=useNavigate()
 
   const submitRegister = (e) => {
     e.preventDefault();
-
-    // const filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // if(!filter.test(input.email)) {
-    //   alert('wrong email')
-    // }
+   if(!input){
+    alert('Bạn phải nhập đủ username, email và password')
+   }
    fetch(
-      "http://localhost:8080/api/v1/auth/register",
-      {
-        method: "POST",
-        body: JSON.stringify(input),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-    .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else throw new Error("failed");
-      })
-      .then((data)=>{
-        alert('Đăng ký thành công!')
-        next('/login')
-      })
-
-    // if ( email===''|| password===''|| username==='' ) {
-    //   alert('Bạn phải nhập đầy đủ username, email, password!')
-    // }else{
-    //   e.preventDefault();
-     
-    //   const data = await res.json();
-    //   alert("Bạn đã đăng ký thành công!");
-    //   next('/login')
-    // }
+    "http://localhost:8080/api/v1/auth/register",
+    {
+      method: "POST",
+      body: JSON.stringify(input),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
+  .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else throw new Error("failed");
+    })
+    .then((data)=>{
+      alert('Đăng ký thành công!')
+      next('/login')
+    })
   };
 
   const handleShowRegister = () => {
     setHiddenRegister(hiddenRegister === false ? true : false);
   };
 
-  // const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-  // const changeUser = (e) => {
-  //   const { value } = e.target;
-  //   setUserName(value);
-  //   if (value.length >= 4) {
-  //     setName(true);
-  //   } else {
-  //     setName(false);
-  //   }
-  // };
-
-  // const changePass = (e) => {
-  //   const { value } = e.target;
-  //   setPassword(value);
-  //   if ( value.length >= 8) {
-  //     setPassValid(true);
-  //   } else {
-  //     setPassValid(false);
-  //   }
-  // };
 
   const handleInput = (e) => {
-    ///value
-    setInput(prevInput => ({...prevInput, [e.target.name]: e.target.value}))
-    
-  }
+    const { name, value } = e.target;
+    if (name === "password") {
+      setPassValid(value.length >= 8);
+    }
+    setInput(prevInput => ({ ...prevInput, [name]: value }));
+  };
+  
 
   return (
     <div className={cx('box')}>
@@ -117,11 +88,7 @@ const next=useNavigate()
                     onChange={handleInput}
                     placeholder="Name"
                   ></input>
-                  {!name && (
-                    <span className={cx("error")}>
-                      Tên đăng nhập phải từ 4 ký tự trở lên!
-                    </span>
-                  )}
+                 
                   <input
                   name="email"
                     type="email"

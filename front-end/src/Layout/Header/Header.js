@@ -38,21 +38,21 @@ function Header() {
   ];
 
   const [types, setTypes] = useState("Home");
-
   const [localUsername, setLocalUsername] = useState(false);
   const [lengthCartItem, setLengthCartItem] = useState();
+
+
   const cartItem = localStorage.getItem("cartItems");
   const parseCartItem = JSON.parse(cartItem);
-  const local = localStorage.getItem("validUser");
-  const paserUsername = JSON.parse(local);
-
+  const username = localStorage.getItem("username");
+  const paserUsername = JSON.parse(username);
   useEffect(() => {
-    if (!local) {
+    if (!username) {
       setLocalUsername(true);
     } else {
       setLocalUsername(false);
     }
-  }, [local]);
+  }, [username]);
 
   
 
@@ -67,7 +67,8 @@ function Header() {
   }, [cartItem]);
 
   const handleLogOut = () => {
-    localStorage.removeItem("validUser");
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
     setLocalUsername(true);
   };
 
