@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Carousel, Col, Row, Card, Button } from "react-bootstrap";
 import classNames from "classnames/bind";
 import styles from "./List.module.scss";
@@ -9,36 +9,45 @@ import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 const ListNewCar = () => {
+  const [heart, setHeart] = useState(false);
+
+  const handleHeart = () => {
+    setHeart(heart === false ? true : false);
+  };
   return (
     <div className={cx("wrapper")}>
-      <Link to="/shopdetail" className={cx("box")}>
-        <div className={cx("img-car")}>
+      <div className={cx("box")}>
+        <Link to="/shopdetail" className={cx("img-car")}>
           <img
             className={cx("picture")}
             src="https://tse2.mm.bing.net/th?id=OIP.jP1affsIOeZfzgBUNECqrAHaE7&pid=Api&P=0"
           />
-        </div>
+        </Link>
         <div className={cx("car")}>
           <div className={cx("icons")}>
-            <span className={cx("eye")}>
+            <Link to='/shopdetail' className={cx("eye")}>
               <AiOutlineEye />
-            </span>
-            <span className={cx("heart")}>
-              <AiOutlineHeart />
+            </Link>
+            <span onClick={handleHeart} className={cx("heart")}>
+              {!heart ? (
+                <AiOutlineHeart />
+              ) : (
+                <AiFillHeart className={cx("icon-heart")} />
+              )}
             </span>
           </div>
           <button className={cx("add")}>
             <BsCartPlus />
           </button>
-          <div className={cx("info")}>
+          <Link to="/shopdetail" className={cx("info")}>
             <div className={cx("title")}>BMW</div>
             <p className={cx("name-car")}>GTR</p>
             <div className={cx("price-car")}>
               <span className={cx("sale-price")}>$20.000</span>- $15,730*
             </div>
-          </div>
+          </Link>
         </div>
-      </Link>
+      </div>
     </div>
   );
 };

@@ -199,15 +199,15 @@ const Shopdetail = () => {
         <div className={cx("random-product")}>
             <Slider {...settings}>
               {products.map((product, index) => (
-                <Link key={index} className={cx("box")}>
-                  <div className={cx("img-car")}>
+                <div key={index} className={cx("box")}>
+                  <Link to='/shopdetail' className={cx("img-car")}>
                     <img className={cx("picture")} src={product.img} />
-                  </div>
+                  </Link>
                   <div className={cx("car")}>
                     <div className={cx("icons")}>
-                      <span className={cx("eye")}>
+                      <Link to='/shopdetail' className={cx("eye")}>
                         <AiOutlineEye />
-                      </span>
+                      </Link>
                       <span className={cx("heart")}>
                         {!heart ? (
                           <AiOutlineHeart />
@@ -222,16 +222,16 @@ const Shopdetail = () => {
                     >
                       <BsCartPlus />
                     </button>
-                    <div className={cx("info")}>
+                    <Link to='/shopdetail' className={cx("info")}>
                       <div className={cx("title")}>BMW</div>
                       <p className={cx("name-car")}>GTR</p>
                       <div className={cx("price-car")}>
                         <span className={cx("sale-price")}>$20.000</span>-
                         $15.730
                       </div>
-                    </div>
+                    </Link>
                   </div>
-                </Link>
+                </div>
               ))}
             </Slider>
         </div>

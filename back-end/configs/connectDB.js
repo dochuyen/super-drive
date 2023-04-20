@@ -4,5 +4,8 @@ config();
 
 export const client = new MongoClient(process.env.MONGO_DB_URL);
 
-export const studentsCollection = client.db("web_65").collection("students");
-export const authCollection = client.db("web_65").collection("auth");
+export const userCollection = client.db("super_drive").collection("user");
+export const authCollection = client.db("super_drive").collection("user");
+export const commentCollection = client.db("super_drive").collection("comments");
+
+

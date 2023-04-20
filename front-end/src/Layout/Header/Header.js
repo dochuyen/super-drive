@@ -3,10 +3,9 @@ import logo from "../../assets/logo/logo.png";
 import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
-import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BiUser, BiLogIn, BiRegistered, BiLogOut } from "react-icons/bi";
-import { Children, useState, useRef, useEffect, useContext } from "react";
-import Offcanvas from './Offcanvas/Offcanvas'
+import {  useState, useEffect } from "react";
 import Canvas from "./Offcanvas/Offcanvas";
 const cx = classNames.bind(styles);
 function Header() {
@@ -39,21 +38,21 @@ function Header() {
   ];
 
   const [types, setTypes] = useState("Home");
-
   const [localUsername, setLocalUsername] = useState(false);
   const [lengthCartItem, setLengthCartItem] = useState();
+
+
   const cartItem = localStorage.getItem("cartItems");
   const parseCartItem = JSON.parse(cartItem);
-  const local = localStorage.getItem("validUser");
-  const paserUsername = JSON.parse(local);
-
+  const username = localStorage.getItem("username");
+  const paserUsername = JSON.parse(username);
   useEffect(() => {
-    if (local === null) {
+    if (!username) {
       setLocalUsername(true);
     } else {
       setLocalUsername(false);
     }
-  }, [local]);
+  }, [username]);
 
   
 
@@ -68,7 +67,8 @@ function Header() {
   }, [cartItem]);
 
   const handleLogOut = () => {
-    localStorage.removeItem("validUser");
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
     setLocalUsername(true);
   };
 
