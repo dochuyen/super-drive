@@ -1,31 +1,29 @@
-import express from "express";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import { authCollection } from "../configs/connectDB.js";
+import express from 'express';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import { authCollection } from '../configs/connectDB.js';
 
 const authRouter = express.Router();
 
-authRouter.post("/login", async (req, res) => {
-
-  const {username, email, password } = req.body;
+authRouter.post('/login', async (req, res) => {
+  const { username, email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({
-      message: "Email or password is missing",
+      message: 'Email or password is missing',
     });
   }
   const user = await authCollection.findOne({ email });
   if (!user) {
     return res.status(400).json({
-      message: "User not found",
+      message: 'User not found',
     });
   }
 
   if (!bcrypt.compareSync(password, user.password)) {
     return res.status(400).json({
-      message: "Password is incorrect",
+      message: 'Password is incorrect',
     });
   }
-
 
   const token = jwt.sign(
     {
@@ -33,32 +31,32 @@ authRouter.post("/login", async (req, res) => {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "1d",
+      expiresIn: '1d',
     }
   );
 
   // send token to client
   return res.status(200).json({
     status: 'ok',
-    message: "Login success",
+    message: 'Login success',
     data: {
       token,
       email,
       username: user.username,
+      cartitem: [],
     },
   });
 });
 
-authRouter.post("/register", async (req, res) => {
-
-  const {username, email, password } = req.body;
+authRouter.post('/register', async (req, res) => {
+  const { username, email, password } = req.body;
 
   try {
     const passwordHash = bcrypt.hashSync(password, 10);
 
     const user = await authCollection.findOne({ email });
     if (user) {
-      throw new Error("Email is already token");
+      throw new Error('Email is already token');
     }
 
     const newUser = await authCollection.insertOne({
@@ -68,16 +66,16 @@ authRouter.post("/register", async (req, res) => {
     });
 
     if (!newUser.acknowledged) {
-      throw new Error("Register failed");
+      throw new Error('Register failed');
     }
 
     res.status(201).json({
-      message: "Register success",
+      message: 'Register success',
       data: {
         _id: newUser.insertedId,
         username,
         email,
-        password:passwordHash,
+        password: passwordHash,
         // cartitem:{img, }
       },
     });

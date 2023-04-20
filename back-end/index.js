@@ -4,12 +4,13 @@ import express from "express";
 import { client } from "./configs/connectDB.js";
 import usesRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
-import cors from 'cors'
+import commentRouter from "./routes/commentRoutes.js";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT;
 
-app.use('*', cors())
+app.use("*", cors());
 
 async function main() {
   try {
@@ -21,13 +22,14 @@ async function main() {
     app.use(express.json());
     app.use("/api/v1/users", usesRoutes);
     app.use("/api/v1/auth", authRoutes);
-    
+    app.use("/api/v1/comments", commentRouter);
+
     // run server
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
   } catch (error) {
-    // handle error here
+    console.log("Fails");
   }
 }
 

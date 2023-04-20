@@ -4,8 +4,7 @@ import { userCollection } from "../configs/connectDB.js";
 
 const userRoutes = express.Router();
 
-userRoutes.get("/",  async (req, res) => {
-
+userRoutes.get("/", async (req, res) => {
   const allUsers = await userCollection.find().toArray();
 
   res.status(200).json({
@@ -14,7 +13,7 @@ userRoutes.get("/",  async (req, res) => {
   });
 });
 
-userRoutes.post("/",  async (req, res) => {
+userRoutes.post("/", async (req, res) => {
   try {
     // lay data tu body
     const userData = req.body;
