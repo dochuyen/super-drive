@@ -4,9 +4,12 @@ import express from "express";
 import { client } from "./configs/connectDB.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import cors from 'cors'
 
 const app = express();
 const PORT = process.env.PORT;
+
+app.use('*', cors())
 
 async function main() {
   try {

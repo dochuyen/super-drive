@@ -6,6 +6,7 @@ import { authCollection } from "../configs/connectDB.js";
 const authRouter = express.Router();
 
 authRouter.post("/login", async (req, res) => {
+  console.log('ok');
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({
@@ -38,6 +39,7 @@ authRouter.post("/login", async (req, res) => {
 
   // send token to client
   return res.status(200).json({
+    status: 'ok',
     message: "Login success",
     data: {
       token,
@@ -47,8 +49,8 @@ authRouter.post("/login", async (req, res) => {
 });
 
 authRouter.post("/register", async (req, res) => {
-  // const {username, email, password } = req.body;
-  const { email, password } = req.body;
+
+  const {username, email, password } = req.body;
 
   try {
     const passwordHash = bcrypt.hashSync(password, 10);
@@ -59,6 +61,7 @@ authRouter.post("/register", async (req, res) => {
     }
 
     const newUser = await authCollection.insertOne({
+      username,
       email,
       password: passwordHash,
     });
@@ -71,6 +74,7 @@ authRouter.post("/register", async (req, res) => {
       message: "Register success",
       data: {
         _id: newUser.insertedId,
+        username,
         email,
         password:passwordHash,
         // cartitem:{img, }

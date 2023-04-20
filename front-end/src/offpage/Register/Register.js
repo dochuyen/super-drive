@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import styles from "./Register.module.scss";
 import classNames from "classnames/bind";
 import {
   AiFillYoutube,
   AiOutlineGithub,
   AiOutlineArrowLeft,
-  AiOutlineArrowRight,
+
 } from "react-icons/ai";
 import { BsFillEyeSlashFill, BsFacebook } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
@@ -28,33 +28,48 @@ const Register = () => {
           src: "",
         },
       ];
-  const [username, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [input, setInput] = useState({username:'', email:'', password:''});
   const [hiddenRegister, setHiddenRegister] = useState(false);
   const [passValid, setPassValid] = useState(true);
   const [name, setName] = useState(true);
 const next=useNavigate()
 
-  const submitRegister = async (e) => {
-    if ( email===''&& password===''&& username==='' ) {
-      alert('Bạn phải nhập đầy đủ username, email, password!')
-    }else{
-      e.preventDefault();
-      const res = await fetch(
-        "https://63fb4ba12027a45d8d63d560.mockapi.io/account",
-        {
-          method: "POST",
-          body: JSON.stringify({ username, email, password }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const data = await res.json();
-      alert("Bạn đã đăng ký thành công!");
-      next('/login')
-    }
+  const submitRegister = (e) => {
+    e.preventDefault();
+
+    // const filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // if(!filter.test(input.email)) {
+    //   alert('wrong email')
+    // }
+   fetch(
+      "http://localhost:8080/api/v1/auth/register",
+      {
+        method: "POST",
+        body: JSON.stringify(input),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+    .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else throw new Error("failed");
+      })
+      .then((data)=>{
+        alert('Đăng ký thành công!')
+        next('/login')
+      })
+
+    // if ( email===''|| password===''|| username==='' ) {
+    //   alert('Bạn phải nhập đầy đủ username, email, password!')
+    // }else{
+    //   e.preventDefault();
+     
+    //   const data = await res.json();
+    //   alert("Bạn đã đăng ký thành công!");
+    //   next('/login')
+    // }
   };
 
   const handleShowRegister = () => {
@@ -62,25 +77,32 @@ const next=useNavigate()
   };
 
   // const passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-  const changeUser = (e) => {
-    const { value } = e.target;
-    setUserName(value);
-    if (value.length >= 4) {
-      setName(true);
-    } else {
-      setName(false);
-    }
-  };
+  // const changeUser = (e) => {
+  //   const { value } = e.target;
+  //   setUserName(value);
+  //   if (value.length >= 4) {
+  //     setName(true);
+  //   } else {
+  //     setName(false);
+  //   }
+  // };
 
-  const changePass = (e) => {
-    const { value } = e.target;
-    setPassword(value);
-    if ( value.length >= 8) {
-      setPassValid(true);
-    } else {
-      setPassValid(false);
-    }
-  };
+  // const changePass = (e) => {
+  //   const { value } = e.target;
+  //   setPassword(value);
+  //   if ( value.length >= 8) {
+  //     setPassValid(true);
+  //   } else {
+  //     setPassValid(false);
+  //   }
+  // };
+
+  const handleInput = (e) => {
+    ///value
+    setInput(prevInput => ({...prevInput, [e.target.name]: e.target.value}))
+    
+  }
+
   return (
     <div className={cx('box')}>
         <div className={cx('wrapper')}>
@@ -89,9 +111,10 @@ const next=useNavigate()
                 <form onSubmit={submitRegister}>
                   <h1 className={cx("big-title")}>Register hire.</h1>
                   <input
+                    name="username"
                     type="text"
-                    value={username}
-                    onChange={changeUser}
+                    value={input.username}
+                    onChange={handleInput}
                     placeholder="Name"
                   ></input>
                   {!name && (
@@ -100,19 +123,21 @@ const next=useNavigate()
                     </span>
                   )}
                   <input
+                  name="email"
                     type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={input.email}
+                    onChange={handleInput}
                     pattern=".+@gmail\.com"
                     placeholder="Email"
                   ></input>
         
                   <div className={cx("pass-show")}>
                     <input
-                      value={password}
+                      name="password"
+                      value={input.password}
                       type={hiddenRegister ? "text" : "password"}
                       placeholder="Password"
-                      onChange={changePass}
+                      onChange={handleInput}
                     ></input>
                     {hiddenRegister ? (
                       <span onClick={handleShowRegister} className={cx("icon-show")}>

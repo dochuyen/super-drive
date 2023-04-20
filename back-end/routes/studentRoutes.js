@@ -4,15 +4,17 @@ import { studentsCollection } from "../configs/connectDB.js";
 
 const studentRoutes = express.Router();
 
-studentRoutes.get("/", authMiddleware, async (req, res) => {
+studentRoutes.get("/",  async (req, res) => {
+  console.log('run')
   const allStudents = await studentsCollection.find().toArray();
+  console.log({allStudents})
   res.status(200).json({
     message: "Success",
     data: allStudents,
   });
 });
 
-studentRoutes.post("/", authMiddleware, async (req, res) => {
+studentRoutes.post("/",  async (req, res) => {
   try {
     // lay data tu body
     const studentData = req.body;
