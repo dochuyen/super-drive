@@ -2,7 +2,7 @@
   margin: 10px 0;
   display: block;
 }
-.product{
+.product {
   display: flex;
   justify-content: center;
 }
@@ -20,14 +20,14 @@
   justify-content: center;
   width: 230px;
   height: 360px;
-  margin: 15px;
+  margin: 10px;
   border-radius: 5px;
   object-fit: cover;
   transition: transform 400ms;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   &:hover {
     transform: scale(1.05);
-  color: #111;
+    color: #111;
   }
 }
 
@@ -36,21 +36,21 @@
   width: 100%;
 }
 .picture {
-  max-width: 100%;
+  max-width: 96%;
   height: 200px;
+  margin: 2% 2%;
   border-radius: 3px;
 }
 .car {
   width: 100%;
   position: relative;
-  padding: 25px 0 15px 5px;
+  padding: 0px 0 15px 5px;
 }
 .name-car {
   font-size: 15px;
   margin-bottom: 0;
 }
 .icons {
-  padding-bottom: 10px;
   border-bottom: 1px solid #c1c1c1db;
 }
 .eye,
@@ -68,19 +68,19 @@
   font-size: 20px;
   position: absolute;
   right: 10px;
-  top: 23px;
+  top: 0px;
   border: none;
   background-color: transparent;
   transition: transform 400ms;
   object-fit: cover;
   color: #717171;
 }
-.info{
+.info {
   text-align: center;
   margin-top: 20px;
   text-decoration: none;
   color: #111;
-  &:hover{
+  &:hover {
     color: #111;
   }
 }
@@ -121,15 +121,14 @@
 .icon-heart {
   color: rgb(255, 40, 111);
 }
-.eye{
+.eye {
   color: #111;
-  &:hover{
+  &:hover {
     color: #111;
   }
 }
 @media (max-width: 576px) {
   .box {
     margin: 15px 20%;
-
   }
 }
