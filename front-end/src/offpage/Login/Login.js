@@ -51,6 +51,7 @@ const Login = () => {
         } else throw new Error("failed");
       })
       .then((data) => {
+        console.log(data)
         localStorage.setItem('username', JSON.stringify(data.data.username))
         localStorage.setItem("token", JSON.stringify(data.data.token));
         next("/");
