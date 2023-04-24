@@ -5,8 +5,9 @@ import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BiUser, BiLogIn, BiRegistered, BiLogOut } from "react-icons/bi";
-import {  useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Canvas from "./Offcanvas/Offcanvas";
+import {useSelector} from 'react-redux'
 const cx = classNames.bind(styles);
 function Header() {
   const items = [
@@ -39,35 +40,22 @@ function Header() {
 
   const [types, setTypes] = useState("Home");
   const [localUsername, setLocalUsername] = useState(false);
-  const [lengthCartItem, setLengthCartItem] = useState();
+  // const [lengthCartItem, setLengthCartItem] = useState(0);
+  const userName=useSelector(state=>state.userNameReducer.username);
 
 
-  const cartItem = localStorage.getItem("cartItems");
-  const parseCartItem = JSON.parse(cartItem);
-  const username = localStorage.getItem("username");
-  const paserUsername = JSON.parse(username);
+ 
   useEffect(() => {
-    if (!username) {
+    if (!userName) {
       setLocalUsername(true);
     } else {
       setLocalUsername(false);
     }
-  }, [username]);
+  }, [userName]);
 
-  
 
-  useEffect(() => {
-    if (cartItem === null) {
-      setLengthCartItem(0);
-      console.log(0);
-    } else {
-      setLengthCartItem(parseCartItem.length);
-      console.log(parseCartItem.length);
-    }
-  }, [cartItem]);
 
   const handleLogOut = () => {
-    localStorage.removeItem("username");
     localStorage.removeItem("token");
     setLocalUsername(true);
   };
@@ -114,19 +102,7 @@ function Header() {
                   }}
                 >
                   {item.type}
-                  {item.type === "Buy" && item.children && (
-                    <div className={cx("list-buy")}>
-                      {item.children.map((child, index) => (
-                        <Link
-                          className={cx("buy-item")}
-                          to={child.to}
-                          key={index}
-                        >
-                          {child.type}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+                  
                 </Link>
               ))}
             </div>
@@ -160,7 +136,7 @@ function Header() {
                       <span>
                         <BiUser />
                       </span>
-                      {paserUsername}
+                      {userName}
                     </Link>
                     <Link onClick={handleLogOut} className={cx("btn-log")}>
                       <span>
@@ -175,20 +151,30 @@ function Header() {
             <div
               className={cx("nav")}
               onClick={() => {
-                setTypes('AiOutlineShoppingCart');
+                setTypes("AiOutlineShoppingCart");
               }}
             >
               <Link
                 to="/checkout"
                 style={{ position: "relative", cursor: "pointer" }}
               >
-                <AiOutlineShoppingCart className={cx("icon-nav")} style={types==='AiOutlineShoppingCart'&&{color: "#ff9950",}}/>
-                <div className={cx("child-icon")}>{lengthCartItem}</div>
+                <AiOutlineShoppingCart
+                  className={cx("icon-nav")}
+                  style={
+                    types === "AiOutlineShoppingCart" && { color: "#ff9950" }
+                  }
+                />
+                <div className={cx("child-icon")}>{0}</div>
               </Link>
             </div>
           </div>
-          <div className={cx('offcanvas')}>
-            <Canvas localUsername={localUsername} paserUsername={paserUsername} handleLogOut={handleLogOut} lengthCartItem={lengthCartItem} />
+          <div className={cx("offcanvas")}>
+            <Canvas
+              localUsername={localUsername}
+              paserUsername={userName}
+              handleLogOut={handleLogOut}
+              lengthCartItem={0}
+            />
           </div>
         </div>
       </Container>

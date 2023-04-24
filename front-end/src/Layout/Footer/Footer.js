@@ -7,8 +7,6 @@ import {
   AiFillYoutube,
   AiOutlineGithub
 } from "react-icons/ai";
-import {FaFacebookF} from 'react-icons/fa'
-import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
 

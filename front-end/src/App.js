@@ -1,13 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Layout from "./Layout/index";
-import Container from "react-bootstrap/esm/Container";
-import Home from "./component/Home/Home";
-import Shop from "./component/Shop/Shop";
-import Blog from "./component/Blog/Blog";
-import Contact from "./component/Contact/Contact";
-import Checkout from "./component/Buy/Checkout/Checkout";
-import Shopdetail from "./component/Buy/Shopdetail/Shopdetail";
+import Layout from "./layout/index";
+import Home from "./pages/Home/Home";
+import Shop from "./pages/Shop/Shop";
+import Blog from "./pages/Blog/Blog";
+import Contact from "./pages/Contact/Contact";
+import Checkout from "./pages/Buy/Checkout/Checkout";
+import Shopdetail from "./pages/Buy/Shopdetail/Shopdetail";
 import Login from "./offpage/Login/Login";
 import Register from "./offpage/Register/Register";
 
@@ -15,11 +14,11 @@ const App = () => {
   const publics = [
     {
       path: "/",
-      component: Home,
+      pages: Home,
     },
     {
       path: "/shop",
-      component: Shop,
+      pages: Shop,
     },
     {
       path: "/shop/:id",
@@ -27,27 +26,27 @@ const App = () => {
     },
     {
       path: "/blog",
-      component: Blog,
+      pages: Blog,
     },
     {
       path: "/contact",
-      component: Contact,
+      pages: Contact,
     },
 
     {
       path: "/checkout",
-      component: Checkout,
+      pages: Checkout,
     },
     {
       path: "/shopdetail",
-      component: Shopdetail,
+      pages: Shopdetail,
     },
   ];
   return (
     <div>
       <Routes>
         {publics.map((pub, index) => {
-          const Pages = pub.component;
+          const Pages = pub.pages;
           return (
             <Route
               key={index}

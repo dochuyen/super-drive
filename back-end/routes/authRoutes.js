@@ -36,6 +36,7 @@ authRouter.post('/login', async (req, res) => {
   );
 
   // send token to client
+  const {cartitem}=user;
   return res.status(200).json({
     status: 'ok',
     message: 'Login success',
@@ -43,7 +44,7 @@ authRouter.post('/login', async (req, res) => {
       token,
       email,
       username: user.username,
-      cartitem: [],
+      cartitem: cartitem ? cartitem : [],
     },
   });
 });
@@ -81,7 +82,7 @@ authRouter.post('/register', async (req, res) => {
     });
   } catch (error) {
     res.status(400).json({
-      message: error.message,
+      message: "Fail",
       data: null,
     });
   }

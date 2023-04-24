@@ -8,8 +8,11 @@ import {
 } from "react-icons/ai";
 import { BsFillEyeSlashFill, BsFacebook } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
-
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch} from 'react-redux'
+import changeUserName from "../../store/user/action";
+import changeEmail from "../../store/emailuser/action";
+
 
 const cx = classNames.bind(styles);
 const Login = () => {
@@ -27,14 +30,11 @@ const Login = () => {
       src: "",
     },
   ];
-
-  //Login
-
   const [inputLogin, setInputLogin] = useState({ email: "", password: "" });
-
   const [hidden, setHidden] = useState(false);
-
   const next = useNavigate();
+  const dispatch=useDispatch();
+  
 
   const submitLogin = (e) => {
     e.preventDefault();
@@ -51,8 +51,8 @@ const Login = () => {
         } else throw new Error("failed");
       })
       .then((data) => {
-        console.log(data)
-        localStorage.setItem('username', JSON.stringify(data.data.username))
+        dispatch(changeUserName(data.data.username))
+        dispatch(changeEmail(data.data.email))
         localStorage.setItem("token", JSON.stringify(data.data.token));
         next("/");
       })
