@@ -224,6 +224,9 @@
   display: flex;
   width: 100%;
 }
+.random-product{
+  padding-bottom: 30px;
+}
 @media (max-width:768px) {
   .img{
     display: flex;
@@ -237,6 +240,12 @@
     margin-bottom: 10px;
   }
 }
-.random-product{
-  padding-bottom: 30px;
+@media (max-width:576px) {
+  .detail-header{
+    display: grid;
+  }
+  .detail-content{
+    padding: 0;
+  }
 }
+

@@ -26,7 +26,6 @@ const Shopdetail = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplayspeed: 1000,
-    nextArrow: <button className={cx("slick-next")} />,
     responsive: [
       {
         breakpoint: 500,
@@ -34,7 +33,12 @@ const Shopdetail = () => {
           slidesToShow: 1,
         },
       },
-
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
       {
         breakpoint: 772,
         settings: {

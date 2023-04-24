@@ -26,7 +26,6 @@ const Product = () => {
 
   const [heart, setHeart] = useState(false);
   const [pageAction, setPageAction] = useState(1);
-
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
