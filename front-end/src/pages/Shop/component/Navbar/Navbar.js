@@ -35,7 +35,7 @@ const Navbar = () => {
   const [brand, setBrand] = useState(false);
   const [price, setPrice] = useState(false);
   const [type, setType] = useState("BMW");
-  const [id, setId] = useState("64416634196081acc2643440");
+
 
   const hiddenBrand = () => {
     setBrand(brand === false ? true : false);

@@ -7,7 +7,8 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BiUser, BiLogIn, BiRegistered, BiLogOut } from "react-icons/bi";
 import { useState, useEffect } from "react";
 import Canvas from "./Offcanvas/Offcanvas";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
+import SearchProducts from "../../pages/Shop/component/search/search";
 const cx = classNames.bind(styles);
 function Header() {
   const items = [
@@ -41,10 +42,8 @@ function Header() {
   const [types, setTypes] = useState("Home");
   const [localUsername, setLocalUsername] = useState(false);
   // const [lengthCartItem, setLengthCartItem] = useState(0);
-  const userName=useSelector(state=>state.userNameReducer.username);
+  const userName = useSelector((state) => state.userNameReducer.username);
 
-
- 
   useEffect(() => {
     if (!userName) {
       setLocalUsername(true);
@@ -52,8 +51,6 @@ function Header() {
       setLocalUsername(false);
     }
   }, [userName]);
-
-
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
@@ -102,14 +99,11 @@ function Header() {
                   }}
                 >
                   {item.type}
-                  
                 </Link>
               ))}
             </div>
 
-            <div className={cx("nav-search")}>
-              <input className={cx("search")} type="search" />
-            </div>
+            <SearchProducts />
 
             <div className={cx("btn-log")}>
               <BiUser />

@@ -22,7 +22,7 @@ const App = () => {
     },
     {
       path: "/shop/:id",
-      component: Shop,
+      pages: Shop,
     },
     {
       path: "/blog",

@@ -13,7 +13,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 const Shopdetail = () => {
@@ -26,19 +26,24 @@ const Shopdetail = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplayspeed: 1000,
-    nextArrow: <button className={cx("slick-next")} />,
+
     responsive: [
       {
-        breakpoint: 500,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-
-      {
-        breakpoint: 772,
+        breakpoint: 992,
         settings: {
           slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 568,
+        settings: {
+          slidesToShow: 2,
         },
       },
     ],
@@ -195,17 +200,17 @@ const Shopdetail = () => {
                 </button>
               </div> */}
           </div>
-        
-        <div className={cx("random-product")}>
+
+          <div className={cx("random-product")}>
             <Slider {...settings}>
               {products.map((product, index) => (
                 <div key={index} className={cx("box")}>
-                  <Link to='/shopdetail' className={cx("img-car")}>
+                  <Link to="/shopdetail" className={cx("img-car")}>
                     <img className={cx("picture")} src={product.img} />
                   </Link>
                   <div className={cx("car")}>
                     <div className={cx("icons")}>
-                      <Link to='/shopdetail' className={cx("eye")}>
+                      <Link to="/shopdetail" className={cx("eye")}>
                         <AiOutlineEye />
                       </Link>
                       <span className={cx("heart")}>
@@ -222,7 +227,7 @@ const Shopdetail = () => {
                     >
                       <BsCartPlus />
                     </button>
-                    <Link to='/shopdetail' className={cx("info")}>
+                    <Link to="/shopdetail" className={cx("info")}>
                       <div className={cx("title")}>BMW</div>
                       <p className={cx("name-car")}>GTR</p>
                       <div className={cx("price-car")}>
@@ -234,8 +239,8 @@ const Shopdetail = () => {
                 </div>
               ))}
             </Slider>
-        </div>
-          </Container>
+          </div>
+        </Container>
       </div>
     </div>
   );
