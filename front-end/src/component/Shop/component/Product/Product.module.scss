@@ -84,7 +84,12 @@
     color: #111;
   }
 }
-.title,
+.title {
+  font-family: Montserrat, sans-serif;
+  font-size: 17px;
+  margin-top: 7px;
+  font-weight: 700;
+}
 .price-car,
 .sale-price {
   font-family: Montserrat, sans-serif;

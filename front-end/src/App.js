@@ -22,6 +22,10 @@ const App = () => {
       component: Shop,
     },
     {
+      path: "/shop/:id",
+      component: Shop,
+    },
+    {
       path: "/blog",
       component: Blog,
     },
@@ -29,7 +33,7 @@ const App = () => {
       path: "/contact",
       component: Contact,
     },
-    
+
     {
       path: "/checkout",
       component: Checkout,
