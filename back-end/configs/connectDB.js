@@ -1,4 +1,5 @@
-import { MongoClient } from "mongodb";
+// import mongoose from 'mongoose';
+import {MongoClient} from 'mongodb'
 import { config } from "dotenv";
 config();
 
