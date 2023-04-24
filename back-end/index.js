@@ -5,6 +5,7 @@ import { client } from "./configs/connectDB.js";
 import usesRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import commentRouter from "./routes/commentRoutes.js";
+
 import cors from "cors";
 
 const app = express();
@@ -19,6 +20,7 @@ async function main() {
     console.log("Connected to mongodb successfully");
 
     // set up middlewares
+    
     app.use(express.json());
     app.use("/api/v1/users", usesRoutes);
     app.use("/api/v1/auth", authRoutes);

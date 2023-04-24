@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./Product.module.scss";
 import { GrFormNextLink } from "react-icons/gr";
@@ -6,7 +6,7 @@ import { AiOutlineHeart, AiOutlineEye, AiFillHeart } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 const cx = classNames.bind(styles);
 const Product = () => {
   const pages = [
@@ -26,25 +26,17 @@ const Product = () => {
 
   const [heart, setHeart] = useState(false);
   const [pageAction, setPageAction] = useState(1);
-  const [cartItems, setCartItems] = useState([]);
-  const [products, setProducts] = useState([
-    {
-      picture:
-        "https://tse2.mm.bing.net/th?id=OIP.jP1affsIOeZfzgBUNECqrAHaE7&pid=Api&P=0",
-    },
-    {
-      picture:
-        "https://tse2.mm.bing.net/th?id=OIP.jP1affsIOeZfzgBUNECqrAHaE7&pid=Api&P=0",
-    },
-    {
-      picture:
-        "https://tse2.mm.bing.net/th?id=OIP.jP1affsIOeZfzgBUNECqrAHaE7&pid=Api&P=0",
-    },
-    {
-      picture:
-        "https://tse2.mm.bing.net/th?id=OIP.jP1affsIOeZfzgBUNECqrAHaE7&pid=Api&P=0",
-    },
-  ]);
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/product")
+      .then((response) => {
+        setProducts(response.data.productData);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const handleAddProduct = (product) => {
     const productList = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -61,17 +53,21 @@ const Product = () => {
         <GrFormNextLink /> Showing page <span className={cx("action")}>1</span>
       </p>
 
-     <div className={cx("product")}>
-        <Row >
+      <div className={cx("product")}>
+        <Row>
           {products.map((product, index) => (
-            <Col xs={12} sm={6} md={6} lg={4} xl={3}>
-              <div  key={index} className={cx("box")}>
-                <Link to='/shopdetail' className={cx("img-car")}>
-                  <img className={cx("picture")} src={product.picture} />
+            <Col xs={12} sm={6} md={6} lg={4} xl={3} key={index}>
+              <div className={cx("box")}>
+                <Link to="/shopdetail" className={cx("img-car")}>
+                  <img
+                    className={cx("picture")}
+                    src={product.images}
+                    width="100%"
+                  />
                 </Link>
                 <div className={cx("car")}>
                   <div className={cx("icons")}>
-                    <Link to='/shopdetail' className={cx("eye")}>
+                    <Link to="/shopdetail" className={cx("eye")}>
                       <AiOutlineEye />
                     </Link>
                     <span onClick={handleHeart} className={cx("heart")}>
@@ -88,8 +84,8 @@ const Product = () => {
                   >
                     <BsCartPlus />
                   </button>
-                  <Link to='/shopdetail' className={cx("info")}>
-                    <div className={cx("title")}>BMW</div>
+                  <Link to="/shopdetail" className={cx("info")}>
+                    <div className={cx("title")}>{product.brand}</div>
                     <p className={cx("name-car")}>GTR</p>
                     <div className={cx("price-car")}>
                       <span className={cx("sale-price")}>$20.000</span>- $15.730
@@ -100,8 +96,7 @@ const Product = () => {
             </Col>
           ))}
         </Row>
-  
-     </div>
+      </div>
 
       <div className={cx("page")}>
         {pages.map((page, index) => (

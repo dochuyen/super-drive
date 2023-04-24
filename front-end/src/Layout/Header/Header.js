@@ -56,7 +56,6 @@ function Header() {
 
 
   const handleLogOut = () => {
-    localStorage.removeItem("username");
     localStorage.removeItem("token");
     setLocalUsername(true);
   };
