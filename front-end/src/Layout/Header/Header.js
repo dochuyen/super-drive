@@ -8,7 +8,7 @@ import { BiUser, BiLogIn, BiRegistered, BiLogOut } from "react-icons/bi";
 import { useState, useEffect } from "react";
 import Canvas from "./Offcanvas/Offcanvas";
 import { useSelector } from "react-redux";
-import SearchProducts from "../../pages/Shop/component/search/search";
+import Search from "./component/Search";
 const cx = classNames.bind(styles);
 function Header() {
   const items = [
@@ -103,7 +103,9 @@ function Header() {
               ))}
             </div>
 
-            <SearchProducts />
+            <div className={cx("nav-search")}>
+              <Search />
+            </div>
 
             <div className={cx("btn-log")}>
               <BiUser />

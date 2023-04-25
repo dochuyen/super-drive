@@ -28,7 +28,6 @@ const Product = () => {
 
   const [heart, setHeart] = useState(false);
   const [pageAction, setPageAction] = useState(1);
-
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -90,9 +89,8 @@ const Product = () => {
                     <h1 className={cx("title")}>{product.title}</h1>
                     <p className={cx("name-car")}>{product.description}</p>
                     <div className={cx("price-car")}>
-                      <span className={cx("sale-price")}></span>
+                      <span className={cx("sale-price")}>$</span>
                       {product.price}
-                      VND
                     </div>
                   </Link>
                 </div>

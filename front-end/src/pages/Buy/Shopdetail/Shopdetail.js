@@ -26,10 +26,21 @@ const Shopdetail = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplayspeed: 1000,
-
     responsive: [
       {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
         breakpoint: 992,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 772,
         settings: {
           slidesToShow: 3,
         },
