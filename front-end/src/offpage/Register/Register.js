@@ -38,7 +38,7 @@ const Register = () => {
     if (!input) {
       alert("Bạn phải nhập đủ username, email và password");
     } else {
-      fetch("", {
+      fetch("http://localhost:8080/api/v1/auth/register", {
         method: "POST",
         body: JSON.stringify(input),
         headers: {
@@ -57,7 +57,7 @@ const Register = () => {
           next("/login");
         })
         .catch((error) => {
-          alert("Đăng ký thất bại. Email này đã được đăng ký!");
+          alert('Email đã được đăng ký!')
         });
     }
   };

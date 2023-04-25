@@ -109,7 +109,7 @@ const Login = () => {
                   <label className={cx("remember")}>Remember account</label>
                 </div>
                 <div className={cx("pass-link")}>
-                  <a href="#">Forgot password?</a>
+                  <Link to='/forgot-password'>Forgot password?</Link>
                 </div>
               </div>
 

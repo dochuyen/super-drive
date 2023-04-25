@@ -9,6 +9,7 @@ import Checkout from "./pages/Buy/Checkout/Checkout";
 import Shopdetail from "./pages/Buy/Shopdetail/Shopdetail";
 import Login from "./offpage/Login/Login";
 import Register from "./offpage/Register/Register";
+import ForgotPassword from "./offpage/ForgotPassword/ForgotPassword";
 
 const App = () => {
   const publics = [
@@ -59,6 +60,7 @@ const App = () => {
         })}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword/>}/>
       </Routes>
     </div>
   );
