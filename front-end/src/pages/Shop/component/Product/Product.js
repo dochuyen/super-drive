@@ -5,10 +5,12 @@ import { GrFormNextLink } from "react-icons/gr";
 import { AiOutlineHeart, AiOutlineEye, AiFillHeart } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
 import { Row, Col } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 const cx = classNames.bind(styles);
 const Product = () => {
+  const result = useParams();
+
   const pages = [
     {
       page: 1,
@@ -30,12 +32,12 @@ const Product = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/product")
+      .get(`http://localhost:8080/api/product/getBrand/${result.id}`)
       .then((response) => {
-        setProducts(response.data.productData);
+        setProducts(response.data);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [result.id]);
 
   const handleAddProduct = (product) => {
     const productList = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -84,10 +86,11 @@ const Product = () => {
                     <BsCartPlus />
                   </button>
                   <Link to="/shopdetail" className={cx("info")}>
-                    <div className={cx("title")}>{product.brand}</div>
-                    <p className={cx("name-car")}>GTR</p>
+                    <h1 className={cx("title")}>{product.title}</h1>
+                    <p className={cx("name-car")}>{product.description}</p>
                     <div className={cx("price-car")}>
-                      <span className={cx("sale-price")}>$20.000</span>- $15.730
+                      <span className={cx("sale-price")}>$</span>
+                      {product.price}
                     </div>
                   </Link>
                 </div>
