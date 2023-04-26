@@ -6,6 +6,8 @@ import gifFerrari from "../../../../assets/gif/trend1.gif";
 import gifGtr from "../../../../assets/gif/gtr-trend.gif";
 import gifLamborghini from "../../../../assets/gif/lambogini-trend.gif";
 import { Col, Container, Row } from "react-bootstrap";
+import { AnimationOnScroll } from 'react-animation-on-scroll';
+
 
 const cx = classNames.bind(styles);
 const Trend = () => {
@@ -31,6 +33,7 @@ const Trend = () => {
         <h5 className={cx("small-title")}>LATEST NEWS</h5>
         <h2 className={cx("big-title")}>New Trends</h2>
       </div>
+      <AnimationOnScroll animateIn='animate__fadeInUp'>
       <Row sm="12" md="3" lg="3">
         {dataGif.map((gif, index) => (
           <Col key={index}>
@@ -48,6 +51,7 @@ const Trend = () => {
           </Col>
         ))}
       </Row>
+      </AnimationOnScroll>
     </Container>
   );
 };
