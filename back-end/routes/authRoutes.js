@@ -2,6 +2,14 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { authCollection } from '../configs/connectDB.js';
+import nodemailer from 'nodemailer';
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_ADDRESS,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 const authRouter = express.Router();
 
@@ -77,7 +85,7 @@ authRouter.post('/register', async (req, res) => {
         username,
         email,
         password: passwordHash,
-        // cartitem:{img, }
+  
       },
     });
   } catch (error) {
@@ -87,5 +95,4 @@ authRouter.post('/register', async (req, res) => {
     });
   }
 });
-
 export default authRouter;

@@ -10,6 +10,7 @@ import Shopdetail from "./pages/Buy/Shopdetail/Shopdetail";
 import Login from "./offpage/Login/Login";
 import Register from "./offpage/Register/Register";
 
+
 const App = () => {
   const publics = [
     {
