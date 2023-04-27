@@ -9,6 +9,7 @@ import commentRouter from "./routes/commentRoutes.js";
 import cors from "cors";
 import productRouter from "./routes/productRoutes.js";
 import brandRouter from "./routes/brandRoutes.js";
+import { dbConnect } from "./configs/connectDB.js";
 
 const app = express();
 const PORT = process.env.PORT;
@@ -18,7 +19,7 @@ app.use("*", cors());
 async function main() {
   try {
     // connect to mongodb
-    await client.connect();
+    dbConnect();
     console.log("Connected to mongodb successfully");
 
     // set up middlewares

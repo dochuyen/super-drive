@@ -12,3 +12,17 @@ export const authCollection = client.db("super_drive").collection("user");
 export const commentCollection = client
   .db("super_drive")
   .collection("comments");
+  
+  import mongoose from "mongoose";
+import dotenv from 'dotenv';
+dotenv.config();
+
+export const dbConnect = async () => {
+  try{
+    await mongoose.connect(process.env.MONGO_DB_URL);
+    console.log('connect db successfully!!')
+  } catch(err) {
+    console.log('connect fail!!!')
+  }
+}
+
