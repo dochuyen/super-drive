@@ -21,6 +21,7 @@ const Shop = () => {
       <Container>
         <Layoutshop/>
       </Container>
+      
     </div>
   )
 }

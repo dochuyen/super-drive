@@ -29,7 +29,6 @@ const Product = () => {
   const [heart, setHeart] = useState(false);
   const [pageAction, setPageAction] = useState(1);
   const [products, setProducts] = useState([]);
-
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/product/getBrand/${result.id}`)

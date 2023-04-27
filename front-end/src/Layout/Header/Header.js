@@ -20,7 +20,7 @@ function Header() {
     },
     {
       id: 2,
-      to: "/shop",
+      to: "/shop/64416634196081acc2643440",
       type: "Shop",
       text: false,
     },
