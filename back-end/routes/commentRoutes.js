@@ -1,7 +1,7 @@
 import express from "express";
-import { commentCollection } from "../configs/connectDB.js";
 
 const commentRouter = express.Router();
+
 commentRouter.post("/", async (req, res) => {
   console.log("Handling POST request to /api/v1/comments");
   try {
