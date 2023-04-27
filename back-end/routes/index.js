@@ -16,6 +16,6 @@ const initRout = (app) => {
   app.use("/api/user", userRouter);
   app.use("/api/product", productRouter);
   app.use("/api/brand", brandRouter);
-  app.use("/api/blog", commentRouter);
+  app.use("/api/comments", commentRouter);
 };
 export default initRout;

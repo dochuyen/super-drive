@@ -1,5 +1,7 @@
 
 import Users from "../model/user.js";
+import bcrypt from "bcrypt"
+
 const getUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -83,6 +85,7 @@ const userRegister = async (req, res) => {
       },
     });
   } catch (error) {
+    console.log(error)
     res.status(400).json({
       message: 'Fail',
       data: null,

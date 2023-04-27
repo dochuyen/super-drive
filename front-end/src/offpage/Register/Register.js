@@ -38,7 +38,7 @@ const Register = () => {
     if (!input) {
       alert("Bạn phải nhập đủ username, email và password");
     } else {
-      fetch("http://localhost:8080/api/v1/auth/register", {
+      fetch("http://localhost:8080/api/user/register", {
         method: "POST",
         body: JSON.stringify(input),
         headers: {

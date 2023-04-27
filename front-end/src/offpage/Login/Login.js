@@ -38,7 +38,7 @@ const Login = () => {
 
   const submitLogin = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8080/api/v1/auth/login", {
+    fetch("http://localhost:8080/api/user/login", {
       method: "POST",
       body: JSON.stringify(inputLogin),
       headers: {
