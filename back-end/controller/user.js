@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+
 import Users from "../model/user.js";
 const getUser = async (req, res) => {
   try {
@@ -10,7 +10,7 @@ const getUser = async (req, res) => {
   } catch (error) {}
 };
 const userLogin=async (req, res) => {
-  const { username, email, password } = req.body;
+  const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({
       message: 'Email or password is missing',
@@ -52,42 +52,42 @@ const userLogin=async (req, res) => {
     },
   });
 }
-const userRegister= async (req, res) => {
+const userRegister = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
     const passwordHash = bcrypt.hashSync(password, 10);
 
-    const user = await authCollection.findOne({ email });
+    const user = await Users.findOne({ email });
     if (user) {
-      throw new Error('Email is already token');
+      throw new Error('Email is already taken');
     }
 
-    const newUser = await Users.insertOne({
+    const newUser = await Users.create({
       username,
       email,
       password: passwordHash,
     });
 
-    if (!newUser.acknowledged) {
+    if (!newUser) {
       throw new Error('Register failed');
     }
 
     res.status(201).json({
       message: 'Register success',
       data: {
-        _id: newUser.insertedId,
+        _id: newUser._id,
         username,
         email,
         password: passwordHash,
-        // cartitem:{img, }
       },
     });
   } catch (error) {
     res.status(400).json({
-      message: "Fail",
+      message: 'Fail',
       data: null,
     });
   }
-}
+};
+
 export { getUser, userLogin, userRegister };
