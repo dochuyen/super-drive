@@ -15,15 +15,14 @@ const Search = () => {
         `http://localhost:8080/api/product/search?q=${searchQuery}`
       );
       setProducts(response.data.productData);
-      console.log(response.data.productData);
-      console.log(products);
+      console.log(products)
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div>
+    <div className={cx('wrapper')}>
       <form onSubmit={handleSearch}>
         <input
           className={cx("search")}
@@ -32,11 +31,14 @@ const Search = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </form>
-      {products.map((product) => (
-        <div key={product._id}>
-          <h2>{product.title}</h2>
-        </div>
-      ))}
+      <div className={cx('result')}>
+        {products.map((product) => (
+          <div key={product._id}>
+            <h2>{product.title}</h2>
+            <img src={product.img}/>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

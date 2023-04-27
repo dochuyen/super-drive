@@ -1,8 +1,9 @@
 import express from "express";
-import postComment from "../controller/comment.js";
+import * as proControl from "../controller/comment.js";
 
 const commentRouter = express.Router();
 
-commentRouter.post("/", postComment);
+commentRouter.post("/", proControl.postComment);
+commentRouter.get('/get', proControl.getComment)
 
 export default commentRouter;

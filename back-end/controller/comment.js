@@ -29,4 +29,14 @@ const postComment= async (req, res) => {
       });
     }
   }
-  export default postComment
+  const getComment= async (req, res) => {
+    const product = await Comment.find({}).then((data) => {
+      return res.status(200).json({
+        status:'ok',
+        message:'Yeahhhh',
+        data
+      });
+    });
+  };
+
+  export {postComment, getComment} 

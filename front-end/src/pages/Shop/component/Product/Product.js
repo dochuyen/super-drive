@@ -37,6 +37,17 @@ const Product = () => {
       })
       .catch((error) => console.log(error));
   }, [result.id]);
+  useEffect(()=>{
+    axios
+    .get('http://localhost:8080/api/product')
+    .then((res)=>{
+      setProducts(res.data)
+      console.log(res.data)
+    })
+    .catch((error)=>{
+      console.log(error)
+    })
+  }, [])
 
   const handleAddProduct = (product) => {
     const productList = JSON.parse(localStorage.getItem("cartItems")) || [];
