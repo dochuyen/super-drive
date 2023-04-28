@@ -24,7 +24,6 @@ const getBrand = async (req, res) => {
   }
 };
 
-
 const createProducts = async (req, res) => {
   try {
     if (Object.keys(req.body).length === 0) throw new Error("Missing input");
@@ -95,7 +94,6 @@ const deleteProducts = async (req, res) => {
   }
 };
 
-
 const uploadImageProduct = async (req, res) => {
   try {
     const { pid } = req.params;
@@ -121,16 +119,15 @@ const uploadImageProduct = async (req, res) => {
 };
 const searchProducts = async (req, res) => {
   try {
-    const { q } = req.query; // Lấy giá trị của tham số tìm kiếm từ URL query string
+    const { q, price } = req.query;
+    if (!q) throw new Error("Missing search query");
 
-    if (!q) throw new Error("Missing search query"); // Nếu không có tham số tìm kiếm, trả về lỗi
-
-    // Tìm kiếm sản phẩm trong cơ sở dữ liệu MongoDB dựa trên giá trị tham số tìm kiếm
-    const products = await Products.find({ $text: { $search: q } });
-
+    const products = await Products.find({
+      title: { $regex: q, $options: "i" },
+    });
     return res.status(200).json({
       success: true,
-      products: products,
+      productData: products,
     });
   } catch (error) {
     return res.status(400).json({
@@ -143,11 +140,9 @@ const searchProducts = async (req, res) => {
 export {
   getBrand,
   getAllProducts,
- 
   createProducts,
   updateProducts,
   deleteProducts,
-
   uploadImageProduct,
   searchProducts,
 };
