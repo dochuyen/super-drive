@@ -1,11 +1,10 @@
-
 import Products from "../model/product.js";
 
 import slugify from "slugify";
 const getAllProducts = async (req, res) => {
   const product = await Products.find({}).then((data) => {
     return res.status(200).json({
-      success: product ? true : false,
+      success: data ? true : false,
       productData: data ? data : "cannot find product",
     });
   });
