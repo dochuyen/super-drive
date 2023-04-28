@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+
 import Products from "../model/product.js";
 
 import slugify from "slugify";
