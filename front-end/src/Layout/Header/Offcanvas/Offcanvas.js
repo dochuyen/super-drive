@@ -1,11 +1,8 @@
 import { useState } from "react";
-import Alert from "react-bootstrap/Alert";
-import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiUser, BiLogIn, BiRegistered, BiLogOut } from "react-icons/bi";
-import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
-
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Offcanvas.module.scss";
@@ -95,7 +92,7 @@ function Canvas({
                       </span>
                       {paserUsername}
                     </Link>
-                    <Link onClick={handleLogOut} className={cx("btn-log")}>
+                    <Link onClick={handleLogOut} className={cx("btn-logout")}>
                       <span>
                         <BiLogOut />
                       </span>

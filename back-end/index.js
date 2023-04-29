@@ -1,41 +1,18 @@
 import { config } from "dotenv";
 config();
 import express from "express";
-import { client } from "./configs/connectDB.js";
-import usesRoutes from "./routes/userRoutes.js";
-import authRoutes from "./routes/authRoutes.js";
-import commentRouter from "./routes/commentRoutes.js";
-import proCategoryRouter from "./routes/productCategoryRoutes.js";
-import productRouter from "./routes/productRoutes.js";
-import brandRouter from "./routes/brandRoutes.js";
-import cors from "cors";
+import dbConnect from "./configs/connectDb.js";
+import initRout from "./routes/index.js";
+import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT;
+app.use(cors());
+app.use(express.json());
 
-app.use("*", cors());
+initRout(app);
+dbConnect();
 
-async function main() {
-  try {
-    // connect to mongodb
-    await client.connect();
-    console.log("Connected to mongodb successfully");
-
-    // set up middlewares
-    app.use(express.json());
-    app.use("/api/v1/users", usesRoutes);
-    app.use("/api/v1/auth", authRoutes);
-    app.use("/api/v1/comments", commentRouter);
-    app.use("/api/v1/product", productRouter);
-    app.use("/api/v1/brand", brandRouter);
-    app.use("/api/v1/productcategory", proCategoryRouter);
-    // run server
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  } catch (error) {
-    console.log("Fails");
-  }
-}
-
-main();
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

@@ -1,11 +1,12 @@
-import { MongoClient } from "mongodb";
+import { mongoose } from "mongoose";
 import { config } from "dotenv";
 config();
 
-export const client = new MongoClient(process.env.MONGO_DB_URL);
+const dbConnect = async () => {
+  try {
+    const db = await mongoose.connect(process.env.MONGO_DB_URL);
+    console.log("Connect DB successfully");
+  } catch (error) {}
+};
 
-export const userCollection = client.db("super_drive").collection("user");
-export const authCollection = client.db("super_drive").collection("user");
-export const commentCollection = client.db("superdrive").collection("comments");
-
-
+export default dbConnect;

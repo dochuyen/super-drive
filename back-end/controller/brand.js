@@ -14,7 +14,7 @@ const getOne = async (req, res) => {
 const getAll = async (req, res) => {
   try {
     const brand = await Brand.find();
-
+    console.log({ brand });
     res.json(brand);
   } catch (error) {}
 };
