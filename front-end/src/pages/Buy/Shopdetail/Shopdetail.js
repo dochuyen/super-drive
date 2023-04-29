@@ -171,14 +171,7 @@ const Shopdetail = () => {
         <Container>
           <div className={cx("involve-title")}>
             <p className={cx("involve-text")}>You Might Also Like</p>
-            {/* <div className={cx("icon-detail")}>
-                <button className={cx("icon-next")}>
-                  <AiOutlineLeft />
-                </button>
-                <button className={cx("icon-next")}>
-                  <AiOutlineRight />
-                </button>
-              </div> */}
+            
           </div>
 
           <div className={cx("random-product")}>

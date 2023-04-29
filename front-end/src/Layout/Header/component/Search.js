@@ -2,12 +2,22 @@ import React, { useState } from "react";
 import axios from "axios";
 import classNames from "classnames/bind";
 import styles from "./Search.module.scss";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
+import { AiOutlineEye, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { BsCartPlus } from "react-icons/bs";
+
 const cx = classNames.bind(styles);
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState([]);
-  console.log(searchQuery);
+  const [hidden, setHidden] = useState(false);
 
+  const handleHidden = () => {
+    setHidden(false)
+  };
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
@@ -15,14 +25,14 @@ const Search = () => {
         `http://localhost:8080/api/product/search?q=${searchQuery}`
       );
       setProducts(response.data.productData);
-      console.log(products)
+      setHidden(true);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div className={cx('wrapper')}>
+    <div className={cx("wrapper")}>
       <form onSubmit={handleSearch}>
         <input
           className={cx("search")}
@@ -31,14 +41,31 @@ const Search = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </form>
-      <div className={cx('result')}>
-        {products.map((product) => (
-          <div key={product._id}>
-            <h2>{product.title}</h2>
-            <img src={product.img}/>
-          </div>
-        ))}
-      </div>
+      {hidden && (
+        <div className={cx("result")}>
+          {products.map((product) => (
+            <>
+              <div key={product._id} className={cx("box")}>
+                <Link to="/shopdetail" className={cx("img-car")}>
+                  <img className={cx("picture")} src={product.images} />
+                </Link>
+                <div className={cx("car")}>
+                  <Link to="/shopdetail" className={cx("info")}>
+                    <div className={cx("title")}>{product.title}</div>
+
+                    <div className={cx("price-car")}>
+                      <span className={cx("sale-price")}>$20.000</span>- $15.730
+                    </div>
+                  </Link>
+                </div>
+              </div>
+              <div className={cx("hidden")} onClick={handleHidden}>
+                
+              </div>
+            </>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
