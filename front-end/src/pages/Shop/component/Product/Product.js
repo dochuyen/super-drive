@@ -56,6 +56,9 @@ const Product = () => {
         const response = await axios.put(`http://localhost:8080/api/add-cart`, {
           email: emailUser,
           productId: product._id,
+
+          title: product.title,
+          price: product.price,
           quantity: 1,
         });
         console.log(response.data);

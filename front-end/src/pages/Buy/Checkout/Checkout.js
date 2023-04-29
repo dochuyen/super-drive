@@ -1,11 +1,20 @@
-import React from "react";
+import {React,useEffect,useState} from "react";
 import styles from "./Checkout.module.scss";
 import classNames from "classnames/bind";
 import { Container, Row, Col } from "react-bootstrap";
 import { AiOutlineRight,AiOutlinePlusCircle,AiOutlineMinusCircle } from "react-icons/ai";
-
+import axios from "axios";
 const cx = classNames.bind(styles);
 const Checkout = () => {
+  const [proCheck, setProCheck] = useState([])
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/product`)
+      .then((response) => {
+        setProCheck(response.data.productData);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <div className={cx("wapper")}>
       <div className={cx("toolbar")}>
