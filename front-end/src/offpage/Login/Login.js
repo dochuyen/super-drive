@@ -52,6 +52,7 @@ const Login = () => {
       })
       .then((data) => {
         dispatch(changeUserName(data.data.username))
+        localStorage.setItem('email', JSON.stringify(data.data.email))
         dispatch(changeEmail(data.data.email))
         localStorage.setItem("token", JSON.stringify(data.data.token));
         next("/");

@@ -1,4 +1,3 @@
-
 import Users from "../model/user.js";
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
@@ -90,6 +89,7 @@ const userRegister = async (req, res) => {
     res.status(400).json({
       message: 'Fail',
       data: null,
+
     });
   }
 };

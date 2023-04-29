@@ -41,8 +41,7 @@ function Header() {
 
   const [types, setTypes] = useState("Home");
   const [localUsername, setLocalUsername] = useState(false);
-  // const [lengthCartItem, setLengthCartItem] = useState(0);
-  const userName = useSelector((state) => state.userNameReducer.username);
+  const userName = JSON.parse(localStorage.getItem('username'));
 
   useEffect(() => {
     if (!userName) {

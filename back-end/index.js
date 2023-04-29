@@ -3,10 +3,11 @@ config();
 import express from "express";
 import dbConnect from "./configs/connectDb.js";
 import initRout from "./routes/index.js";
+import cors from 'cors';
 
 const app = express();
 const PORT = process.env.PORT;
-
+app.use(cors());
 app.use(express.json());
 
 initRout(app);
