@@ -11,9 +11,39 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import classNames from "classnames/bind";
 import styles from "./Blog.module.scss";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 const Blog = () => {
+
+  let commentData=[]
+
+  const fetchComment=() => {
+    axios.get(`http://localhost:8080/api/v1/comments/get`)
+      .then(res => {
+        const comments = res.data;
+        commentData = comments.data
+      })
+      .catch(error => console.log(error));
+  }
+
+  fetchComment();
+
+  const postHandle = (e)=>{
+
+    const newComment=e.target.value;
+
+    fetch("http://localhost:8080/apti/v1/comments/post", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({}),
+    });
+
+}
+
   const blogData = [
     {
       title: "Blog 1",
@@ -30,6 +60,12 @@ const Blog = () => {
           <div className={cx("directional")}>
             Home <AiOutlineRight className={cx("icon-tool")} />
             <span>Blog</span>
+          </div>
+          <div className={cx('blogSearch')}>
+          <form>
+            <input type="text" placeholder="Tìm kiếm blog..."></input>
+            <button className={cx('searchButton')}>Tìm kiếm</button>
+          </form>
           </div>
         </Container>
       </div>
@@ -142,20 +178,28 @@ const Blog = () => {
               height="50px"
             />
             <input type="text" placeholder="Viết bình luận" />
+            <div className={cx('commentBtnHolder')}>
+       <button className={cx('commentBtn')} onClick={e=>postHandle(e)}>Bình luận</button>
+       </div>
           </div>
           <ul className={cx("list-comment")}>
-            <li className={cx("comment-box")}>
+              {commentData.map(comment=>{
+                return(
+                  <li className={cx("comment-box")}>
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFwttmJ8hKA9m__MNyYn7WghUocb2Gu9Uoow&usqp=CAU"
                 alt=""
                 width="50px"
                 height="50px"
               />
-              <div>
-                <h5>Đàn</h5>
-                <p>textNihi</p>
-              </div>
-            </li>
+                  <div>
+               <h5>{comment.username}</h5>
+               <p>{comment.comment}</p>
+               </div>
+               </li>
+                )
+              })}
+              
           </ul>
         </Row>
       </Container>

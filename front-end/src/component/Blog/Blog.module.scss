@@ -12,7 +12,37 @@
 .icon-tool {
   font-size: 12px;
 }
+.blogSearch{
+background-color:#F6B024;
+width: 45%;
+border-radius: 5px;
+padding: 5px;
+margin-top: 30px;
+}
+.blogSearch form{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.blogSearch input{
+  background-color: #f0f0f0;
+  outline:none;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 80%;
+  margin-right: 20px;
+}
 
+.blogSearch button{
+  outline: none;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #F6B024;
+  color: #fff;
+
+}
 .blog {
   height: 100%;
   margin: 20px 20px 20px 0;
@@ -120,4 +150,22 @@
       }
     }
   }
+  .commentBtnHolder{
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    margin-right:70px;
+  }
 }
+
+.commentBtn{
+  color: #fff;
+  background-color: #F6B024;
+  border-radius: 5px;
+  width: 98px;
+  height: 29px;
+  border: none;
+  margin-top: 20px;
+}
+
+
