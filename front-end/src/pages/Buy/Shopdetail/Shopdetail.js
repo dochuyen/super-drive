@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./Shopdetail.module.scss";
 import {
-  AiOutlineLeft,
   AiOutlineRight,
   AiOutlineEye,
   AiOutlineHeart,
   AiFillHeart,
 } from "react-icons/ai";
-import { BsCartPlus, BsCurrencyDollar } from "react-icons/bs";
+import { BsCartPlus } from "react-icons/bs";
 import { Container, Row, Col } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -202,14 +201,7 @@ const Shopdetail = () => {
         <Container>
           <div className={cx("involve-title")}>
             <p className={cx("involve-text")}>You Might Also Like</p>
-            {/* <div className={cx("icon-detail")}>
-                <button className={cx("icon-next")}>
-                  <AiOutlineLeft />
-                </button>
-                <button className={cx("icon-next")}>
-                  <AiOutlineRight />
-                </button>
-              </div> */}
+            
           </div>
 
           <div className={cx("random-product")}>
