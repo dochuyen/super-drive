@@ -29,39 +29,28 @@ const Shopdetail = () => {
     autoplayspeed: 1000,
     responsive: [
       {
-        breakpoint: 500,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-      {
         breakpoint: 992,
         settings: {
           slidesToShow: 3,
         },
       },
-      {
-        breakpoint: 772,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
+
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
         },
       },
       {
         breakpoint: 568,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
         },
       },
     ],
   };
-  const [heart, setHeart] = useState(false);
   const [products, setProducts] = useState({});
+  const [randomProducts, setRandomProducts] = useState([]);
 
   useEffect(() => {
     axios
@@ -71,6 +60,14 @@ const Shopdetail = () => {
       })
       .catch((error) => console.log(error));
   }, [details.id]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/product`)
+      .then((response) => {
+        setRandomProducts(response.data.productData);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   const handleAddProduct = (product) => {
     const productList = JSON.parse(localStorage.getItem("cartItems")) || [];
     productList.push(product);
@@ -139,7 +136,7 @@ const Shopdetail = () => {
             <Col lg={4}>
               <div className={cx("detail-content")}>
                 <h2 className={cx("detail-title")}>{products.title}</h2>
-                <p className={cx("type")}>Nissan</p>
+
                 <p className={cx("detail-price")}>{products.price}</p>
                 <button className={cx("detail-btn")}>Add to Bag</button>
                 <button className={cx("detail-heart")}>
@@ -157,10 +154,7 @@ const Shopdetail = () => {
       <div className={cx("detail-introduce")}>
         <Col lg={12}>
           <div className={cx("introduce-title")}>Explore the GTR</div>
-          <img
-            src="https://tse1.mm.bing.net/th?id=OIP.5CmhYL1kfc68xJo5gt8eawHaEK&pid=Api&P=0"
-            alt=""
-          />
+          <img src={products.images} alt="" />
           <p className={cx("introduce-text")}>
             The stitched leather overlays on the upper add heritage style,
             durability and support.
@@ -171,43 +165,45 @@ const Shopdetail = () => {
         <Container>
           <div className={cx("involve-title")}>
             <p className={cx("involve-text")}>You Might Also Like</p>
-            
           </div>
 
           <div className={cx("random-product")}>
             <Slider {...settings}>
-              <div key={""} className={cx("box")}>
-                <Link to="/shopdetail" className={cx("img-car")}>
-                  <img className={cx("picture")} src=""  alt=""/>
-                </Link>
-                <div className={cx("car")}>
-                  <div className={cx("icons")}>
-                    <Link to="/shopdetail" className={cx("eye")}>
-                      <AiOutlineEye />
-                    </Link>
-                    <span className={cx("heart")}>
-                      {!heart ? (
-                        <AiOutlineHeart />
-                      ) : (
-                        <AiFillHeart className={cx("icon-heart")} />
-                      )}
-                    </span>
-                  </div>
-                  <button
-                    className={cx("add")}
-                    onClick={() => handleAddProduct()}
-                  >
-                    <BsCartPlus />
-                  </button>
-                  <Link to="/shopdetail" className={cx("info")}>
-                    <div className={cx("title")}>BMW</div>
-                    <p className={cx("name-car")}>GTR</p>
-                    <div className={cx("price-car")}>
-                      <span className={cx("sale-price")}>$20.000</span>- $15.730
-                    </div>
+              {randomProducts.map((randomProduct, _id) => (
+                <div key={randomProduct._id} className={cx("box")}>
+                  <Link to="/shopdetail" className={cx("img-car")}>
+                    <img
+                      className={cx("picture")}
+                      src={randomProduct.images}
+                      alt=""
+                    />
                   </Link>
+                  <div className={cx("car")}>
+                    <div className={cx("icons")}>
+                      <Link to="/shopdetail" className={cx("eye")}>
+                        <AiOutlineEye />
+                      </Link>
+                    </div>
+                    <button
+                      className={cx("add")}
+                      onClick={() => handleAddProduct()}
+                    >
+                      <BsCartPlus />
+                    </button>
+                    <Link to="/shopdetail" className={cx("info")}>
+                      <div className={cx("title")}>{randomProduct.title}</div>
+                      <p className={cx("name-car")}>
+                        {randomProduct.description}
+                      </p>
+                      <div className={cx("price-car")}>
+                        <span className={cx("sale-price")}>
+                          ${randomProduct.price}
+                        </span>
+                      </div>
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              ))}
             </Slider>
           </div>
         </Container>

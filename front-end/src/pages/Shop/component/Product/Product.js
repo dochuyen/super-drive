@@ -29,7 +29,7 @@ const Product = () => {
   const [heart, setHeart] = useState(false);
   const [pageAction, setPageAction] = useState(1);
   const [products, setProducts] = useState([]);
-  const emailUser=JSON.parse(localStorage.getItem('email'))
+  const emailUser = JSON.parse(localStorage.getItem("email"));
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/product/getBrand/${result.id}`)
@@ -51,15 +51,14 @@ const Product = () => {
   // }, [])
 
   const handleAddProduct = (product) => {
-  
     const fetchData = async () => {
       try {
         const response = await axios.put(`http://localhost:8080/api/add-cart`, {
-          email:emailUser,
+          email: emailUser,
           productId: product._id,
           quantity: 1,
         });
-        console.log(response.data)
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -91,7 +90,6 @@ const Product = () => {
                     src={product.images}
                     alt=""
                     width="100%"
-                    alt="picture car"
                   />
                 </Link>
                 <div className={cx("car")}>
