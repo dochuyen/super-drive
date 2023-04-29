@@ -66,13 +66,17 @@ const Product = () => {
 
       <div className={cx("product")}>
         <Row>
-          {products.map((product, index) => (
-            <Col xs={12} sm={6} md={6} lg={4} xl={3} key={index}>
+          {products.map((product, _id) => (
+            <Col xs={12} sm={6} md={6} lg={4} xl={3} key={_id}>
               <div className={cx("box")}>
-                <Link to="/shopdetail" className={cx("img-car")}>
+                <Link
+                  to={"/shopdetail/" + product._id}
+                  className={cx("img-car")}
+                >
                   <img
                     className={cx("picture")}
                     src={product.images}
+                    alt=""
                     width="100%"
                   />
                 </Link>
