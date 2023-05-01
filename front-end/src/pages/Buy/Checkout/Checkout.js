@@ -2,19 +2,25 @@ import {React,useEffect,useState} from "react";
 import styles from "./Checkout.module.scss";
 import classNames from "classnames/bind";
 import { Container, Row, Col } from "react-bootstrap";
-import { AiOutlineRight,AiOutlinePlusCircle,AiOutlineMinusCircle } from "react-icons/ai";
+import { AiOutlineRight, AiOutlineCloseCircle } from "react-icons/ai";
 import axios from "axios";
 const cx = classNames.bind(styles);
 const Checkout = () => {
-  const [proCheck, setProCheck] = useState([])
-  useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/product`)
+  const [cartItems, setCartItems] = useState([]);
+  const handleRemoveFromCart = (productId) => {
+    axios.delete(`http://localhost:8080/api/cart/delete/:productId${productId}`)
       .then((response) => {
-        setProCheck(response.data.productData);
+        if (response.data.status === "ok") {
+          const updatedCartItems = cartItems.filter(
+            (item) => item.productId !== productId
+          );
+          setCartItems(updatedCartItems);
+        }
       })
-      .catch((error) => console.log(error));
-  }, []);
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className={cx("wapper")}>
       <div className={cx("toolbar")}>
@@ -114,9 +120,8 @@ const Checkout = () => {
                 <div className={cx("list-bill")}>
                   <p>Lamborgini</p>
                   <div className={cx('icons-bill')}>
-                    <span className={cx('plus')}><AiOutlinePlusCircle/></span>
-                    1
-                    <span className={cx('minus')}><AiOutlineMinusCircle/></span>
+                    <span onClick={handleRemoveFromCart} className={cx('plus')}><AiOutlineCloseCircle/></span>
+                    
                   </div>
                   <p>$10000</p>
                 </div>

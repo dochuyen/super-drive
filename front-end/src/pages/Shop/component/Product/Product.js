@@ -53,10 +53,9 @@ const Product = () => {
   const handleAddProduct = (product) => {
     const fetchData = async () => {
       try {
-        const response = await axios.put(`http://localhost:8080/api/add-cart`, {
+        const response = await axios.put(`http://localhost:8080/api/cart/add`, {
           email: emailUser,
           productId: product._id,
-
           title: product.title,
           price: product.price,
           quantity: 1,

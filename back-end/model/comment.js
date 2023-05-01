@@ -17,6 +17,7 @@ const commentSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  
 });
 
 //Export the model

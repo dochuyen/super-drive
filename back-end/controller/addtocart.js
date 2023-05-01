@@ -55,4 +55,35 @@ const addToCart = async (req, res) => {
     });
   }
 };
-export { addToCart };
+const deleteCart=async (req, res) => {
+  const productId = req.params.productId;
+
+  try {
+    // Xóa sản phẩm khỏi danh sách sản phẩm trong giỏ hàng
+    const cart = await Users.findOneAndUpdate(
+      {},
+      { $pull: { items: { productId: productId } } },
+      { new: true }
+    );
+
+    if (!cart) {
+      return res.status(404).json({
+        status: "fail",
+        message: "Cart not found",
+      });
+    }
+
+    // Trả về phản hồi nếu xóa thành công
+    return res.status(200).json({
+      status: "ok",
+      message: "Product removed from cart",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+    });
+  }
+}
+export { addToCart,deleteCart };
