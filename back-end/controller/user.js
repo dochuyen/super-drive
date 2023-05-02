@@ -7,7 +7,6 @@ const getUser = async (req, res) => {
     const { id } = req.params;
     console.log(id);
     const user = await Users.findById(id);
-
     res.json(user);
   } catch (error) {}
 };
@@ -50,7 +49,6 @@ const userLogin=async (req, res) => {
       token,
       email,
       username: user.username,
-      cartitem: cartitem ? cartitem : [],
     },
   });
 }

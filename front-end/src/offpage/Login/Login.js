@@ -10,8 +10,7 @@ import { BsFillEyeSlashFill, BsFacebook } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch} from 'react-redux'
-import changeUserName from "../../store/user/action";
-import changeEmail from "../../store/emailuser/action";
+
 
 
 const cx = classNames.bind(styles);
@@ -43,6 +42,7 @@ const Login = () => {
       body: JSON.stringify(inputLogin),
       headers: {
         "Content-Type": "application/json",
+        // Authorization:`Bearer ${localStorage.getItem('token')}`
       },
     })
       .then((res) => {
@@ -51,9 +51,9 @@ const Login = () => {
         } else throw new Error("failed");
       })
       .then((data) => {
-        dispatch(changeUserName(data.data.username))
-        localStorage.setItem('email', JSON.stringify(data.data.email))
-        dispatch(changeEmail(data.data.email))
+        dispatch({type:"SET_USERNAME", payload:data.data.username})
+        dispatch({type:"SET_EMAIL", payload:data.data.email})
+        // dispatch({type:"ADD_ITEM", payload:data.data.cart})
         localStorage.setItem("token", JSON.stringify(data.data.token));
         next("/");
       })

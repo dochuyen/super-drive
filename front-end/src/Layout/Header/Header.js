@@ -9,6 +9,9 @@ import { useState, useEffect } from "react";
 import Canvas from "./Offcanvas/Offcanvas";
 import { useSelector } from "react-redux";
 import Search from "./component/Search";
+import {store} from '../../store/index.js'
+
+
 const cx = classNames.bind(styles);
 function Header() {
   const items = [
@@ -41,7 +44,10 @@ function Header() {
 
   const [types, setTypes] = useState("Home");
   const [localUsername, setLocalUsername] = useState(false);
-  const userName = JSON.parse(localStorage.getItem('username'));
+  const userName = useSelector(state => state.username);
+  const clearAuthStateAction = {
+    type: 'CLEAR_AUTH_STATE',
+  };
 
   useEffect(() => {
     if (!userName) {
@@ -53,6 +59,8 @@ function Header() {
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
+    store.dispatch(clearAuthStateAction);
+
     setLocalUsername(true);
   };
 

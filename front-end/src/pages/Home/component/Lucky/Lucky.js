@@ -40,11 +40,11 @@ const Lucky = () => {
   ];
   const [random, setRandom] = useState(giftS);
   const [isClicked, setIsClicked] = useState(false);
-  const user=localStorage.getItem("token")
+  const token=localStorage.getItem("token")
   const next =useNavigate()
 
   const handleRandom = () => {
-    if(user){
+    if(token){
       const randomGift = Math.floor(Math.random() * giftS.length);
     setRandom(giftS[randomGift]);
     setIsClicked(true);

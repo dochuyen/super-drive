@@ -16,8 +16,7 @@ const addToCart = async (req, res) => {
       });
     }
 
-    // Check if product already exists in cart
-    let cartItemIndex = -1;
+    const cartItemIndex = -1;
     const cartItem = user.cartitem.find((item) => {
       item.productId = productId;
       item.title = title;
@@ -25,7 +24,6 @@ const addToCart = async (req, res) => {
     });
 
     if (cartItem) {
-      // Update existing cart item
       const updatedCartItem = {
         ...cartItem,
         quantity: cartItem.quantity + quantity,
@@ -48,42 +46,58 @@ const addToCart = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
+
     return res.status(400).json({
       message: "Error adding product to cart",
       data: null,
     });
   }
 };
-const deleteCart=async (req, res) => {
-  const productId = req.params.productId;
+const deleteCart = async (req, res) => {
+  const { email, productId } = req.body;
 
   try {
-    // Xóa sản phẩm khỏi danh sách sản phẩm trong giỏ hàng
-    const cart = await Users.findOneAndUpdate(
-      {},
-      { $pull: { items: { productId: productId } } },
-      { new: true }
-    );
-
-    if (!cart) {
-      return res.status(404).json({
-        status: "fail",
-        message: "Cart not found",
+    if (!email || !productId) {
+      return res.status(400).json({
+        message: "Missing email or productId",
       });
     }
 
-    // Trả về phản hồi nếu xóa thành công
+    const user = await Users.findOne({ email });
+    if (!user) {
+      return res.status(400).json({
+        message: "User not found",
+      });
+    }
+
+    const cartItemIndex = user.cartitem.findIndex(
+      (item) => item.productId === productId
+    );
+
+    if (cartItemIndex === -1) {
+      return res.status(404).json({
+        message: "Product not found in cart",
+      });
+    }
+
+    user.cartitem.splice(cartItemIndex, 1);
+    await user.save();
+
     return res.status(200).json({
       status: "ok",
       message: "Product removed from cart",
+      data: {
+        email,
+        username: user.username,
+        cartitem: user.cartitem,
+      },
     });
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      status: "error",
-      message: "Internal server error",
+    return res.status(400).json({
+      message: "Error removing product from cart",
+      data: null,
     });
   }
-}
+};
+
 export { addToCart,deleteCart };

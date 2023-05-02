@@ -3,6 +3,7 @@ import brandRouter from "./brandRoutes.js";
 import userRouter from "./userRoutes.js";
 import commentRouter from "./commentRoutes.js";
 import cartRouter from './cartRouter.js';
+import addressRouter from "./addressRouter.js";
 
 const initRout = (app) => {
   app.use(function (req, res, next) {
@@ -19,5 +20,6 @@ const initRout = (app) => {
   app.use("/api/brand", brandRouter);
   app.use("/api/comments", commentRouter);
   app.use('/api/cart', cartRouter)
+  app.use('/api/address', addressRouter)
 };
 export default initRout;

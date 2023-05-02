@@ -1,4 +1,4 @@
-import {React,useEffect,useState} from "react";
+import { React, useEffect, useState } from "react";
 import styles from "./Checkout.module.scss";
 import classNames from "classnames/bind";
 import { Container, Row, Col } from "react-bootstrap";
@@ -7,19 +7,22 @@ import axios from "axios";
 const cx = classNames.bind(styles);
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
+  const carts = JSON.parse(localStorage.getItem("cartitem"));
   const handleRemoveFromCart = (productId) => {
-    axios.delete(`http://localhost:8080/api/cart/delete/:productId${productId}`)
-      .then((response) => {
-        if (response.data.status === "ok") {
-          const updatedCartItems = cartItems.filter(
-            (item) => item.productId !== productId
-          );
-          setCartItems(updatedCartItems);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios
+    //   .delete(`http://localhost:8080/api/cart/delete/:productId`)
+    //   .then((response) => {
+    //     if (response.data.status === "ok") {
+    //       const updatedCartItems = cartItems.filter(
+    //         (item) => item.productId !== productId
+    //       );
+    //       setCartItems(updatedCartItems);
+    //       console.log(cartItems);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
   return (
     <div className={cx("wapper")}>
@@ -43,22 +46,7 @@ const Checkout = () => {
             <div className={cx("info-user")}>
               <form>
                 <div className={cx("title-form")}>Customer information</div>
-                <div className={cx("name")}>
-                  <div className={cx("checkout-name")}>
-                    <p>
-                      Fist Name
-                      <span>*</span>
-                    </p>
-                    <input type="text" name="fist-name" />
-                  </div>
-                  <div className={cx("checkout-name")}>
-                    <p>
-                      Last Name
-                      <span>*</span>
-                    </p>
-                    <input type="text" name="last-name" />
-                  </div>
-                </div>
+
                 <div className={cx("address")}>
                   <div className={cx("checkout-input")}>
                     <p>
@@ -82,22 +70,15 @@ const Checkout = () => {
                     <input type="text" name="last-name" />
                   </div>
                 </div>
-                <div className={cx("name")}>
-                  <div className={cx("checkout-name")}>
-                    <p>
-                      Phone
-                      <span>*</span>
-                    </p>
-                    <input type="text" name="fist-name" />
-                  </div>
-                  <div className={cx("checkout-name")}>
-                    <p>
-                      Email
-                      <span>*</span>
-                    </p>
-                    <input type="text" name="last-name" />
-                  </div>
+
+                <div className={cx("checkout-input")}>
+                  <p>
+                    Phone
+                    <span>*</span>
+                  </p>
+                  <input type="text" name="fist-name" />
                 </div>
+
                 <div className={cx("checkout-input")}>
                   <p>Order notes (option)</p>
                   <input type="text" name="last-name" />
@@ -118,12 +99,20 @@ const Checkout = () => {
                   </div>
                 </div>
                 <div className={cx("list-bill")}>
-                  <p>Lamborgini</p>
-                  <div className={cx('icons-bill')}>
-                    <span onClick={handleRemoveFromCart} className={cx('plus')}><AiOutlineCloseCircle/></span>
-                    
-                  </div>
-                  <p>$10000</p>
+                  {carts.map((cart) => (
+                    <>
+                      <p>{cart.title}</p>
+                      <div className={cx("icons-bill")}>
+                        <span
+                          onClick={handleRemoveFromCart}
+                          className={cx("plus")}
+                        >
+                          <AiOutlineCloseCircle />
+                        </span>
+                      </div>
+                      <p>${cart.price}</p>
+                    </>
+                  ))}
                 </div>
               </div>
               <div className={cx("total")}>
