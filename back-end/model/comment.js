@@ -14,11 +14,7 @@ const commentSchema = new mongoose.Schema({
   comment: {
     type: Array,
     require: true,
-  },
-  createAt:{
-    type:String,
-    require:true
-  }
+  },  
 });
 
 //Export the model

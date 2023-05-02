@@ -38,12 +38,12 @@ const Contact = () => {
     <div className={cx("wrapper")}>
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.3391816052476!2d105.7834574153847!3d20.97903669484882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135accd88c1276b%3A0xc7ec85c744d8874e!2zSOG7kyBHxrDGoW0gUGxhemE!5e0!3m2!1svi!2s!4v1679021566383!5m2!1svi!2s"
-        width="95%"
+        width="100%"
         height="450"
         title="map"
         style={{
           border: "1px  blue solid  ",
-          margin: " 20px 2.5%",
+          margin: " 20px 0",
           borderRadius: "5px",
         }}
         loading="lazy"
@@ -85,7 +85,7 @@ const Contact = () => {
             md={5}
             style={{ justifyContent: "center", alignItems: "center" }}
           >
-            <Card className={cx("card-support")} >
+            <Card className={cx("card-support")}>
               <Card.Header style={{ background: "violet" }} as="h3">
                 Support team
               </Card.Header>
@@ -96,7 +96,7 @@ const Contact = () => {
               </Card.Body>
             </Card>
 
-          <ContactForm />
+            <ContactForm />
           </Col>
         </Row>
         <Row xs={1} md={1} lg={1}>

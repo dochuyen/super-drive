@@ -29,7 +29,7 @@ const Product = () => {
   const [heart, setHeart] = useState(false);
   const [pageAction, setPageAction] = useState(1);
   const [products, setProducts] = useState([]);
-  const emailUser=JSON.parse(localStorage.getItem('email'))
+  const emailUser = JSON.parse(localStorage.getItem("email"));
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/product/getBrand/${result.id}`)
@@ -51,15 +51,16 @@ const Product = () => {
   // }, [])
 
   const handleAddProduct = (product) => {
-  
     const fetchData = async () => {
       try {
-        const response = await axios.put(`http://localhost:8080/api/add-cart`, {
-          email:emailUser,
+        const response = await axios.put(`http://localhost:8080/api/cart/add`, {
+          email: emailUser,
           productId: product._id,
+          title: product.title,
+          price: product.price,
           quantity: 1,
         });
-        console.log(response.data)
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -79,15 +80,18 @@ const Product = () => {
 
       <div className={cx("product")}>
         <Row>
-          {products.map((product, index) => (
-            <Col xs={12} sm={6} md={6} lg={4} xl={3} key={index}>
+          {products.map((product, _id) => (
+            <Col xs={12} sm={6} md={6} lg={4} xl={3} key={_id}>
               <div className={cx("box")}>
-                <Link to="/shopdetail" className={cx("img-car")}>
+                <Link
+                  to={"/shopdetail/" + product._id}
+                  className={cx("img-car")}
+                >
                   <img
                     className={cx("picture")}
                     src={product.images}
+                    alt=""
                     width="100%"
-                    alt="picture car"
                   />
                 </Link>
                 <div className={cx("car")}>

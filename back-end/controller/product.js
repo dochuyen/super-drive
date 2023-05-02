@@ -9,6 +9,16 @@ const getAllProducts = async (req, res) => {
     });
   });
 };
+const getOneProducts = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const product = await Products.findById(id);
+
+    res.json(product);
+  } catch (error) {}
+};
+
 const getBrand = async (req, res) => {
   try {
     const { brandId } = req.params;
@@ -139,6 +149,7 @@ const searchProducts = async (req, res) => {
 export {
   getBrand,
   getAllProducts,
+  getOneProducts,
   createProducts,
   updateProducts,
   deleteProducts,

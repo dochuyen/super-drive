@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styles from "./Lucky.module.scss";
 import classNames from "classnames/bind";
 import picturelucky from "../../../../assets/lucky/lamborgini-lucky.jpg";
-import {Row, Col} from 'react-bootstrap'
+import {useNavigate} from 'react-router-dom'
+
 
 const cx = classNames.bind(styles);
 const Lucky = () => {
@@ -39,11 +40,20 @@ const Lucky = () => {
   ];
   const [random, setRandom] = useState(giftS);
   const [isClicked, setIsClicked] = useState(false);
+  const user=localStorage.getItem("token")
+  const next =useNavigate()
 
   const handleRandom = () => {
-    const randomGift = Math.floor(Math.random() * giftS.length);
+    if(user){
+      const randomGift = Math.floor(Math.random() * giftS.length);
     setRandom(giftS[randomGift]);
     setIsClicked(true);
+    }else{
+      alert('Bạn phải đăng nhập!')
+      next('/login')
+    }
+
+    
   };
   return (
     

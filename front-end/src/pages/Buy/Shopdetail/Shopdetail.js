@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./Shopdetail.module.scss";
+import axios from "axios";
 import {
   AiOutlineRight,
   AiOutlineEye,
@@ -12,10 +13,11 @@ import { Container, Row, Col } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 const Shopdetail = () => {
+  const details = useParams();
   const settings = {
     dots: true,
     infinite: true,
@@ -27,83 +29,51 @@ const Shopdetail = () => {
     autoplayspeed: 1000,
     responsive: [
       {
-        breakpoint: 500,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-      {
         breakpoint: 992,
         settings: {
           slidesToShow: 3,
         },
       },
-      {
-        breakpoint: 772,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
+
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
         },
       },
       {
         breakpoint: 568,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
         },
       },
     ],
   };
-  const [heart, setHeart] = useState(false);
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      img: "https://znews-photo.zingcdn.me/w660/Uploaded/ebhuiwh/2022_02_10/2022_Koenigsegg_Expansion_Announcement_1.jpg",
-    },
-    {
-      id: 2,
-      img: "https://media.auto5.vn/files/hoanghai98/2021/03/20/mc%207-095647.jpeg",
-    },
-    {
-      id: 3,
-      img: "https://cafefcdn.com/203337114487263232/2022/12/9/photo-24-16705931840871741252566.jpg",
-    },
+  const [products, setProducts] = useState({});
+  const [randomProducts, setRandomProducts] = useState([]);
 
-    {
-      id: 4,
-      img: "https://cdn.baogiaothong.vn/upload/images/2020-2/album_img/2020-04-25/nguoi-dep-porsche-911-1-1587757294-width1004height565.jpg",
-    },
-    {
-      id: 5,
-      img: "https://autopro8.mediacdn.vn/2020/5/6/11-15887664230931119062938.jpg",
-    },
-
-    {
-      id: 6,
-      img: "https://fptshop.com.vn/Uploads/images/1(270).jpg",
-    },
-    {
-      id: 7,
-      img: "https://danviet.mediacdn.vn/upload/1-2017/images/2017-03-15/148953874025088-2.jpg",
-    },
-    {
-      id: 8,
-      img: "http://anhnendep.net/wp-content/uploads/2016/02/nguoi-dep-va-sieu-xe-15-683x1024.jpg",
-    },
-    {
-      id: 9,
-      img: "https://danchoioto.vn/wp-content/uploads/2020/05/xe-mo-hinh-bang-bang-nhua-silicone-hoac-cao-su-duoc-goi-la-dong-xe-resin.jpg",
-    },
-  ]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/product/shopdetail/${details.id}`)
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, [details.id]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/product`)
+      .then((response) => {
+        setRandomProducts(response.data.productData);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   const handleAddProduct = (product) => {
     const productList = JSON.parse(localStorage.getItem("cartItems")) || [];
     productList.push(product);
     localStorage.push("cartItems", JSON.stringify(productList));
   };
+
   return (
     <div className={cx("wrapper")}>
       <div className={cx("toolbar")}>
@@ -157,10 +127,7 @@ const Shopdetail = () => {
                 </Col>
                 <Col lg={10}>
                   <div className={cx("img-big")}>
-                    <img
-                      src="https://tse1.mm.bing.net/th?id=OIP.5CmhYL1kfc68xJo5gt8eawHaEK&pid=Api&P=0"
-                      alt=""
-                    />
+                    <img src={products.images} alt="" height="325px" />
                   </div>
                 </Col>
               </div>
@@ -168,9 +135,9 @@ const Shopdetail = () => {
 
             <Col lg={4}>
               <div className={cx("detail-content")}>
-                <h2 className={cx("detail-title")}>GTR R28</h2>
-                <p className={cx("type")}>Nissan</p>
-                <p className={cx("detail-price")}> $10,000</p>
+                <h2 className={cx("detail-title")}>{products.title}</h2>
+
+                <p className={cx("detail-price")}>{products.price}</p>
                 <button className={cx("detail-btn")}>Add to Bag</button>
                 <button className={cx("detail-heart")}>
                   Favorite
@@ -187,10 +154,7 @@ const Shopdetail = () => {
       <div className={cx("detail-introduce")}>
         <Col lg={12}>
           <div className={cx("introduce-title")}>Explore the GTR</div>
-          <img
-            src="https://tse1.mm.bing.net/th?id=OIP.5CmhYL1kfc68xJo5gt8eawHaEK&pid=Api&P=0"
-            alt=""
-          />
+          <img src={products.images} alt="" />
           <p className={cx("introduce-text")}>
             The stitched leather overlays on the upper add heritage style,
             durability and support.
@@ -201,41 +165,40 @@ const Shopdetail = () => {
         <Container>
           <div className={cx("involve-title")}>
             <p className={cx("involve-text")}>You Might Also Like</p>
-            
           </div>
 
           <div className={cx("random-product")}>
             <Slider {...settings}>
-              {products.map((product, index) => (
-                <div key={index} className={cx("box")}>
+              {randomProducts.map((randomProduct, _id) => (
+                <div key={randomProduct._id} className={cx("box")}>
                   <Link to="/shopdetail" className={cx("img-car")}>
-                    <img className={cx("picture")} src={product.img} />
+                    <img
+                      className={cx("picture")}
+                      src={randomProduct.images}
+                      alt=""
+                    />
                   </Link>
                   <div className={cx("car")}>
                     <div className={cx("icons")}>
                       <Link to="/shopdetail" className={cx("eye")}>
                         <AiOutlineEye />
                       </Link>
-                      <span className={cx("heart")}>
-                        {!heart ? (
-                          <AiOutlineHeart />
-                        ) : (
-                          <AiFillHeart className={cx("icon-heart")} />
-                        )}
-                      </span>
                     </div>
                     <button
                       className={cx("add")}
-                      onClick={() => handleAddProduct(product)}
+                      onClick={() => handleAddProduct()}
                     >
                       <BsCartPlus />
                     </button>
                     <Link to="/shopdetail" className={cx("info")}>
-                      <div className={cx("title")}>BMW</div>
-                      <p className={cx("name-car")}>GTR</p>
+                      <div className={cx("title")}>{randomProduct.title}</div>
+                      <p className={cx("name-car")}>
+                        {randomProduct.description}
+                      </p>
                       <div className={cx("price-car")}>
-                        <span className={cx("sale-price")}>$20.000</span>-
-                        $15.730
+                        <span className={cx("sale-price")}>
+                          ${randomProduct.price}
+                        </span>
                       </div>
                     </Link>
                   </div>
