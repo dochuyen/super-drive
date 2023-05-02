@@ -144,7 +144,12 @@ margin-top: 30px;
       border-radius: 50%;
     }
     .comment-box {
+      margin-top: 10px;
+      background-color: aliceblue;
+      border-radius: 10px;
       display: flex;
+      align-items: center;
+     padding: 5px;
       img {
         margin-right: 20px;
       }

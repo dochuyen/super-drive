@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -16,44 +16,32 @@ import axios from "axios";
 const cx = classNames.bind(styles);
 const Blog = () => {
 
- const [comments,setComments]=useState([])
- const [newComment,setNewComment]=useState('')
+  let commentData=[]
 
   const fetchComment=() => {
     axios.get(`http://localhost:8080/api/comments/get`)
       .then(res => {
-        const commentData=res.data
-        setComments(commentData.data)
-        console.log(commentData.data)
+        const comments = res.data;
+        commentData = comments.data
       })
       .catch(error => console.log(error));
   }
 
- useEffect(()=>{
-  fetchComment()
- },[])
+  fetchComment();
 
+  const postHandle = (e)=>{
 
+    const newComment=e.target.value;
 
- const username = JSON.parse(localStorage.getItem('email'));
- const email = JSON.parse(localStorage.getItem('email'));
-
-
-  const postHandle = ()=>{
-   
-    const newFullComment={username:username,email:email,comment:newComment}
-
-    fetch("http://localhost:8080/api/comments", {
+    fetch("http://localhost:8080/apti/v1/comments/post", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newFullComment),
+      body: JSON.stringify({}),
     });
-    console.log(newComment)
-    console.log(username)
-    console.log(email)
+
 }
 
   const blogData = [
@@ -189,16 +177,13 @@ const Blog = () => {
               width="50px"
               height="50px"
             />
-            <input type="text" placeholder="Viết bình luận" onChange={(e)=>{{
-              setNewComment(e.target.value)
-            }}}/>
+            <input type="text" placeholder="Viết bình luận" />
             <div className={cx('commentBtnHolder')}>
        <button className={cx('commentBtn')} onClick={e=>postHandle(e)}>Bình luận</button>
        </div>
           </div>
           <ul className={cx("list-comment")}>
-          
-              {comments.map(comment=>{
+              {commentData.map(comment=>{
                 return(
                   <li className={cx("comment-box")}>
               <img
@@ -207,8 +192,8 @@ const Blog = () => {
                 width="50px"
                 height="50px"
               />
-                  <div className={cx("comment-info")}>
-               <h5 style={{marginTop:'18px'}}>{comment.username}</h5>
+                  <div>
+               <h5>{comment.username}</h5>
                <p>{comment.comment}</p>
                </div>
                </li>

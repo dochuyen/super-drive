@@ -1,7 +1,7 @@
 import express from "express";
-// import uploadCloud from "../configs/cloudinary.config.js";
 import * as proCtrl from "../controller/product.js";
 const productRouter = express.Router();
+import uploadCloud from "../configs/cloudinary.config.js";
 
 productRouter.get("/getBrand/:brandId", proCtrl.getBrand);
 productRouter.get("/", proCtrl.getAllProducts);

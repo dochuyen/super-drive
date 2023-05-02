@@ -5,18 +5,20 @@ const commentSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true,
     index: true,
   },
   email: {
     type: String,
-    required: true,
-    unique: true,
+    required: true, 
   },
   comment: {
-    type: String,
+    type: Array,
     require: true,
   },
+  createAt:{
+    type:String,
+    require:true
+  }
 });
 
 //Export the model
