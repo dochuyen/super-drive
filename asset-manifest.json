@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/super-drive/static/css/main.4e20073e.css",
-    "main.js": "/super-drive/static/js/main.c112deb8.js",
+    "main.css": "/super-drive/static/css/main.bc5b9fff.css",
+    "main.js": "/super-drive/static/js/main.f1d02550.js",
     "static/js/651.7571a414.chunk.js": "/super-drive/static/js/651.7571a414.chunk.js",
     "static/media/giphy.gif": "/super-drive/static/media/giphy.a518e3a8f45376159d00.gif",
     "static/media/lambogini-trend.gif": "/super-drive/static/media/lambogini-trend.05a96336ea4039172e9c.gif",
@@ -20,12 +20,12 @@
     "static/media/slick.woff": "/super-drive/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/super-drive/index.html",
     "static/media/search.svg": "/super-drive/static/media/search.83bf22fea51e5d789840.svg",
-    "main.4e20073e.css.map": "/super-drive/static/css/main.4e20073e.css.map",
-    "main.c112deb8.js.map": "/super-drive/static/js/main.c112deb8.js.map",
+    "main.bc5b9fff.css.map": "/super-drive/static/css/main.bc5b9fff.css.map",
+    "main.f1d02550.js.map": "/super-drive/static/js/main.f1d02550.js.map",
     "651.7571a414.chunk.js.map": "/super-drive/static/js/651.7571a414.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4e20073e.css",
-    "static/js/main.c112deb8.js"
+    "static/css/main.bc5b9fff.css",
+    "static/js/main.f1d02550.js"
   ]
 }
