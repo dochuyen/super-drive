@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/super-drive/static/css/main.4e20073e.css",
+    "main.js": "/super-drive/static/js/main.c112deb8.js",
+    "static/js/651.7571a414.chunk.js": "/super-drive/static/js/651.7571a414.chunk.js",
+    "static/media/giphy.gif": "/super-drive/static/media/giphy.a518e3a8f45376159d00.gif",
+    "static/media/lambogini-trend.gif": "/super-drive/static/media/lambogini-trend.05a96336ea4039172e9c.gif",
+    "static/media/trend1.gif": "/super-drive/static/media/trend1.a71bce4caff459a33916.gif",
+    "static/media/gtr-trend.gif": "/super-drive/static/media/gtr-trend.f442cf52b7cc5bce3907.gif",
+    "static/media/1.png": "/super-drive/static/media/1.bee98f7ac7aea93c3707.png",
+    "static/media/car1.jpg": "/super-drive/static/media/car1.dc86a9a938f455e86a0b.jpg",
+    "static/media/car3.jpg": "/super-drive/static/media/car3.317f609821b55b9a6d0c.jpg",
+    "static/media/lamborgini-lucky.jpg": "/super-drive/static/media/lamborgini-lucky.853d24a36a50eac99094.jpg",
+    "static/media/2.png": "/super-drive/static/media/2.e9f1e5d0efb68ee8767d.png",
+    "static/media/car2.jpg": "/super-drive/static/media/car2.88feff6c68518972e71e.jpg",
+    "static/media/logo.png": "/super-drive/static/media/logo.f98974219afdfecd6582.png",
+    "static/media/slick.svg": "/super-drive/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/super-drive/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/super-drive/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/super-drive/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/super-drive/index.html",
+    "static/media/search.svg": "/super-drive/static/media/search.83bf22fea51e5d789840.svg",
+    "main.4e20073e.css.map": "/super-drive/static/css/main.4e20073e.css.map",
+    "main.c112deb8.js.map": "/super-drive/static/js/main.c112deb8.js.map",
+    "651.7571a414.chunk.js.map": "/super-drive/static/js/651.7571a414.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4e20073e.css",
+    "static/js/main.c112deb8.js"
+  ]
+}
