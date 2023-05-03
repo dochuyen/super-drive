@@ -42,7 +42,6 @@ const Login = () => {
       body: JSON.stringify(inputLogin),
       headers: {
         "Content-Type": "application/json",
-        // Authorization:`Bearer ${localStorage.getItem('token')}`
       },
     })
       .then((res) => {
@@ -53,7 +52,8 @@ const Login = () => {
       .then((data) => {
         dispatch({type:"SET_USERNAME", payload:data.data.username})
         dispatch({type:"SET_EMAIL", payload:data.data.email})
-        // dispatch({type:"ADD_ITEM", payload:data.data.cart})
+        // dispatch({ type: "SET_CART", payload: data.data.cartitem });
+        
         localStorage.setItem("token", JSON.stringify(data.data.token));
         next("/");
       })

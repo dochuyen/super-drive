@@ -99,5 +99,38 @@ const deleteCart = async (req, res) => {
     });
   }
 };
+const getCartItems = async (req, res) => {
+  const { email } = req.params;
 
-export { addToCart,deleteCart };
+  try {
+    if (!email) {
+      return res.status(400).json({
+        message: "Missing email",
+      });
+    }
+
+    const user = await Users.findOne({ email });
+    if (!user) {
+      return res.status(400).json({
+        message: "User not found",
+      });
+    }
+
+    return res.status(200).json({
+      status: "ok",
+      message: "Cart items retrieved",
+      data: {
+        email,
+        cartitem: user.cartitem,
+      },
+    });
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json({
+      message: "Error retrieving cart items",
+      data: null,
+    });
+  }
+};
+
+export { addToCart,deleteCart, getCartItems };

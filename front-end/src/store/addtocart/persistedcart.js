@@ -1,3 +1,11 @@
+import { persistReducer } from "redux-persist";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const cartConfig={
+  key:'cart',
+  storage:AsyncStorage,
+  whilelist:['items']
+}
 const cartReducer = (state = { items: [] }, action) => {
     switch (action.type) {
       case 'ADD_ITEM':
@@ -9,6 +17,6 @@ const cartReducer = (state = { items: [] }, action) => {
     }
   };
   
-  const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
+  const persistedCartReducer = persistReducer(cartConfig, cartReducer);
   export default persistedCartReducer;
   

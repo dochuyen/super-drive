@@ -1,28 +1,49 @@
 import { React, useEffect, useState } from "react";
 import styles from "./Checkout.module.scss";
 import classNames from "classnames/bind";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import { AiOutlineRight, AiOutlineCloseCircle } from "react-icons/ai";
 import axios from "axios";
+import { useSelector } from "react-redux";
+
 const cx = classNames.bind(styles);
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
-  const carts = JSON.parse(localStorage.getItem("cartitem"));
-  const handleRemoveFromCart = (productId) => {
-    // axios
-    //   .delete(`http://localhost:8080/api/cart/delete/:productId`)
-    //   .then((response) => {
-    //     if (response.data.status === "ok") {
-    //       const updatedCartItems = cartItems.filter(
-    //         (item) => item.productId !== productId
-    //       );
-    //       setCartItems(updatedCartItems);
-    //       console.log(cartItems);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+  const userEmail = useSelector((state) => state.email);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/cart/get/${userEmail}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        setCartItems(response.data.data.cartitem);
+
+        console.log(response.data.data.cartitem);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const handleRemoveFromCart = (cart) => {
+    const deleteCart = async () => {
+      try {
+        const response = await axios.delete(
+          `http://localhost:8080/api/cart/delete`,
+          {
+            email: userEmail,
+            productId: cart.productId,
+          }
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    deleteCart();
   };
   return (
     <div className={cx("wapper")}>
@@ -99,19 +120,19 @@ const Checkout = () => {
                   </div>
                 </div>
                 <div className={cx("list-bill")}>
-                  {carts.map((cart) => (
-                    <>
+                  {cartItems.map((cart) => (
+                    <div className={cx("list-item")} key={cart.productId}>
                       <p>{cart.title}</p>
                       <div className={cx("icons-bill")}>
                         <span
-                          onClick={handleRemoveFromCart}
+                          onClick={() => handleRemoveFromCart(cart)}
                           className={cx("plus")}
                         >
                           <AiOutlineCloseCircle />
                         </span>
                       </div>
                       <p>${cart.price}</p>
-                    </>
+                    </div>
                   ))}
                 </div>
               </div>

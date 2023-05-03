@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import { Carousel, Col, Row, Card, Button } from "react-bootstrap";
+
 import classNames from "classnames/bind";
 import styles from "./List.module.scss";
-import { IoIosAddCircle } from "react-icons/io";
+
 import { AiFillHeart, AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";

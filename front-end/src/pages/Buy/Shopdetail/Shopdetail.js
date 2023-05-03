@@ -6,7 +6,7 @@ import {
   AiOutlineRight,
   AiOutlineEye,
   AiOutlineHeart,
-  AiFillHeart,
+
 } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
 import { Container, Row, Col } from "react-bootstrap";

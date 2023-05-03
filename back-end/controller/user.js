@@ -41,7 +41,7 @@ const userLogin=async (req, res) => {
   );
 
   // send token to client
-  const {cartitem}=user;
+
   return res.status(200).json({
     status: 'ok',
     message: 'Login success',
@@ -49,6 +49,7 @@ const userLogin=async (req, res) => {
       token,
       email,
       username: user.username,
+      cartitem:user.cartitem
     },
   });
 }

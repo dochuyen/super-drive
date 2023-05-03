@@ -6,9 +6,12 @@ import { AiOutlineHeart, AiOutlineEye, AiFillHeart } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
 import { Row, Col } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 const cx = classNames.bind(styles);
 const Product = () => {
+  const dispatch = useDispatch;
+
   const result = useParams();
 
   const pages = [
@@ -29,7 +32,10 @@ const Product = () => {
   const [heart, setHeart] = useState(false);
   const [pageAction, setPageAction] = useState(1);
   const [products, setProducts] = useState([]);
-  const emailUser = JSON.parse(localStorage.getItem("email"));
+  const [cartLength, setCartLength] = useState();
+  const emailUser = useSelector((state) => state.email);
+  // dispatch({ type: "SET_CART", payload: cartLength.length });
+
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/product/getBrand/${result.id}`)
@@ -38,17 +44,6 @@ const Product = () => {
       })
       .catch((error) => console.log(error));
   }, [result.id]);
-  // useEffect(()=>{
-  //   axios
-  //   .get('http://localhost:8080/api/product')
-  //   .then((res)=>{
-  //     setProducts(res.data)
-  //     console.log(res.data)
-  //   })
-  //   .catch((error)=>{
-  //     console.log(error)
-  //   })
-  // }, [])
 
   const handleAddProduct = (product) => {
     const fetchData = async () => {
@@ -60,7 +55,8 @@ const Product = () => {
           price: product.price,
           quantity: 1,
         });
-        console.log(response.data);
+        console.log(response.data.data.cartitem);
+        setCartLength(response.data.data.cartitem);
       } catch (error) {
         console.log(error);
       }

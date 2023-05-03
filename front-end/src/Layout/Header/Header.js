@@ -44,7 +44,17 @@ function Header() {
 
   const [types, setTypes] = useState("Home");
   const [localUsername, setLocalUsername] = useState(false);
+  const [lengthCartItem, setLengthCartItem]=useState()
   const userName = useSelector(state => state.username);
+  const cartItem = useSelector(state => state.cart);
+  useEffect(()=>{
+    if(!cartItem){
+      setLengthCartItem(0)
+    }else{
+      setLengthCartItem(cartItem.length)
+    }
+  },[])
+
   const clearAuthStateAction = {
     type: 'CLEAR_AUTH_STATE',
   };
@@ -167,7 +177,7 @@ function Header() {
                     types === "AiOutlineShoppingCart" && { color: "#ff9950" }
                   }
                 />
-                <div className={cx("child-icon")}>{0}</div>
+                <div className={cx("child-icon")}>{lengthCartItem}</div>
               </Link>
             </div>
           </div>
@@ -176,7 +186,7 @@ function Header() {
               localUsername={localUsername}
               paserUsername={userName}
               handleLogOut={handleLogOut}
-              lengthCartItem={0}
+              lengthCartItem={lengthCartItem}
             />
           </div>
         </div>

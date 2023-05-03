@@ -4,11 +4,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const authPersistConfig = {
   key: "auth",
   storage: AsyncStorage,
-  whitelist: ["username", "email", "cart"], // lưu trữ thuộc tính username và email của state auth
+  whitelist: ["username", "email", "cart"], 
 };
 
 const authReducer = (
-  state = { username: null, email: null, cart: [] },
+  state = { username: null, email: null, cart: null },
   action
 ) => {
   switch (action.type) {
@@ -17,7 +17,7 @@ const authReducer = (
     case "SET_EMAIL":
       return { ...state, email: action.payload };
     case "SET_CART":
-      return { ...state, cart: action.payload };
+      return { ...state, cart: [action.payload] };
     case "CLEAR_AUTH_STATE":
       return { username: null, email: null, cart: null };
     default:

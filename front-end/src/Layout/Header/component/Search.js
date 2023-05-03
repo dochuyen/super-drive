@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import classNames from "classnames/bind";
 import styles from "./Search.module.scss";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+
 import { Link } from "react-router-dom";
-import { AiOutlineEye, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { BsCartPlus } from "react-icons/bs";
+
 
 const cx = classNames.bind(styles);
 const Search = () => {

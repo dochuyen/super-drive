@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -6,14 +6,54 @@ import { CiUser } from "react-icons/ci";
 import { BiTimeFive } from "react-icons/bi";
 import { FaRegCommentDots } from "react-icons/fa";
 import { AiOutlineRight } from "react-icons/ai";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import classNames from "classnames/bind";
 import styles from "./Blog.module.scss";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const cx = classNames.bind(styles);
 const Blog = () => {
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+
+  const fetchComment = () => {
+    axios
+      .get(`http://localhost:8080/api/comments/get`)
+      .then((res) => {
+        const commentData = res.data;
+        setComments(commentData.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    fetchComment();
+  }, []);
+
+  const username = useSelector((state) => state.username);
+  const email = useSelector((state) => state.email);
+
+  const postHandle = () => {
+    const newFullComment = {
+      username: username,
+      email: email,
+      comment: newComment,
+    };
+
+    fetch("http://localhost:8080/api/comments", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newFullComment),
+    });
+
+    setNewComment("");
+  };
+
   const blogData = [
     {
       title: "Blog 1",
@@ -30,6 +70,12 @@ const Blog = () => {
           <div className={cx("directional")}>
             Home <AiOutlineRight className={cx("icon-tool")} />
             <span>Blog</span>
+          </div>
+          <div className={cx("blogSearch")}>
+            <form>
+              <input type="text" placeholder="Tìm kiếm blog..."></input>
+              <button className={cx("searchButton")}>Tìm kiếm</button>
+            </form>
           </div>
         </Container>
       </div>
@@ -141,21 +187,42 @@ const Blog = () => {
               width="50px"
               height="50px"
             />
-            <input type="text" placeholder="Viết bình luận" />
+            <input
+              type="text"
+              value={newComment}
+              placeholder="Viết bình luận"
+              onChange={(e) => {
+                {
+                  setNewComment(e.target.value);
+                }
+              }}
+            />
+            <div className={cx("commentBtnHolder")}>
+              <button
+                className={cx("commentBtn")}
+                onClick={(e) => postHandle(e)}
+              >
+                Bình luận
+              </button>
+            </div>
           </div>
           <ul className={cx("list-comment")}>
-            <li className={cx("comment-box")}>
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFwttmJ8hKA9m__MNyYn7WghUocb2Gu9Uoow&usqp=CAU"
-                alt=""
-                width="50px"
-                height="50px"
-              />
-              <div>
-                <h5>Đàn</h5>
-                <p>textNihi</p>
-              </div>
-            </li>
+            {comments.map((comment) => {
+              return (
+                <li key={comment._id} className={cx("comment-box")}>
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFwttmJ8hKA9m__MNyYn7WghUocb2Gu9Uoow&usqp=CAU"
+                    alt=""
+                    width="50px"
+                    height="50px"
+                  />
+                  <div className={cx("comment-info")}>
+                    <h5 style={{ marginTop: "18px" }}>{comment.username}</h5>
+                    <p>{comment.comment}</p>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </Row>
       </Container>
