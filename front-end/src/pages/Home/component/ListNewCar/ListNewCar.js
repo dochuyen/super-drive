@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import classNames from "classnames/bind";
 import styles from "./List.module.scss";
 import { Col, Row } from "react-bootstrap";
-import { AiFillHeart, AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
