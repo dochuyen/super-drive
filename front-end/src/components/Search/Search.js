@@ -5,7 +5,6 @@ import styles from "./Search.module.scss";
 
 import { Link } from "react-router-dom";
 
-
 const cx = classNames.bind(styles);
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,7 +12,7 @@ const Search = () => {
   const [hidden, setHidden] = useState(false);
 
   const handleHidden = () => {
-    setHidden(false)
+    setHidden(false);
   };
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -44,7 +43,7 @@ const Search = () => {
             <>
               <div key={product._id} className={cx("box")}>
                 <Link to="/shopdetail" className={cx("img-car")}>
-                  <img className={cx("picture")} src={product.images} />
+                  <img alt="" className={cx("picture")} src={product.images} />
                 </Link>
                 <div className={cx("car")}>
                   <Link to="/shopdetail" className={cx("info")}>
@@ -56,9 +55,7 @@ const Search = () => {
                   </Link>
                 </div>
               </div>
-              <div className={cx("hidden")} onClick={handleHidden}>
-                
-              </div>
+              <div className={cx("hidden")} onClick={handleHidden}></div>
             </>
           ))}
         </div>

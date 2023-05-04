@@ -1,9 +1,10 @@
 import Users from "../model/user.js";
 import mongoose from "mongoose";
 const addAddress = async (req, res) => {
-  const { email, city, country, phone,notes } = req.body;
+  const {email}=req.params;
+  const { address,city, country, phone,notes } = req.body;
   try {
-    if (!email || !city || !country || !phone) {
+    if (!address||!email || !city || !country || !phone) {
       return req.status(400).json({
         message: "Missing email, city, country or phone",
       });
@@ -15,9 +16,9 @@ const addAddress = async (req, res) => {
       });
     }
 
-    const indexToDelete = user.address.findIndex((address) => {
+    const indexToDelete = user.address.find((address) => {
       return (
-       
+        address.address===address&&
         address.city === city &&
         address.country === country &&
         address.phone === phone&&
@@ -25,8 +26,9 @@ const addAddress = async (req, res) => {
       );
     });
 
-    const newAddress = new Users({
-        // _id: new mongoose.Types.ObjectId(),
+    const newAddress = ({
+        _id: new mongoose.Types.ObjectId(),
+        address,
         city,
         country,
         phone,

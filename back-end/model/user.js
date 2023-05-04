@@ -32,11 +32,10 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    address: [
-      { type: mongoose.Types.ObjectId, ref: "address" },
-      { wishlist: mongoose.Types.ObjectId, ref: "product" },
-      { isBlocked: mongoose.Types.Boolean, default: false },
-    ],
+    address: {
+      type: Array,
+      default: [],
+    },
 
     refreshToken: {
       type: String,
