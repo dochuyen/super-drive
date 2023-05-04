@@ -31,13 +31,12 @@ const Checkout = () => {
     const deleteCart = async () => {
       try {
         const response = await axios.delete(
-          `http://localhost:8080/api/cart/delete`,
-          {
-            email: userEmail,
-            productId: cart.productId,
-          }
+          `http://localhost:8080/api/cart/delete/${userEmail}/${cart.productId}`
         );
-        console.log(response.data);
+        const updatedCartItems = cartItems.filter(
+          (item) => item.productId !== cart.productId
+        );
+        setCartItems(updatedCartItems);
       } catch (error) {
         console.log(error);
       }
