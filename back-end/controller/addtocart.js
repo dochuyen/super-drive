@@ -54,7 +54,7 @@ const addToCart = async (req, res) => {
   }
 };
 const deleteCart = async (req, res) => {
-  const { email, productId } = req.body;
+  const { email, productId } = req.params;
 
   try {
     if (!email || !productId) {

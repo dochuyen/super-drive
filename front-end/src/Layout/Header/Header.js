@@ -8,7 +8,7 @@ import { BiUser, BiLogIn, BiRegistered, BiLogOut } from "react-icons/bi";
 import { useState, useEffect } from "react";
 import Canvas from "./Offcanvas/Offcanvas";
 import { useSelector } from "react-redux";
-import Search from "./component/Search";
+import Search from "../../components/Search/Search";
 import {store} from '../../store/index.js'
 
 
@@ -70,7 +70,6 @@ function Header() {
   const handleLogOut = () => {
     localStorage.removeItem("token");
     store.dispatch(clearAuthStateAction);
-
     setLocalUsername(true);
   };
 

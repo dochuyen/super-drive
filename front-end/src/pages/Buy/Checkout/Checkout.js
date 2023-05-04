@@ -5,11 +5,16 @@ import { Container, Row } from "react-bootstrap";
 import { AiOutlineRight, AiOutlineCloseCircle } from "react-icons/ai";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Address from "../../../components/Address/Address";
 
 const cx = classNames.bind(styles);
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
   const userEmail = useSelector((state) => state.email);
+  const total = cartItems.reduce(
+    (item, crr) => item + crr.price * crr.quantity,
+    0
+  );
 
   useEffect(() => {
     axios
@@ -21,8 +26,6 @@ const Checkout = () => {
       })
       .then((response) => {
         setCartItems(response.data.data.cartitem);
-
-        console.log(response.data.data.cartitem);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -30,19 +33,17 @@ const Checkout = () => {
   const handleRemoveFromCart = (cart) => {
     const deleteCart = async () => {
       try {
-        const response = await axios.delete(
-          `http://localhost:8080/api/cart/delete`,
-          {
-            email: userEmail,
-            productId: cart.productId,
-          }
+        await axios.delete(
+          `http://localhost:8080/api/cart/delete/${userEmail}/${cart.productId}`
         );
-        console.log(response.data);
+        const updatedCartItems = cartItems.filter(
+          (item) => item.productId !== cart.productId
+        );
+        setCartItems(updatedCartItems);
       } catch (error) {
         console.log(error);
       }
     };
-
     deleteCart();
   };
   return (
@@ -65,46 +66,7 @@ const Checkout = () => {
         <Row>
           <div className={cx("content")}>
             <div className={cx("info-user")}>
-              <form>
-                <div className={cx("title-form")}>Customer information</div>
-
-                <div className={cx("address")}>
-                  <div className={cx("checkout-input")}>
-                    <p>
-                      Address
-                      <span>*</span>
-                    </p>
-                    <input type="text" name="last-name" />
-                  </div>
-                  <div className={cx("checkout-input")}>
-                    <p>
-                      Town/City
-                      <span>*</span>
-                    </p>
-                    <input type="text" name="last-name" />
-                  </div>
-                  <div className={cx("checkout-input")}>
-                    <p>
-                      Country
-                      <span>*</span>
-                    </p>
-                    <input type="text" name="last-name" />
-                  </div>
-                </div>
-
-                <div className={cx("checkout-input")}>
-                  <p>
-                    Phone
-                    <span>*</span>
-                  </p>
-                  <input type="text" name="fist-name" />
-                </div>
-
-                <div className={cx("checkout-input")}>
-                  <p>Order notes (option)</p>
-                  <input type="text" name="last-name" />
-                </div>
-              </form>
+              <Address />
             </div>
 
             <div className={cx("bill")}>
@@ -138,7 +100,7 @@ const Checkout = () => {
               </div>
               <div className={cx("total")}>
                 <p>Total</p>
-                <p className={cx("total-child")}>0</p>
+                <p className={cx("total-child")}>${total}</p>
               </div>
               <div className={cx("check")}>
                 <input type="checkbox" name="" value="" />
