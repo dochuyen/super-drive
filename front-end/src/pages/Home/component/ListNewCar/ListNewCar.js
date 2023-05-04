@@ -1,54 +1,102 @@
-import React, {useState} from "react";
-
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import classNames from "classnames/bind";
 import styles from "./List.module.scss";
-
+import { Col, Row } from "react-bootstrap";
 import { AiFillHeart, AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const cx = classNames.bind(styles);
 const ListNewCar = () => {
   const [heart, setHeart] = useState(false);
-
+  const [products, setProducts] = useState([]);
+  const emailUser = useSelector((state) => state.email);
   const handleHeart = () => {
     setHeart(heart === false ? true : false);
   };
+  useEffect(() => {
+    axios
+      .get(
+        `http://localhost:8080/api/product/getBrand/64416645196081acc2643442`
+      )
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+  const next = useNavigate();
+  const handleAddProduct = (product) => {
+    if (!emailUser) {
+      alert("Bạn cần đăng nhập !");
+      next("/login");
+    } else {
+      const fetchData = async () => {
+        try {
+          const response = await axios.put(
+            `http://localhost:8080/api/cart/add`,
+            {
+              email: emailUser,
+              productId: product._id,
+              title: product.title,
+              price: product.price,
+              quantity: 1,
+            }
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      fetchData();
+    }
+  };
   return (
-    <div className={cx("wrapper")}>
-      <div className={cx("box")}>
-        <Link to="/shopdetail" className={cx("img-car")}>
-          <img
-            className={cx("picture")}
-            src="https://tse2.mm.bing.net/th?id=OIP.jP1affsIOeZfzgBUNECqrAHaE7&pid=Api&P=0"
-          />
-        </Link>
-        <div className={cx("car")}>
-          <div className={cx("icons")}>
-            <Link to='/shopdetail' className={cx("eye")}>
-              <AiOutlineEye />
+    <Row>
+      {products.map((product, _id) => (
+        <Col xs={12} sm={6} md={6} lg={4} xl={3} key={_id}>
+          <div className={cx("box")}>
+            <Link to={"/shopdetail/" + product._id} className={cx("img-car")}>
+              <img
+                className={cx("picture")}
+                src={product.images}
+                alt=""
+                width="100%"
+              />
             </Link>
-            <span onClick={handleHeart} className={cx("heart")}>
-              {!heart ? (
-                <AiOutlineHeart />
-              ) : (
-                <AiFillHeart className={cx("icon-heart")} />
-              )}
-            </span>
-          </div>
-          <button className={cx("add")}>
-            <BsCartPlus />
-          </button>
-          <Link to="/shopdetail" className={cx("info")}>
-            <div className={cx("title")}>BMW</div>
-            <p className={cx("name-car")}>GTR</p>
-            <div className={cx("price-car")}>
-              <span className={cx("sale-price")}>$20.000</span>- $15,730*
+            <div className={cx("car")}>
+              <div className={cx("icons")}>
+                <Link to="/shopdetail" className={cx("eye")}>
+                  <AiOutlineEye />
+                </Link>
+                <span onClick={handleHeart} className={cx("heart")}>
+                  {!heart ? (
+                    <AiOutlineHeart />
+                  ) : (
+                    <AiFillHeart className={cx("icon-heart")} />
+                  )}
+                </span>
+              </div>
+              <button
+                className={cx("add")}
+                onClick={() => handleAddProduct(product)}
+              >
+                <BsCartPlus />
+              </button>
+              <Link to="/shopdetail" className={cx("info")}>
+                <h1 className={cx("title")}>{product.title}</h1>
+                <p className={cx("name-car")}>{product.description}</p>
+                <div className={cx("price-car")}>
+                  <span className={cx("sale-price")}>$</span>
+                  {product.price}
+                </div>
+              </Link>
             </div>
-          </Link>
-        </div>
-      </div>
-    </div>
+          </div>
+        </Col>
+      ))}
+    </Row>
   );
 };
 

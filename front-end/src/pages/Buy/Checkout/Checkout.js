@@ -46,6 +46,50 @@ const Checkout = () => {
     };
     deleteCart();
   };
+  const [inputAddress, setInputAddress] = useState({
+    address: "",
+    city: "",
+    country: "",
+    phone: "",
+    notes: "",
+  });
+  const submitAddress = (e) => {
+    e.preventDefault();
+    if (
+      !inputAddress.address ||
+      !inputAddress.city ||
+      !inputAddress.country ||
+      !inputAddress.phone
+    ) {
+      alert("Vui lòng điền thông tin nhận hàng đầy đủ !");
+    } else {
+      fetch(`http://localhost:8080/api/address/add/${userEmail}`, {
+        method: "PUT",
+        body: JSON.stringify(inputAddress),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          } else throw new Error("failed");
+        })
+        .then((data) => {
+          alert("Đặt hàng thành công!");
+          console.log(data);
+        })
+        .catch((err) => {
+          alert("Đặt hàng chưa thành công!");
+        });
+    }
+  };
+  const changeAddres = (e) => {
+    setInputAddress((prevInput) => ({
+      ...prevInput,
+      [e.target.name]: e.target.value,
+    }));
+  };
   return (
     <div className={cx("wapper")}>
       <div className={cx("toolbar")}>
@@ -66,7 +110,11 @@ const Checkout = () => {
         <Row>
           <div className={cx("content")}>
             <div className={cx("info-user")}>
-              <Address />
+              <Address
+                inputAddress={inputAddress}
+                submitAddress={submitAddress}
+                changeAddres={changeAddres}
+              />
             </div>
 
             <div className={cx("bill")}>
@@ -110,7 +158,9 @@ const Checkout = () => {
                 <input type="checkbox" name="" value="" />
                 <span>Paypal</span>
               </div>
-              <button className={cx("btn-submit")}>PLACE ORDER</button>
+              <button className={cx("btn-submit")} onClick={submitAddress}>
+                PLACE ORDER
+              </button>
             </div>
           </div>
         </Row>
