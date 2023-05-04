@@ -10,12 +10,9 @@ import axios from "axios";
 
 const cx = classNames.bind(styles);
 const ListNewCar = () => {
-  const [heart, setHeart] = useState(false);
   const [products, setProducts] = useState([]);
   const emailUser = useSelector((state) => state.email);
-  const handleHeart = () => {
-    setHeart(heart === false ? true : false);
-  };
+
   useEffect(() => {
     axios
       .get(
@@ -70,12 +67,8 @@ const ListNewCar = () => {
                 <Link to="/shopdetail" className={cx("eye")}>
                   <AiOutlineEye />
                 </Link>
-                <span onClick={handleHeart} className={cx("heart")}>
-                  {!heart ? (
-                    <AiOutlineHeart />
-                  ) : (
-                    <AiFillHeart className={cx("icon-heart")} />
-                  )}
+                <span className={cx("heart")}>
+                  <AiOutlineHeart />
                 </span>
               </div>
               <button

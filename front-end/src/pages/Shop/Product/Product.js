@@ -29,7 +29,6 @@ const Product = () => {
     },
   ];
 
-  const [heart, setHeart] = useState(false);
   const [pageAction, setPageAction] = useState(1);
   const [products, setProducts] = useState([]);
   const [cartLength, setCartLength] = useState();
@@ -82,9 +81,7 @@ const Product = () => {
     }
   };
 
-  const handleHeart = () => {
-    setHeart(heart === false ? true : false);
-  };
+ 
   return (
     <div className={cx("wrapper")}>
       <p className={cx("option")}>
@@ -112,12 +109,10 @@ const Product = () => {
                     <Link to="/shopdetail" className={cx("eye")}>
                       <AiOutlineEye />
                     </Link>
-                    <span onClick={handleHeart} className={cx("heart")}>
-                      {!heart ? (
+                    <span  className={cx("heart")}>
+                      
                         <AiOutlineHeart />
-                      ) : (
-                        <AiFillHeart className={cx("icon-heart")} />
-                      )}
+                     
                     </span>
                   </div>
                   <button
