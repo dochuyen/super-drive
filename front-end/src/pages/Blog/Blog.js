@@ -54,13 +54,7 @@ const Blog = () => {
     setNewComment("");
   };
 
-  const blogData = [
-    {
-      title: "Blog 1",
-      discriptions: "bài 1",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSku11THyazq5qxc17AmBnusnk9dY7nPyiB2Q&usqp=CAU",
-    },
-  ];
+ 
 
   return (
     <>

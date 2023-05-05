@@ -32,8 +32,9 @@ const Product = () => {
   const [pageAction, setPageAction] = useState(1);
   const [products, setProducts] = useState([]);
   const [cartLength, setCartLength] = useState();
-  const emailUser = useSelector((state) => state.email);
-  // dispatch({ type: "SET_CART", payload: cartLength.length });
+
+  
+  const token = JSON.parse(localStorage.getItem("token"));
 
   useEffect(() => {
     if (result.id) {
@@ -54,7 +55,7 @@ const Product = () => {
   }, [result.id]);
 
   const handleAddProduct = (product) => {
-    if (!emailUser) {
+    if (!token) {
       alert("Bạn cần đăng nhập !");
       next("/login");
     } else {
@@ -63,11 +64,15 @@ const Product = () => {
           const response = await axios.put(
             `http://localhost:8080/api/cart/add`,
             {
-              email: emailUser,
               productId: product._id,
               title: product.title,
               price: product.price,
               quantity: 1,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             }
           );
           console.log(response.data.data.cartitem);
@@ -81,7 +86,6 @@ const Product = () => {
     }
   };
 
- 
   return (
     <div className={cx("wrapper")}>
       <p className={cx("option")}>
@@ -109,10 +113,8 @@ const Product = () => {
                     <Link to="/shopdetail" className={cx("eye")}>
                       <AiOutlineEye />
                     </Link>
-                    <span  className={cx("heart")}>
-                      
-                        <AiOutlineHeart />
-                     
+                    <span className={cx("heart")}>
+                      <AiOutlineHeart />
                     </span>
                   </div>
                   <button

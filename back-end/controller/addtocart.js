@@ -1,15 +1,16 @@
 import Users from "../model/user.js";
 const addToCart = async (req, res) => {
-  const { email, productId, title, quantity, price } = req.body;
+  const { productId, title, quantity, price } = req.body;
   console.log(quantity, productId, title, price);
+
   try {
-    if (!email || !productId || !quantity || !title || !price) {
+    if (!productId || !quantity || !title || !price) {
       return res.status(400).json({
-        message: "Missing email, productId,title or quantity",
+        message: "Missing productId,title or quantity",
       });
     }
 
-    const user = await Users.findOne({ email });
+    const user = await Users.findOne({ email: req.user.email });
     if (!user) {
       return res.status(400).json({
         message: "User not found",
@@ -40,30 +41,30 @@ const addToCart = async (req, res) => {
       status: "ok",
       message: "Product added to cart",
       data: {
-        email,
+        email: req.user.email,
         username: user.username,
         cartitem: user.cartitem,
       },
     });
   } catch (error) {
-
     return res.status(400).json({
       message: "Error adding product to cart",
       data: null,
     });
   }
 };
+
 const deleteCart = async (req, res) => {
-  const { email, productId } = req.params;
+  const { productId } = req.params;
 
   try {
-    if (!email || !productId) {
+    if (!productId) {
       return res.status(400).json({
-        message: "Missing email or productId",
+        message: "Missing productId",
       });
     }
 
-    const user = await Users.findOne({ email });
+    const user = await Users.findOne({ email: req.user.email });
     if (!user) {
       return res.status(400).json({
         message: "User not found",
@@ -87,7 +88,7 @@ const deleteCart = async (req, res) => {
       status: "ok",
       message: "Product removed from cart",
       data: {
-        email,
+        email: req.user.email,
         username: user.username,
         cartitem: user.cartitem,
       },
@@ -100,16 +101,16 @@ const deleteCart = async (req, res) => {
   }
 };
 const getCartItems = async (req, res) => {
-  const { email } = req.params;
-
   try {
+    const email = req.user.email;
+
     if (!email) {
       return res.status(400).json({
         message: "Missing email",
       });
     }
 
-    const user = await Users.findOne({ email });
+    const user = await Users.findOne({ email: email });
     if (!user) {
       return res.status(400).json({
         message: "User not found",
@@ -133,4 +134,5 @@ const getCartItems = async (req, res) => {
   }
 };
 
-export { addToCart,deleteCart, getCartItems };
+
+export { addToCart, deleteCart, getCartItems };

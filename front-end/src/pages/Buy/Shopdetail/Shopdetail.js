@@ -14,7 +14,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 
 const cx = classNames.bind(styles);
 const Shopdetail = () => {
@@ -52,11 +52,13 @@ const Shopdetail = () => {
   };
   const [products, setProducts] = useState({});
   const [randomProducts, setRandomProducts] = useState([]);
-  const emailUser = useSelector((state) => state.email);
+
+  const token = JSON.parse(localStorage.getItem("token"));
+
   const next =useNavigate()
 
   const handleAddProduct = (products) => {
-    if (!emailUser) {
+    if (!token) {
       alert("Bạn cần đăng nhập !");
       next("/login");
     } else {
@@ -65,11 +67,15 @@ const Shopdetail = () => {
           const response = await axios.put(
             `http://localhost:8080/api/cart/add`,
             {
-              email: emailUser,
               productId: products._id,
               title: products.title,
               price: products.price,
               quantity: 1,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             }
           );
 
