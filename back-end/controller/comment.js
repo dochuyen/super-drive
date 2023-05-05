@@ -2,19 +2,20 @@ import Comment from "../model/comment.js";
 
 const postComment= async (req, res) => {
 
+  const { username, comment } = req.body;
     try {
-      const { username,comment } = req.body;
       if (!username  || !comment) {
         return res.status(400).json({
-          message: "Name, or comment is missing",
+          message: "Name or comment is missing",
         });
       }
       const data = {
         username,
-        email,
+
         comment,
         createdAt: new Date(),
       };
+
       const result = await Comment.create(data);
 
       return res.status(201).json({

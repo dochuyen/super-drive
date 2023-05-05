@@ -34,6 +34,7 @@ const Blog = () => {
 
   const username = useSelector((state) => state.username);
 
+  const token = JSON.parse(localStorage.getItem("token"));
 
   const postHandle = () => {
     const newFullComment = {
@@ -47,6 +48,7 @@ const Blog = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(newFullComment),
     });
