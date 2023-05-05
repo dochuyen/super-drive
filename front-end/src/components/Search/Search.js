@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 import classNames from "classnames/bind";
 import styles from "./Search.module.scss";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { AiOutlineEye } from "react-icons/ai";
+
 
 import { Link } from "react-router-dom";
 
@@ -10,7 +15,37 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState([]);
   const [hidden, setHidden] = useState(false);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 6,
+    centerPadding: "200px",
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplayspeed: 1000,
+    responsive: [
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
 
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 568,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
   const handleHidden = () => {
     setHidden(false);
   };
@@ -26,6 +61,7 @@ const Search = () => {
       console.log(error);
     }
   };
+  
 
   return (
     <div className={cx("wrapper")}>
@@ -39,25 +75,33 @@ const Search = () => {
       </form>
       {hidden && (
         <div className={cx("result")}>
-          {products.map((product) => (
-            <>
-              <div key={product._id} className={cx("box")}>
-                <Link to="/shopdetail" className={cx("img-car")}>
-                  <img alt="" className={cx("picture")} src={product.images} />
-                </Link>
-                <div className={cx("car")}>
-                  <Link to="/shopdetail" className={cx("info")}>
-                    <div className={cx("title")}>{product.title}</div>
-
-                    <div className={cx("price-car")}>
-                      <span className={cx("sale-price")}>$20.000</span>- $15.730
-                    </div>
+          <div className={cx('slide-search')}>
+            <Slider {...settings}>
+              {products.map((product) => (
+                <div key={product._id} className={cx("box")}>
+                  <Link to="/shopdetail" className={cx("img-car")}>
+                    <img className={cx("picture")} src={product.images} alt="" />
                   </Link>
+                  <div className={cx("car")}>
+                    <div className={cx("icons")}>
+                      <Link to="/shopdetail" className={cx("eye")}>
+                        <AiOutlineEye />
+                      </Link>
+                    </div>
+                    
+                    <Link to="/shopdetail" className={cx("info")}>
+                      <div className={cx("title")}>{product.title}</div>
+                      <p className={cx("name-car")}>{product.description}</p>
+                      <div className={cx("price-car")}>
+                        ${product.price}
+                      </div>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-              <div className={cx("hidden")} onClick={handleHidden}></div>
-            </>
-          ))}
+              ))}
+            </Slider>
+          </div>
+          <div className={cx("hidden")} onClick={handleHidden}></div>
         </div>
       )}
     </div>
