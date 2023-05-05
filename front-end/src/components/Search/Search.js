@@ -5,6 +5,8 @@ import styles from "./Search.module.scss";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { AiOutlineEye } from "react-icons/ai";
+
 import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
@@ -12,27 +14,11 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState([]);
   const [hidden, setHidden] = useState(false);
-
-  const handleHidden = () => {
-    setHidden(false);
-  };
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/api/product/search?q=${searchQuery}`
-      );
-      setProducts(response.data.productData);
-      setHidden(true);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 6,
     centerPadding: "200px",
     slidesToScroll: 1,
     autoplay: true,
@@ -59,6 +45,22 @@ const Search = () => {
       },
     ],
   };
+  const handleHidden = () => {
+    setHidden(false);
+  };
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/product/search?q=${searchQuery}`
+      );
+      setProducts(response.data.productData);
+      setHidden(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={cx("wrapper")}>
       <form onSubmit={handleSearch}>
@@ -71,29 +73,35 @@ const Search = () => {
       </form>
       {hidden && (
         <div className={cx("result")}>
-          {products.map((product) => (
-            <>
-              <div key={product._id} className={cx("box")}>
-                <Link
-                  to={"/shopdetail/" + product._id}
-                  className={cx("img-car")}
-                >
-                  <img alt="" className={cx("picture")} src={product.images} />
-                </Link>
-                <div className={cx("car")}>
-                  <Link
-                    to={"/shopdetail/" + product._id}
-                    className={cx("info")}
-                  >
-                    <div className={cx("title")}>{product.title}</div>
-
-                    <div className={cx("price-car")}>${product.price}</div>
+          <div className={cx("slide-search")}>
+            <Slider {...settings}>
+              {products.map((product) => (
+                <div key={product._id} className={cx("box")}>
+                  <Link to="/shopdetail" className={cx("img-car")}>
+                    <img
+                      className={cx("picture")}
+                      src={product.images}
+                      alt=""
+                    />
                   </Link>
+                  <div className={cx("car")}>
+                    <div className={cx("icons")}>
+                      <Link to="/shopdetail" className={cx("eye")}>
+                        <AiOutlineEye />
+                      </Link>
+                    </div>
+
+                    <Link to="/shopdetail" className={cx("info")}>
+                      <div className={cx("title")}>{product.title}</div>
+                      <p className={cx("name-car")}>{product.description}</p>
+                      <div className={cx("price-car")}>${product.price}</div>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-              <div className={cx("hidden")} onClick={handleHidden}></div>
-            </>
-          ))}
+              ))}
+            </Slider>
+          </div>
+          <div className={cx("hidden")} onClick={handleHidden}></div>
         </div>
       )}
     </div>

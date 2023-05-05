@@ -13,7 +13,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+
 
 const cx = classNames.bind(styles);
 const Shopdetail = () => {
@@ -52,6 +53,41 @@ const Shopdetail = () => {
   const [products, setProducts] = useState({});
   const [randomProducts, setRandomProducts] = useState([]);
 
+  const token = JSON.parse(localStorage.getItem("token"));
+
+  const next =useNavigate()
+
+  const handleAddProduct = (products) => {
+    if (!token) {
+      alert("Bạn cần đăng nhập !");
+      next("/login");
+    } else {
+      const fetchData = async () => {
+        try {
+          const response = await axios.put(
+            `http://localhost:8080/api/cart/add`,
+            {
+              productId: products._id,
+              title: products.title,
+              price: products.price,
+              quantity: 1,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      fetchData();
+    }
+  };
+
   useEffect(() => {
     axios
       .get(`http://localhost:8080/api/product/shopdetail/${details.id}`)
@@ -68,11 +104,7 @@ const Shopdetail = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-  const handleAddProduct = (product) => {
-    const productList = JSON.parse(localStorage.getItem("cartItems")) || [];
-    productList.push(product);
-    localStorage.push("cartItems", JSON.stringify(productList));
-  };
+ 
 
   return (
     <div className={cx("wrapper")}>
@@ -137,8 +169,8 @@ const Shopdetail = () => {
               <div className={cx("detail-content")}>
                 <h2 className={cx("detail-title")}>{products.title}</h2>
 
-                <p className={cx("detail-price")}>{products.price}</p>
-                <button className={cx("detail-btn")}>Add to Bag</button>
+                <p className={cx("detail-price")}>${products.price}</p>
+                <button onClick={()=>handleAddProduct(products)} className={cx("detail-btn")}>Add to Bag</button>
                 <button className={cx("detail-heart")}>
                   Favorite
                   <span>

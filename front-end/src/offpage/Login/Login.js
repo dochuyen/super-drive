@@ -9,9 +9,7 @@ import {
 import { BsFillEyeSlashFill, BsFacebook } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch} from 'react-redux'
-
-
+import { useDispatch } from "react-redux";
 
 const cx = classNames.bind(styles);
 const Login = () => {
@@ -32,8 +30,7 @@ const Login = () => {
   const [inputLogin, setInputLogin] = useState({ email: "", password: "" });
   const [hidden, setHidden] = useState(false);
   const next = useNavigate();
-  const dispatch=useDispatch();
-  
+  const dispatch = useDispatch();
 
   const submitLogin = (e) => {
     e.preventDefault();
@@ -50,15 +47,12 @@ const Login = () => {
         } else throw new Error("failed");
       })
       .then((data) => {
-        dispatch({type:"SET_USERNAME", payload:data.data.username})
-        dispatch({type:"SET_EMAIL", payload:data.data.email})
-        // dispatch({ type: "SET_CART", payload: data.data.cartitem });
-        
+        dispatch({ type: "SET_USERNAME", payload: data.data.username });
         localStorage.setItem("token", JSON.stringify(data.data.token));
         next("/");
       })
       .catch((err) => {
-        alert("Tài khoản, mật khẩu không đúng!")
+        alert("Tài khoản, mật khẩu không đúng!");
       });
   };
 
@@ -110,7 +104,7 @@ const Login = () => {
                   <label className={cx("remember")}>Remember account</label>
                 </div>
                 <div className={cx("pass-link")}>
-                  <Link >Forgot password?</Link>
+                  <Link>Forgot password?</Link>
                 </div>
               </div>
 

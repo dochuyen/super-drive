@@ -8,11 +8,6 @@ const commentSchema = new mongoose.Schema({
     unique: true,
     index: true,
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   comment: {
     type: String,
     require: true,

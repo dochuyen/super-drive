@@ -29,12 +29,14 @@ const Product = () => {
     },
   ];
 
-  const [heart, setHeart] = useState(false);
   const [pageAction, setPageAction] = useState(1);
   const [products, setProducts] = useState([]);
   const [cartLength, setCartLength] = useState();
   const emailUser = useSelector((state) => state.email);
  
+
+  
+  const token = JSON.parse(localStorage.getItem("token"));
 
   useEffect(() => {
     if (result.id) {
@@ -55,7 +57,7 @@ const Product = () => {
   }, [result.id]);
 
   const handleAddProduct = (product) => {
-    if (!emailUser) {
+    if (!token) {
       alert("Bạn cần đăng nhập !");
       next("/login");
     } else {
@@ -64,11 +66,15 @@ const Product = () => {
           const response = await axios.put(
             `http://localhost:8080/api/cart/add`,
             {
-              email: emailUser,
               productId: product._id,
               title: product.title,
               price: product.price,
               quantity: 1,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             }
           );
           console.log(response.data.data.cartitem);
@@ -82,9 +88,6 @@ const Product = () => {
     }
   };
 
-  const handleHeart = () => {
-    setHeart(heart === false ? true : false);
-  };
   return (
     <div className={cx("wrapper")}>
       <p className={cx("option")}>
@@ -112,12 +115,8 @@ const Product = () => {
                     <Link to="/shopdetail" className={cx("eye")}>
                       <AiOutlineEye />
                     </Link>
-                    <span onClick={handleHeart} className={cx("heart")}>
-                      {!heart ? (
-                        <AiOutlineHeart />
-                      ) : (
-                        <AiFillHeart className={cx("icon-heart")} />
-                      )}
+                    <span className={cx("heart")}>
+                      <AiOutlineHeart />
                     </span>
                   </div>
                   <button

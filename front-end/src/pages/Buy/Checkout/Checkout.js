@@ -10,7 +10,9 @@ import Address from "../../../components/Address/Address";
 const cx = classNames.bind(styles);
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
-  const userEmail = useSelector((state) => state.email);
+ 
+  const token = JSON.parse(localStorage.getItem("token"));
+
   const total = cartItems.reduce(
     (item, crr) => item + crr.price * crr.quantity,
     0
@@ -18,10 +20,9 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/cart/get/${userEmail}`, {
+      .get(`http://localhost:8080/api/cart/get`, {
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
@@ -34,7 +35,12 @@ const Checkout = () => {
     const deleteCart = async () => {
       try {
         await axios.delete(
-          `http://localhost:8080/api/cart/delete/${userEmail}/${cart.productId}`
+          `http://localhost:8080/api/cart/delete/${cart.productId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         const updatedCartItems = cartItems.filter(
           (item) => item.productId !== cart.productId
@@ -63,11 +69,12 @@ const Checkout = () => {
     ) {
       alert("Vui lòng điền thông tin nhận hàng đầy đủ !");
     } else {
-      fetch(`http://localhost:8080/api/address/add/${userEmail}`, {
+      fetch(`http://localhost:8080/api/address/add`, {
         method: "PUT",
         body: JSON.stringify(inputAddress),
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       })
         .then((res) => {

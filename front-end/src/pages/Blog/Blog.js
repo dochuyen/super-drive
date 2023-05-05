@@ -33,12 +33,13 @@ const Blog = () => {
   }, []);
 
   const username = useSelector((state) => state.username);
-  const email = useSelector((state) => state.email);
+
+  const token = JSON.parse(localStorage.getItem("token"));
 
   const postHandle = () => {
     const newFullComment = {
       username: username,
-      email: email,
+
       comment: newComment,
     };
 
@@ -47,6 +48,7 @@ const Blog = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(newFullComment),
     });
@@ -54,13 +56,7 @@ const Blog = () => {
     setNewComment("");
   };
 
-  const blogData = [
-    {
-      title: "Blog 1",
-      discriptions: "bài 1",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSku11THyazq5qxc17AmBnusnk9dY7nPyiB2Q&usqp=CAU",
-    },
-  ];
+ 
 
   return (
     <>
