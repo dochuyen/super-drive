@@ -77,7 +77,10 @@ const Search = () => {
             <Slider {...settings}>
               {products.map((product) => (
                 <div key={product._id} className={cx("box")}>
-                  <Link to="/shopdetail" className={cx("img-car")}>
+                  <Link
+                    to={"/shopdetail/" + product._id}
+                    className={cx("img-car")}
+                  >
                     <img
                       className={cx("picture")}
                       src={product.images}
@@ -85,13 +88,10 @@ const Search = () => {
                     />
                   </Link>
                   <div className={cx("car")}>
-                    <div className={cx("icons")}>
-                      <Link to="/shopdetail" className={cx("eye")}>
-                        <AiOutlineEye />
-                      </Link>
-                    </div>
-
-                    <Link to="/shopdetail" className={cx("info")}>
+                    <Link
+                      to={"/shopdetail/" + product._id}
+                      className={cx("info")}
+                    >
                       <div className={cx("title")}>{product.title}</div>
                       <p className={cx("name-car")}>{product.description}</p>
                       <div className={cx("price-car")}>${product.price}</div>

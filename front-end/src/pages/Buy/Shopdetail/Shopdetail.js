@@ -2,19 +2,13 @@ import React, { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./Shopdetail.module.scss";
 import axios from "axios";
-import {
-  AiOutlineRight,
-  AiOutlineEye,
-  AiOutlineHeart,
-
-} from "react-icons/ai";
+import { AiOutlineRight, AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
 import { Container, Row, Col } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useParams, useNavigate } from "react-router-dom";
-
 
 const cx = classNames.bind(styles);
 const Shopdetail = () => {
@@ -55,7 +49,7 @@ const Shopdetail = () => {
 
   const token = JSON.parse(localStorage.getItem("token"));
 
-  const next =useNavigate()
+  const next = useNavigate();
 
   const handleAddProduct = (products) => {
     if (!token) {
@@ -78,7 +72,6 @@ const Shopdetail = () => {
               },
             }
           );
-
         } catch (error) {
           console.log(error);
         }
@@ -104,7 +97,6 @@ const Shopdetail = () => {
       })
       .catch((error) => console.log(error));
   }, []);
- 
 
   return (
     <div className={cx("wrapper")}>
@@ -170,7 +162,12 @@ const Shopdetail = () => {
                 <h2 className={cx("detail-title")}>{products.title}</h2>
 
                 <p className={cx("detail-price")}>${products.price}</p>
-                <button onClick={()=>handleAddProduct(products)} className={cx("detail-btn")}>Add to Bag</button>
+                <button
+                  onClick={() => handleAddProduct(products)}
+                  className={cx("detail-btn")}
+                >
+                  Add to Bag
+                </button>
                 <button className={cx("detail-heart")}>
                   Favorite
                   <span>
@@ -203,7 +200,10 @@ const Shopdetail = () => {
             <Slider {...settings}>
               {randomProducts.map((randomProduct, _id) => (
                 <div key={randomProduct._id} className={cx("box")}>
-                  <Link to="/shopdetail" className={cx("img-car")}>
+                  <Link
+                    to={"/shopdetail/" + randomProduct._id}
+                    className={cx("img-car")}
+                  >
                     <img
                       className={cx("picture")}
                       src={randomProduct.images}
@@ -212,7 +212,10 @@ const Shopdetail = () => {
                   </Link>
                   <div className={cx("car")}>
                     <div className={cx("icons")}>
-                      <Link to="/shopdetail" className={cx("eye")}>
+                      <Link
+                        to={"/shopdetail/" + randomProduct._id}
+                        className={cx("eye")}
+                      >
                         <AiOutlineEye />
                       </Link>
                     </div>
@@ -222,7 +225,10 @@ const Shopdetail = () => {
                     >
                       <BsCartPlus />
                     </button>
-                    <Link to="/shopdetail" className={cx("info")}>
+                    <Link
+                      to={"/shopdetail/" + randomProduct._id}
+                      className={cx("info")}
+                    >
                       <div className={cx("title")}>{randomProduct.title}</div>
                       <p className={cx("name-car")}>
                         {randomProduct.description}
