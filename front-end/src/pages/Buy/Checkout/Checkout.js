@@ -112,7 +112,7 @@ const Checkout = () => {
             <div className={cx("info-user")}>
               <Address
                 inputAddress={inputAddress}
-                submitAddress={submitAddress}
+         
                 changeAddres={changeAddres}
               />
             </div>

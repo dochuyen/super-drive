@@ -181,6 +181,8 @@ function Header() {
             </div>
           </div>
           <div className={cx("offcanvas")}>
+          <div className={cx('search-offcanvas')}><Search/></div>
+
             <Canvas
               localUsername={localUsername}
               paserUsername={userName}

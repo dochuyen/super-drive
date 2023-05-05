@@ -16,25 +16,10 @@ const Navbar = () => {
     },
   ];
 
-  const dataPrices = [
-    {
-      title: "PRICE",
-      children: [
-        {
-          type: "$10000-$20000",
-        },
-        {
-          type: "$20000-$30000",
-        },
-        {
-          type: "$30000-$40000",
-        },
-      ],
-    },
-  ];
   const [brand, setBrand] = useState(false);
   const [price, setPrice] = useState(false);
   const [type, setType] = useState("");
+  const [inputPrice, setInputPrice] = useState({ min: "", max: "" });
 
   const hiddenBrand = () => {
     setBrand(brand === false ? true : false);
@@ -51,7 +36,28 @@ const Navbar = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+  const changePrice = (e) => {
+    setInputPrice((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
+  const minPrice = inputPrice.min;
+  const maxPrice = inputPrice.max;
+  const handlePrice = (e) => {
+    e.preventDefault();
+
+    axios
+      .get(
+        `http://localhost:8080/api/product/sort?minPrice=${minPrice}&maxPrice=${maxPrice}`
+      )
+      .then((response) => {
+        console.log(response.data.productData);
+        
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <div className={cx("wrapper")}>
       {dataBrands.map((dataBrand, index) => (
@@ -92,43 +98,41 @@ const Navbar = () => {
           )}
         </div>
       ))}
-      {dataPrices.map((dataPrice, index) => (
-        <div key={index} className={cx("branding")}>
-          <button onClick={hiddenPrice} className={cx("title")}>
-            {dataPrice.title}{" "}
-            {!price ? (
-              <AiOutlineUp className={cx("icon-title")} />
-            ) : (
-              <AiOutlineDown className={cx("icon-title")} />
-            )}
-          </button>
+      <div className={cx("branding")}>
+        <button onClick={hiddenPrice} className={cx("title")}>
+          Price
           {!price ? (
-            <div className={cx("items-brand")}>
-              <ul>
-                {dataPrice.children.map((chid, index) => (
-                  <li
-                    key={index}
-                    style={
-                      type === chid.type
-                        ? {
-                            color: "#000",
-                            fontWeight: "500",
-                          }
-                        : {}
-                    }
-                    onClick={() => setType(chid.type)}
-                    className={cx("item")}
-                  >
-                    {chid.type}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <AiOutlineUp className={cx("icon-title")} />
           ) : (
-            <></>
+            <AiOutlineDown className={cx("icon-title")} />
           )}
-        </div>
-      ))}
+        </button>
+        {!price ? (
+          <form action="">
+            <span>
+              <input
+                className={cx("sortprice")}
+                name="min"
+                type="text"
+                value={inputPrice.min}
+                onChange={changePrice}
+                placeholder="minPrice"
+              />
+              <input
+                className={cx("sortprice")}
+                name="max"
+                type="text"
+                value={inputPrice.max}
+                placeholder="maxPrice"
+                onChange={changePrice}
+              />
+            </span>
+            <button onClick={handlePrice}>Filter</button>
+          </form>
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 };

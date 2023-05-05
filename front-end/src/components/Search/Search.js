@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import classNames from "classnames/bind";
 import styles from "./Search.module.scss";
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
@@ -26,7 +28,37 @@ const Search = () => {
       console.log(error);
     }
   };
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    centerPadding: "200px",
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplayspeed: 1000,
+    responsive: [
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
 
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 568,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
   return (
     <div className={cx("wrapper")}>
       <form onSubmit={handleSearch}>
@@ -42,16 +74,20 @@ const Search = () => {
           {products.map((product) => (
             <>
               <div key={product._id} className={cx("box")}>
-                <Link to="/shopdetail" className={cx("img-car")}>
+                <Link
+                  to={"/shopdetail/" + product._id}
+                  className={cx("img-car")}
+                >
                   <img alt="" className={cx("picture")} src={product.images} />
                 </Link>
                 <div className={cx("car")}>
-                  <Link to="/shopdetail" className={cx("info")}>
+                  <Link
+                    to={"/shopdetail/" + product._id}
+                    className={cx("info")}
+                  >
                     <div className={cx("title")}>{product.title}</div>
 
-                    <div className={cx("price-car")}>
-                      <span className={cx("sale-price")}>$20.000</span>- $15.730
-                    </div>
+                    <div className={cx("price-car")}>${product.price}</div>
                   </Link>
                 </div>
               </div>

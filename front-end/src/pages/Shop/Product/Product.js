@@ -34,7 +34,7 @@ const Product = () => {
   const [products, setProducts] = useState([]);
   const [cartLength, setCartLength] = useState();
   const emailUser = useSelector((state) => state.email);
-  // dispatch({ type: "SET_CART", payload: cartLength.length });
+ 
 
   useEffect(() => {
     if (result.id) {

@@ -4,7 +4,7 @@ import className from "classnames/bind";
 
 
 const cx = className.bind(styles);
-const Address = ({ inputAddress, changeAddres, submitAddress }) => {
+const Address = ({ inputAddress, changeAddres }) => {
   return (
     <>
       <form>

@@ -64,6 +64,7 @@
 .picture {
   display: inline;
   width: 100%;
+  height: 80px;
 
   border-radius: 3px;
 }
@@ -102,9 +103,9 @@
 }
 .hidden {
   position: absolute;
-  height: 148%;
+  height: 200%;
   width: 100%;
-  bottom: -148%;
+  bottom: -200%;
   opacity: 0.5;
   // background-color: hsla(0, 0%, 0%, 0.36);
   backdrop-filter: blur(4px);
