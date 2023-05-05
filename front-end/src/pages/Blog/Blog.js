@@ -33,12 +33,12 @@ const Blog = () => {
   }, []);
 
   const username = useSelector((state) => state.username);
-  const email = useSelector((state) => state.email);
+
 
   const postHandle = () => {
     const newFullComment = {
       username: username,
-      email: email,
+
       comment: newComment,
     };
 

@@ -3,10 +3,10 @@ import Comment from "../model/comment.js";
 const postComment= async (req, res) => {
 
     try {
-      const { username, email, comment } = req.body;
-      if (!username || !email || !comment) {
+      const { username,comment } = req.body;
+      if (!username  || !comment) {
         return res.status(400).json({
-          message: "Name, email, or comment is missing",
+          message: "Name, or comment is missing",
         });
       }
       const data = {
