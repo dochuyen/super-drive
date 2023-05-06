@@ -173,4 +173,8 @@ margin-top: 30px;
   margin-top: 20px;
 }
 
-
+.commentBtn:hover{
+  background-color: #aa7814;
+  transition: transform 400ms;
+  transform: scale(1.25,1.25);
+}

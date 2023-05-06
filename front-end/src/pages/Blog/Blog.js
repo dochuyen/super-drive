@@ -51,6 +51,8 @@ const Blog = () => {
       },
       body: JSON.stringify(newFullComment),
     });
+
+    setNewComment('')
     console.log(newComment)
     console.log(username)
     console.log(email)
@@ -189,7 +191,7 @@ const Blog = () => {
               width="50px"
               height="50px"
             />
-            <input type="text" placeholder="Viết bình luận" onChange={(e)=>{{
+            <input type="text" value={newComment} placeholder="Viết bình luận" onChange={(e)=>{{
               setNewComment(e.target.value)
             }}}/>
             <div className={cx('commentBtnHolder')}>

@@ -11,6 +11,7 @@ const getUser = async (req, res) => {
     res.json(user);
   } catch (error) {}
 };
+
 const userLogin=async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -94,4 +95,5 @@ const userRegister = async (req, res) => {
   }
 };
 
-export { getUser, userLogin, userRegister };
+
+export { getUser, userLogin, userRegister,userPasswordChange };

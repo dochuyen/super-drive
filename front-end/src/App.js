@@ -9,6 +9,7 @@ import Checkout from "./pages/Buy/Checkout/Checkout";
 import Shopdetail from "./pages/Buy/Shopdetail/Shopdetail";
 import Login from "./offpage/Login/Login";
 import Register from "./offpage/Register/Register";
+import ChangePass from "./offpage/ChangePass/ChangePass"
 
 const App = () => {
   const publics = [
@@ -45,6 +46,7 @@ const App = () => {
       path: "/shopdetail/:id",
       pages: Shopdetail,
     },
+   
   ];
   return (
     <div>
@@ -67,6 +69,7 @@ const App = () => {
         })}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/change-password" element={<ChangePass></ChangePass>}></Route>
       </Routes>
     </div>
   );

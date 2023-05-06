@@ -4,6 +4,7 @@ import classNames from "classnames/bind";
 import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { FaExchangeAlt } from "react-icons/fa";
 import { BiUser, BiLogIn, BiRegistered, BiLogOut } from "react-icons/bi";
 import { useState, useEffect } from "react";
 import Canvas from "./Offcanvas/Offcanvas";
@@ -138,6 +139,12 @@ function Header() {
                         <BiLogOut />
                       </span>
                       Log out
+                    </Link>
+                    <Link className={cx("btn-log")} to='/change-password'>
+                      <span>
+                        <FaExchangeAlt></FaExchangeAlt>
+                      </span>
+                      Change Password
                     </Link>
                   </>
                 )}
