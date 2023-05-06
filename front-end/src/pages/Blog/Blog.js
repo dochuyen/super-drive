@@ -11,38 +11,6 @@ import "slick-carousel/slick/slick-theme.css";
 import classNames from "classnames/bind";
 import styles from "./Blog.module.scss";
 import axios from "axios";
-<<<<<<< HEAD
-
-const cx = classNames.bind(styles);
-const Blog = () => {
-
- const [comments,setComments]=useState([])
- const [newComment,setNewComment]=useState('')
-
-  const fetchComment=() => {
-    axios.get(`http://localhost:8080/api/comments/get`)
-      .then(res => {
-        const commentData=res.data
-        setComments(commentData.data)
-        console.log(commentData.data)
-      })
-      .catch(error => console.log(error));
-  }
-
- useEffect(()=>{
-  fetchComment()
- },[])
-
-
-
- const username = JSON.parse(localStorage.getItem('email'));
- const email = JSON.parse(localStorage.getItem('email'));
-
-
-  const postHandle = ()=>{
-   
-    const newFullComment={username:username,email:email,comment:newComment}
-=======
 import { useSelector } from "react-redux";
 
 const cx = classNames.bind(styles);
@@ -74,41 +42,21 @@ const Blog = () => {
 
       comment: newComment,
     };
->>>>>>> 600bb9b6d06a385771beea35280aa15b0c74237f
 
     fetch("http://localhost:8080/api/comments", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-<<<<<<< HEAD
-=======
         'Authorization': `Bearer ${token}`
->>>>>>> 600bb9b6d06a385771beea35280aa15b0c74237f
       },
       body: JSON.stringify(newFullComment),
     });
 
-<<<<<<< HEAD
-    setNewComment('')
-    console.log(newComment)
-    console.log(username)
-    console.log(email)
-}
-
-  const blogData = [
-    {
-      title: "Blog 1",
-      discriptions: "bài 1",
-      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSku11THyazq5qxc17AmBnusnk9dY7nPyiB2Q&usqp=CAU",
-    },
-  ];
-=======
     setNewComment("");
   };
 
  
->>>>>>> 600bb9b6d06a385771beea35280aa15b0c74237f
 
   return (
     <>
@@ -119,19 +67,11 @@ const Blog = () => {
             Home <AiOutlineRight className={cx("icon-tool")} />
             <span>Blog</span>
           </div>
-<<<<<<< HEAD
-          <div className={cx('blogSearch')}>
-          <form>
-            <input type="text" placeholder="Tìm kiếm blog..."></input>
-            <button className={cx('searchButton')}>Tìm kiếm</button>
-          </form>
-=======
           <div className={cx("blogSearch")}>
             <form>
               <input type="text" placeholder="Tìm kiếm blog..."></input>
               <button className={cx("searchButton")}>Tìm kiếm</button>
             </form>
->>>>>>> 600bb9b6d06a385771beea35280aa15b0c74237f
           </div>
         </Container>
       </div>
@@ -243,34 +183,6 @@ const Blog = () => {
               width="50px"
               height="50px"
             />
-<<<<<<< HEAD
-            <input type="text" value={newComment} placeholder="Viết bình luận" onChange={(e)=>{{
-              setNewComment(e.target.value)
-            }}}/>
-            <div className={cx('commentBtnHolder')}>
-       <button className={cx('commentBtn')} onClick={e=>postHandle(e)}>Bình luận</button>
-       </div>
-          </div>
-          <ul className={cx("list-comment")}>
-          
-              {comments.map(comment=>{
-                return(
-                  <li className={cx("comment-box")}>
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFwttmJ8hKA9m__MNyYn7WghUocb2Gu9Uoow&usqp=CAU"
-                alt=""
-                width="50px"
-                height="50px"
-              />
-                  <div className={cx("comment-info")}>
-               <h5 style={{marginTop:'18px'}}>{comment.username}</h5>
-               <p>{comment.comment}</p>
-               </div>
-               </li>
-                )
-              })}
-              
-=======
             <input
               type="text"
               value={newComment}
@@ -307,7 +219,6 @@ const Blog = () => {
                 </li>
               );
             })}
->>>>>>> 600bb9b6d06a385771beea35280aa15b0c74237f
           </ul>
         </Row>
       </Container>

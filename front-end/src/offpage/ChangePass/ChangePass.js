@@ -10,7 +10,7 @@ import { BsFillEyeSlashFill, BsFacebook } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
 
 import { Link, useNavigate } from "react-router-dom";
-
+import axios from "axios";
 const cx = classNames.bind(styles);
 const ChangePass= () => {
   const socials = [
@@ -32,33 +32,35 @@ const ChangePass= () => {
   const [passValid, setPassValid] = useState(true);
 
   const next = useNavigate();
-
+  const token = JSON.parse(localStorage.getItem("token"));
   const submitRegister = (e) => {
     e.preventDefault();
     if (!input) {
-      alert("Bạn phải nhập đủ username, email và password");
+      alert("Bạn phải nhập đủ thông tin");
     } else {
-      fetch("http://localhost:8080/api/user/register", {
-        method: "POST",
-        body: JSON.stringify(input),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            throw new Error("failed");
-          }
-        })
-        .then((data) => {
+      const fetchData = async () => {
+        try {
+          await axios.put(
+            `http://localhost:8080/api/user/change-password`,
+            {
+              currentPassword: input.email,
+              newPassword: input.password,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
           alert("Đổi mật khẩu thành công!");
           next("/login");
-        })
-        .catch((error) => {
-          alert('Lỗi server!')
-        });
+        } catch (error) {
+          console.log(error);
+          alert("Mật khẩu cũ không đúng!");
+        }
+      };
+
+      fetchData();
     }
   };
 
@@ -84,11 +86,11 @@ const ChangePass= () => {
             
               <input
                 name="email"
-                type="email"
+             
                 value={input.email}
                 onChange={handleInput}
-                pattern=".+@gmail\.com"
-                placeholder="Email"
+                type={hiddenRegister ? "text" : "password"}
+                placeholder="Old Password"
               ></input>
 
               <div className={cx("pass-show")}>
@@ -96,7 +98,7 @@ const ChangePass= () => {
                   name="password"
                   value={input.password}
                   type={hiddenRegister ? "text" : "password"}
-                  placeholder="Password"
+                  placeholder="New Password"
                   onChange={handleInput}
                 ></input>
                 {hiddenRegister ? (
@@ -119,6 +121,39 @@ const ChangePass= () => {
               {!passValid ? (
                 <span className={cx("error")}>
                   Mật khẩu phải đủ 8 ký tự trở lên!
+                </span>
+              ) : (
+                <></>
+              )}
+
+              <div className={cx("pass-show")}>
+                <input
+                  name="username"
+                  value={input.username}
+                  type={hiddenRegister ? "text" : "password"}
+                  placeholder="Confirm New Password"
+                  onChange={handleInput}
+                ></input>
+                {hiddenRegister ? (
+                  <span
+                    onClick={handleShowRegister}
+                    className={cx("icon-show")}
+                  >
+                    <BsFillEyeSlashFill />
+                  </span>
+                ) : (
+                  <span
+                    onClick={handleShowRegister}
+                    className={cx("icon-show")}
+                  >
+                    <IoEyeSharp />
+                  </span>
+                )}
+              </div>
+
+              {!(input.password===input.username) ? (
+                <span className={cx("error")}>
+                Vui lòng nhập đúng mật khẩu mới tạo!
                 </span>
               ) : (
                 <></>

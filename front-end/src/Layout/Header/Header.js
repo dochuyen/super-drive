@@ -157,7 +157,7 @@ function Header() {
                       </span>
                       Log out
                     </Link>
-                    <Link className={cx("btn-log")} to='/change-password'>
+                    <Link className={cx("btn-change")} to='/change-password'>
                       <span>
                         <FaExchangeAlt></FaExchangeAlt>
                       </span>
