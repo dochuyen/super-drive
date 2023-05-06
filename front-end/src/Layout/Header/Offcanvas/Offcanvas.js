@@ -7,6 +7,7 @@ import { FaExchangeAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Offcanvas.module.scss";
+import Search from "../../../components/Search/Search";
 
 const cx = classNames.bind(styles);
 function Canvas({
@@ -64,7 +65,7 @@ function Canvas({
             ))}
           </>
           <div className={cx("nav-search")}>
-            <input className={cx("search")} type="search" />
+            {/* <Search/> */}
           </div>
           <div>
             <div className={cx("btn-log")}>

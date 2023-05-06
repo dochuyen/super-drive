@@ -1,11 +1,7 @@
-import {createStore, combineReducers} from 'redux'
-import userNameReducer from './user/reducer';
-import emailReducer from './emailuser/reducer'
+import {createStore} from 'redux'
+import { persistStore } from 'redux-persist';
+import persistedAuthReducer from './user/persisted';
 
-const reducer=combineReducers({
-    userNameReducer,
-    emailReducer,
-    
-})
-const store=createStore(reducer);
-export default store;
+const store=createStore(persistedAuthReducer);
+const persistor = persistStore(store);
+export {store, persistor};

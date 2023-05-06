@@ -7,10 +7,6 @@ const commentSchema = new mongoose.Schema({
     required: true,
     index: true,
   },
-  email: {
-    type: String,
-    required: true, 
-  },
   comment: {
     type: Array,
     require: true,

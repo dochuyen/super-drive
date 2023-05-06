@@ -204,9 +204,22 @@
     display: inline;
   }
   .offcanvas{
-    display: block;
+    display: flex;
+  }
+  .search-offcanvas{
+    margin-right: 15px;
   }
  .header-after{
   display: none;
  }
+}
+@media (max-width:576px) {
+  .title{
+    display: none;
+  }
+}
+@media (max-width:768px) {
+  .title{
+    display: none;
+  }
 }

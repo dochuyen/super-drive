@@ -9,7 +9,7 @@ import ListNewCar from "./component/ListNewCar/ListNewCar";
 import Sale from "./component/Sale/Sale";
 import Lucky from "./component/Lucky/Lucky";
 import Trend from "./component/Trend/Trend";
-import { AnimationOnScroll } from 'react-animation-on-scroll';
+
 
 const cx = classNames.bind(styles);
 const Home = () => {

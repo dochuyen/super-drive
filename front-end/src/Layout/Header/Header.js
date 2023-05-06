@@ -9,7 +9,10 @@ import { BiUser, BiLogIn, BiRegistered, BiLogOut } from "react-icons/bi";
 import { useState, useEffect } from "react";
 import Canvas from "./Offcanvas/Offcanvas";
 import { useSelector } from "react-redux";
-import Search from "./component/Search";
+import Search from "../../components/Search/Search";
+import {store} from '../../store/index.js'
+
+
 const cx = classNames.bind(styles);
 function Header() {
   const items = [
@@ -42,7 +45,20 @@ function Header() {
 
   const [types, setTypes] = useState("Home");
   const [localUsername, setLocalUsername] = useState(false);
-  const userName = JSON.parse(localStorage.getItem('username'));
+  const [lengthCartItem, setLengthCartItem]=useState()
+  const userName = useSelector(state => state.username);
+  const cartItem = useSelector(state => state.cart);
+  useEffect(()=>{
+    if(!cartItem){
+      setLengthCartItem(0)
+    }else{
+      setLengthCartItem(cartItem.length)
+    }
+  },[])
+
+  const clearAuthStateAction = {
+    type: 'CLEAR_AUTH_STATE',
+  };
 
   useEffect(() => {
     if (!userName) {
@@ -54,6 +70,7 @@ function Header() {
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
+    store.dispatch(clearAuthStateAction);
     setLocalUsername(true);
   };
 
@@ -166,16 +183,18 @@ function Header() {
                     types === "AiOutlineShoppingCart" && { color: "#ff9950" }
                   }
                 />
-                <div className={cx("child-icon")}>{0}</div>
+                <div className={cx("child-icon")}>{lengthCartItem}</div>
               </Link>
             </div>
           </div>
           <div className={cx("offcanvas")}>
+          <div className={cx('search-offcanvas')}><Search/></div>
+
             <Canvas
               localUsername={localUsername}
               paserUsername={userName}
               handleLogOut={handleLogOut}
-              lengthCartItem={0}
+              lengthCartItem={lengthCartItem}
             />
           </div>
         </div>

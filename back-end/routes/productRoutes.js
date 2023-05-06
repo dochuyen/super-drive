@@ -16,5 +16,6 @@ productRouter.put(
 );
 productRouter.put("/:pid", proCtrl.updateProducts);
 productRouter.delete("/:pid", proCtrl.deleteProducts);
+productRouter.get("/sort", proCtrl.sortProducts);
 
 export default productRouter;

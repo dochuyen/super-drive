@@ -1,8 +1,8 @@
 import React from "react";
 import classNames from "classnames/bind";
 import styles from "./Layoutshop.module.scss";
-import Navbar from "../component/Navbar/Navbar";
-import Product from "../component/Product/Product";
+import Navbar from "../Navbar/Navbar";
+import Product from "../Product/Product";
 import { Col, Row } from "react-bootstrap";
 
 const cx = classNames.bind(styles);

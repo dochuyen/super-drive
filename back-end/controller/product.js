@@ -12,7 +12,6 @@ const getAllProducts = async (req, res) => {
 const getOneProducts = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
     const product = await Products.findById(id);
 
     res.json(product);
@@ -146,6 +145,22 @@ const searchProducts = async (req, res) => {
   }
 };
 
+const sortProducts = async (req, res) => {
+  const { minPrice, maxPrice } = req.query;
+  try {
+    const products = await Products.find({
+      price: { $gte: minPrice, $lte: maxPrice },
+    });
+
+    return res.status(200).json({
+      success: true,
+      productData: products,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export {
   getBrand,
   getAllProducts,
@@ -155,4 +170,5 @@ export {
   deleteProducts,
   uploadImageProduct,
   searchProducts,
+  sortProducts,
 };
