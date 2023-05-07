@@ -1,13 +1,11 @@
 {
   "dependencies": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "react-router-dom": "^6.10.0"
-=======
-=======
+
+    "react-router-dom": "^6.10.0",
+
     "console-browserify": "^1.2.0",
->>>>>>> 600bb9b6d06a385771beea35280aa15b0c74237f
+
     "cors": "^2.8.5"
->>>>>>> 47e873a44da8d4c745a6e5ebf87c7fbbefa9a3c1
+
   }
 }
