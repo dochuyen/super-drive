@@ -179,6 +179,14 @@
     color: white;
   }
 }
+.btn-change{
+  color: #fff;
+  text-decoration: none;
+  &:hover{
+    color: #fff;
+  }
+}
+
 .btn-user {
   display: flex;
   align-items: center;

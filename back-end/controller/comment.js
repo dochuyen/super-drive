@@ -24,6 +24,7 @@ const postComment= async (req, res) => {
         data,
       });
     } catch (error) {
+      console.log(error)
       res.status(400).json({
         message: error.message,
         data: null,

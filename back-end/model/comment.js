@@ -5,14 +5,12 @@ const commentSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true,
     index: true,
   },
   comment: {
-    type: String,
+    type: Array,
     require: true,
-  },
-  
+  },  
 });
 
 //Export the model

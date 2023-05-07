@@ -3,6 +3,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BiUser, BiLogIn, BiRegistered, BiLogOut } from "react-icons/bi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { FaExchangeAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./Offcanvas.module.scss";
@@ -96,6 +97,12 @@ function Canvas({
                     <Link onClick={handleLogOut} className={cx("btn-logout")}>
                       <span>
                         <BiLogOut />
+                      </span>
+                      Log out
+                    </Link>
+                    <Link className={cx("btn-logout")} to='/change-password'>
+                      <span>
+                        <FaExchangeAlt></FaExchangeAlt>
                       </span>
                       Log out
                     </Link>
