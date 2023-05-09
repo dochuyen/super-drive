@@ -29,6 +29,8 @@ const ChangePass= () => {
   ];
   const [input, setInput] = useState({ username: "", email: "", password: "" });
   const [hiddenRegister, setHiddenRegister] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
   const [passValid, setPassValid] = useState(true);
 
   const next = useNavigate();
@@ -66,6 +68,9 @@ const ChangePass= () => {
 
   const handleShowRegister = () => {
     setHiddenRegister(hiddenRegister === false ? true : false);
+  };
+  const handleHidden = () => {
+    setHidden(hidden === false ? true : false);
   };
 
   const handleInput = (e) => {
@@ -134,16 +139,16 @@ const ChangePass= () => {
                   placeholder="Confirm New Password"
                   onChange={handleInput}
                 ></input>
-                {hiddenRegister ? (
+                {hidden ? (
                   <span
-                    onClick={handleShowRegister}
+                    onClick={handleHidden}
                     className={cx("icon-show")}
                   >
                     <BsFillEyeSlashFill />
                   </span>
                 ) : (
                   <span
-                    onClick={handleShowRegister}
+                    onClick={handleHidden}
                     className={cx("icon-show")}
                   >
                     <IoEyeSharp />
@@ -181,8 +186,8 @@ const ChangePass= () => {
                 <p className={cx("text")}>
                   if you have an account, login here and have fun
                 </p>
-                <Link to="/login" className={cx("ghost")}>
-                  Login
+                <Link to="/" className={cx("ghost")}>
+                  Home
                   <AiOutlineArrowLeft />
                 </Link>
               </div>
