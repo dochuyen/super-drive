@@ -12,8 +12,11 @@ import classNames from "classnames/bind";
 import styles from "./Blog.module.scss";
 import axios from "axios";
 import { useSelector } from "react-redux";
-
+import BlogHeader from "./BlogHeader";
+import Posts from "./Posts";
+import Sidebar from "./Sidebar";
 const cx = classNames.bind(styles);
+
 const Blog = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
@@ -60,10 +63,10 @@ const Blog = () => {
 
   return (
     <>
-      <div className={cx("toolbar")}>
+      {/* <div className={cx("toolbar")}>
         <Container>
           <h3 className={cx("toolbar-title")}>Blog</h3>
-          <div className={cx("directional")}>
+          <div className={cx("directional")} >
             Home <AiOutlineRight className={cx("icon-tool")} />
             <span>Blog</span>
           </div>
@@ -73,10 +76,25 @@ const Blog = () => {
               <button className={cx("searchButton")}>Tìm kiếm</button>
             </form>
           </div>
+          <BlogHeader></BlogHeader>
         </Container>
+      </div> */}
+      <div>
+        <BlogHeader></BlogHeader>
+      </div>
+
+      <div className={cx('blogTitle')}>
+        <span>Our Blog</span>
+      </div>
+      
+      <div className={cx('home')}>
+      <Posts></Posts>
+        <Sidebar></Sidebar>
+        
       </div>
       <Container>
-        <Row>
+      
+        {/* <Row>
           <Col md={8}>
             <div className={cx("blog")}>
               <img
@@ -171,7 +189,8 @@ const Blog = () => {
               </div>
             </div>
           </Col>
-        </Row>
+        </Row> */}
+
         <br />
         <br />
         <Row className={cx("comment")}>
