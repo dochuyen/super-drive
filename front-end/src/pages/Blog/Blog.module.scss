@@ -1,8 +1,7 @@
 .toolbar {
   display: flex;
-  align-items: center;
   background-color: #f3f2ee;
-  padding: 40px 0;
+  height: fit-content;
 }
 .directional {
   & span {
@@ -177,4 +176,16 @@ margin-top: 30px;
   background-color: #aa7814;
   transition: transform 400ms;
   transform: scale(1.25,1.25);
+}
+.home{
+  display: flex;
+}
+.blogTitle{
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Lora", serif;
+  font-size: 60px;
+  color: #444;
 }
