@@ -18,7 +18,6 @@ const cx = classNames.bind(styles);
 const Product = () => {
   const next = useNavigate();
   const result = useParams();
-  const dispatch = useDispatch();
 
   const pages = [
     {
