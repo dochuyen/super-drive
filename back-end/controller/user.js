@@ -96,17 +96,18 @@ const changePassword = async (req, res) => {
     const { currentPassword, newPassword } = req.body;
     const user = await Users.findById(req.user.id);
 
-    // Kiểm tra mật khẩu hiện tại có đúng không
+    
     const isMatch = await bcrypt.compare(currentPassword, user.password);
     if (!isMatch) {
       return res.status(401).json({ msg: "Mật khẩu hiện tại không đúng" });
+      
     }
 
-    // Mã hóa mật khẩu mới
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
 
-    // Lưu mật khẩu mới vào cơ sở dữ liệu
+
     user.password = hashedPassword;
     await user.save();
 
