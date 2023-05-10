@@ -10,7 +10,6 @@ import {
   useParams,
   useNavigate,
   useSearchParams,
- 
 } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -19,6 +18,7 @@ const cx = classNames.bind(styles);
 const Product = () => {
   const next = useNavigate();
   const result = useParams();
+  const dispatch = useDispatch();
 
   const pages = [
     {
@@ -65,7 +65,7 @@ const Product = () => {
             }
           );
           console.log(response.data.data.cartitem);
-          setCartLength(response.data.data.cartitem);
+          // dispatch({type:'SET_CART', payload:response.data.data.cartitem});
         } catch (error) {
           console.log(error);
         }

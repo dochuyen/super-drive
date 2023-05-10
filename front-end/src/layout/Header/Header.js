@@ -183,7 +183,7 @@ function Header() {
                     types === "AiOutlineShoppingCart" && { color: "#ff9950" }
                   }
                 />
-                <div className={cx("child-icon")}>{lengthCartItem}</div>
+                {/* <div className={cx("child-icon")}>!</div> */}
               </Link>
             </div>
           </div>

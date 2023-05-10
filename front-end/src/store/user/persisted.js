@@ -17,7 +17,7 @@ const authReducer = (
     case "SET_EMAIL":
       return { ...state, email: action.payload };
     case "SET_CART":
-      return { ...state, cart: [action.payload] };
+      return { ...state, cart: action.payload };
     case "CLEAR_AUTH_STATE":
       return { username: null, email: null, cart: null };
     default:

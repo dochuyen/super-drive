@@ -4,12 +4,14 @@ import classNames from "classnames/bind";
 import { Container, Row } from "react-bootstrap";
 import { AiOutlineRight, AiOutlineCloseCircle } from "react-icons/ai";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Address from "../../../components/Address/Address";
 
 const cx = classNames.bind(styles);
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
+  const dispatch=useDispatch()
+
  
   const token = JSON.parse(localStorage.getItem("token"));
 
@@ -27,6 +29,7 @@ const Checkout = () => {
       })
       .then((response) => {
         setCartItems(response.data.data.cartitem);
+        // dispatch({type:'SET_CART', payload:response.data.data.cartitem});
       })
       .catch((error) => console.log(error));
   }, []);
