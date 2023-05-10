@@ -45,10 +45,13 @@ const Checkout = () => {
             },
           }
         );
+        //redux dispatch
         const updatedCartItems = cartItems.filter(
           (item) => item.productId !== cart.productId
         );
         setCartItems(updatedCartItems);
+        dispatch({type:'SET_CART', payload: updatedCartItems});
+        
       } catch (error) {
         console.log(error);
       }

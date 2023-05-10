@@ -79,7 +79,7 @@ const Product = () => {
             }
           );
           console.log(response.data.data.cartitem);
-          // dispatch({type:'SET_CART', payload:response.data.data.cartitem});
+          dispatch({type:'SET_CART', payload:response.data.data.cartitem});
         } catch (error) {
           console.log(error);
         }
