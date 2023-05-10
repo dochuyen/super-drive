@@ -59,7 +59,7 @@ const Shopdetail = () => {
       const fetchData = async () => {
         try {
           const response = await axios.put(
-            `http://localhost:8080/api/cart/add`,
+            `${process.env.REACT_APP_API_KEY}api/cart/add`,
             {
               productId: products._id,
               title: products.title,
@@ -83,7 +83,7 @@ const Shopdetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/product/shopdetail/${details.id}`)
+      .get(`${process.env.REACT_APP_API_KEY}api/product/shopdetail/${details.id}`)
       .then((response) => {
         setProducts(response.data);
       })
@@ -91,7 +91,7 @@ const Shopdetail = () => {
   }, [details.id]);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/product`)
+      .get(`${process.env.REACT_APP_API_KEY}api/product`)
       .then((response) => {
         setRandomProducts(response.data.productData);
       })

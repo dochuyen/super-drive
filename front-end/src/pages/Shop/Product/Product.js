@@ -42,14 +42,14 @@ const Product = () => {
   useEffect(() => {
     if (result.id) {
       axios
-        .get(`http://localhost:8080/api/product/getBrand/${result.id}`)
+        .get(`${process.env.REACT_APP_API_KEY}api/product/getBrand/${result.id}`)
         .then((response) => {
           setProducts(response.data);
         })
         .catch((error) => console.log(error));
     } else {
       axios
-        .get("http://localhost:8080/api/product")
+        .get(`${process.env.REACT_APP_API_KEY}api/product`)
         .then((response) => {
           setProducts(response.data.productData);
         })
@@ -65,7 +65,7 @@ const Product = () => {
       const fetchData = async () => {
         try {
           const response = await axios.put(
-            `http://localhost:8080/api/cart/add`,
+            `${process.env.REACT_APP_API_KEY}api/cart/add`,
             {
               productId: product._id,
               title: product.title,

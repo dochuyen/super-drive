@@ -43,7 +43,7 @@ const ChangePass= () => {
       const fetchData = async () => {
         try {
           await axios.put(
-            `http://localhost:8080/api/user/change-password`,
+            `${process.env.REACT_APP_API_KEY}api/user/change-password`,
             {
               currentPassword: input.email,
               newPassword: input.password,
