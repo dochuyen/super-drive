@@ -2,7 +2,7 @@
   "name": "cars",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://chuyenpro.github.io/super-drive/",
+  "homepage": ".",
   "dependencies": {
     "@formspree/react": "^2.4.1",
     "@react-native-async-storage/async-storage": "^1.18.1",

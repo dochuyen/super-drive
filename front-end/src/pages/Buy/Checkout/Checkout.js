@@ -22,7 +22,7 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/cart/get`, {
+      .get(`${process.env.REACT_APP_API_KEY}api/cart/get`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,17 +38,20 @@ const Checkout = () => {
     const deleteCart = async () => {
       try {
         await axios.delete(
-          `http://localhost:8080/api/cart/delete/${cart.productId}`,
+          `${process.env.REACT_APP_API_KEY}api/cart/delete/${cart.productId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
+        //redux dispatch
         const updatedCartItems = cartItems.filter(
           (item) => item.productId !== cart.productId
         );
         setCartItems(updatedCartItems);
+        dispatch({type:'SET_CART', payload: updatedCartItems});
+        
       } catch (error) {
         console.log(error);
       }
@@ -72,7 +75,7 @@ const Checkout = () => {
     ) {
       alert("Vui lòng điền thông tin nhận hàng đầy đủ !");
     } else {
-      fetch(`http://localhost:8080/api/address/add`, {
+      fetch(`${process.env.REACT_APP_API_KEY}api/address/add`, {
         method: "PUT",
         body: JSON.stringify(inputAddress),
         headers: {

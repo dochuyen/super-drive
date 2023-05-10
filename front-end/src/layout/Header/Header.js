@@ -48,13 +48,14 @@ function Header() {
   const [lengthCartItem, setLengthCartItem]=useState()
   const userName = useSelector(state => state.username);
   const cartItem = useSelector(state => state.cart);
+  
   useEffect(()=>{
     if(!cartItem){
       setLengthCartItem(0)
     }else{
       setLengthCartItem(cartItem.length)
     }
-  },[])
+  },[cartItem])
 
   const clearAuthStateAction = {
     type: 'CLEAR_AUTH_STATE',
@@ -183,7 +184,7 @@ function Header() {
                     types === "AiOutlineShoppingCart" && { color: "#ff9950" }
                   }
                 />
-                {/* <div className={cx("child-icon")}>!</div> */}
+                <div className={cx("child-icon")}>{lengthCartItem}</div>
               </Link>
             </div>
           </div>

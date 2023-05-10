@@ -34,7 +34,7 @@ const Login = () => {
 
   const submitLogin = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8080/api/user/login", {
+    fetch(`${process.env.REACT_APP_API_KEY}api/user/login`, {
       method: "POST",
       body: JSON.stringify(inputLogin),
       headers: {
@@ -48,7 +48,7 @@ const Login = () => {
       })
       .then((data) => {
         dispatch({ type: "SET_USERNAME", payload: data.data.username });
-        // dispatch({type:"SET_CART", payload:data.data.cartitem})
+        dispatch({type:"SET_CART", payload:data.data.cartitem})
         localStorage.setItem("token", JSON.stringify(data.data.token));
         next("/");
       })
@@ -83,7 +83,7 @@ const Login = () => {
               ></input>
               <div className={cx("pass-show")}>
                 <input
-                  name={hidden ? "text" : "password"}
+                  name={"password"}
                   value={inputLogin.password}
                   onChange={handleInput}
                   type={hidden ? "text" : "password"}
