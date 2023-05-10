@@ -151,7 +151,7 @@ const Shopdetail = () => {
                 </Col>
                 <Col lg={10}>
                   <div className={cx("img-big")}>
-                    <img src={products.images} alt="" height="325px" />
+                    <img src={products.images} alt="" height="400px" />
                   </div>
                 </Col>
               </div>
