@@ -12,13 +12,13 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
 import axios from "axios";
 const cx = classNames.bind(styles);
 const Product = () => {
   const next = useNavigate();
   const result = useParams();
-
+  const dispatch = useDispatch();
   const pages = [
     {
       page: 1,
@@ -42,23 +42,7 @@ const Product = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   const [searchParams, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
-    if (result.id) {
-      axios
-        .get(`${process.env.REACT_APP_API_KEY}api/product/getBrand/${result.id}`)
-        .then((response) => {
-          setProducts(response.data);
-        })
-        .catch((error) => console.log(error));
-    } else {
-      axios
-        .get(`${process.env.REACT_APP_API_KEY}api/product`)
-        .then((response) => {
-          setProducts(response.data.productData);
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [result.id]);
+  
 
   const handleAddProduct = (product) => {
     if (!token) {
@@ -82,7 +66,7 @@ const Product = () => {
             }
           );
           console.log(response.data.data.cartitem);
-          dispatch({type:'SET_CART', payload:response.data.data.cartitem});
+          dispatch({ type: "SET_CART", payload: response.data.data.cartitem });
         } catch (error) {
           console.log(error);
         }
