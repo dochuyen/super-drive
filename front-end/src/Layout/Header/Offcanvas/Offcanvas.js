@@ -116,7 +116,7 @@ function Canvas({
                 style={{ position: "relative", cursor: "pointer" }}
               >
                 <AiOutlineShoppingCart className={cx("icon-nav")} />
-                <div className={cx("child-icon")}>{lengthCartItem}</div>
+                {/* <div className={cx("child-icon")}>!</div> */}
               </Link>
             </div>
           </div>

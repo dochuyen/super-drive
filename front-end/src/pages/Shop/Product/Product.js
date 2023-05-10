@@ -6,13 +6,14 @@ import { AiOutlineHeart, AiOutlineEye, AiFillHeart } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
 import { Row, Col } from "react-bootstrap";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import axios from "axios";
 const cx = classNames.bind(styles);
 const Product = () => {
   const next = useNavigate();
   const result = useParams();
+  const dispatch=useDispatch()
 
   const pages = [
     {
@@ -31,8 +32,8 @@ const Product = () => {
 
   const [pageAction, setPageAction] = useState(1);
   const [products, setProducts] = useState([]);
-  const [cartLength, setCartLength] = useState();
-  const emailUser = useSelector((state) => state.email);
+
+
  
 
   
@@ -78,7 +79,7 @@ const Product = () => {
             }
           );
           console.log(response.data.data.cartitem);
-          setCartLength(response.data.data.cartitem);
+          // dispatch({type:'SET_CART', payload:response.data.data.cartitem});
         } catch (error) {
           console.log(error);
         }
