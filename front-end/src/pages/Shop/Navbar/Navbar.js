@@ -102,7 +102,7 @@ const Navbar = () => {
           )}
         </button>
         {!price ? (
-          <form className={cx("filterprice")} action="">
+          <form action="">
             <span>
               <input
                 className={cx("sortprice")}
@@ -121,7 +121,9 @@ const Navbar = () => {
                 onChange={changePrice}
               />
             </span>
-            <button onClick={handlePrice}>Filter</button>
+            <button className={cx("filterprice")} onClick={handlePrice}>
+              Filter
+            </button>
           </form>
         ) : (
           <></>
