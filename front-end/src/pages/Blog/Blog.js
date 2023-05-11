@@ -24,7 +24,7 @@ const token = JSON.parse(localStorage.getItem("token"));
       .get(`${process.env.REACT_APP_API_KEY}api/comments/get`)
       .then((res) => {
         const commentData = res.data;
-        setComments(commentData.data);
+        setComments(commentData.data.reverse());
       })
       .catch((error) => console.log(error));
   }, []);
@@ -47,7 +47,9 @@ const token = JSON.parse(localStorage.getItem("token"));
         'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify(newFullComment),
-    });
+    }).then(() => {
+      fetchComment();
+    }) ;
   
     setNewComment("");
   };
