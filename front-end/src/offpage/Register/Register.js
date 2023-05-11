@@ -16,11 +16,11 @@ const Register = () => {
   const socials = [
     {
       icon: <BsFacebook />,
-      src: "https://www.facebook.com/profile.php?id=100040142041736",
+      src: "",
     },
     {
       icon: <AiOutlineGithub />,
-      src: "https://github.com/chuyenpro?tab=repositories",
+      src: "",
     },
     {
       icon: <AiFillYoutube />,
@@ -57,7 +57,7 @@ const Register = () => {
           next("/login");
         })
         .catch((error) => {
-          alert('Email đã được đăng ký!')
+          alert("Email đã được đăng ký!");
         });
     }
   };

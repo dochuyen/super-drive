@@ -50,7 +50,7 @@ const Product = () => {
       const fetchData = async () => {
         try {
           const response = await axios.put(
-            `${process.env.REACT_APP_API_KEY}api/cart/add`,
+            `${process.env.REACT_APP_API_KEY}/api/cart/add`,
             {
               productId: product._id,
               title: product.title,
