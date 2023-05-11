@@ -3,7 +3,7 @@ import styles from "./Navbar.module.scss";
 import classNames from "classnames/bind";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 const Navbar = () => {
@@ -20,6 +20,8 @@ const Navbar = () => {
   const [price, setPrice] = useState(false);
   const [type, setType] = useState("");
   const [inputPrice, setInputPrice] = useState({ min: "", max: "" });
+
+  const [_searchParams, setSearchParams] = useSearchParams();
 
   const hiddenBrand = () => {
     setBrand(brand === false ? true : false);
@@ -48,6 +50,7 @@ const Navbar = () => {
   const handlePrice = (e) => {
     e.preventDefault();
 
+    setSearchParams({ min: minPrice, max: maxPrice });
     axios
       .get(
         `${process.env.REACT_APP_API_KEY}api/product/sort?minPrice=${minPrice}&maxPrice=${maxPrice}`
@@ -115,8 +118,8 @@ const Navbar = () => {
                 name="min"
                 type="text"
                 value={inputPrice.min}
-                onChange={changePrice}
                 placeholder="minPrice"
+                onChange={changePrice}
               />
               <input
                 className={cx("sortprice")}
@@ -127,7 +130,9 @@ const Navbar = () => {
                 onChange={changePrice}
               />
             </span>
-            <button onClick={handlePrice}>Filter</button>
+            <button className={cx("filterprice")} onClick={handlePrice}>
+              Filter
+            </button>
           </form>
         ) : (
           <></>

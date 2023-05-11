@@ -2,19 +2,23 @@ import React, { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./Product.module.scss";
 import { GrFormNextLink } from "react-icons/gr";
-import { AiOutlineHeart, AiOutlineEye, AiFillHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineEye } from "react-icons/ai";
 import { BsCartPlus } from "react-icons/bs";
 import { Row, Col } from "react-bootstrap";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useParams,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-
 import axios from "axios";
 const cx = classNames.bind(styles);
 const Product = () => {
   const next = useNavigate();
   const result = useParams();
-  const dispatch=useDispatch()
-
+  const dispatch = useDispatch();
   const pages = [
     {
       page: 1,
@@ -32,30 +36,11 @@ const Product = () => {
 
   const [pageAction, setPageAction] = useState(1);
   const [products, setProducts] = useState([]);
+  const [cartLength, setCartLength] = useState();
+  const emailUser = useSelector((state) => state.email);
 
-
- 
-
-  
   const token = JSON.parse(localStorage.getItem("token"));
-
-  useEffect(() => {
-    if (result.id) {
-      axios
-        .get(`${process.env.REACT_APP_API_KEY}api/product/getBrand/${result.id}`)
-        .then((response) => {
-          setProducts(response.data);
-        })
-        .catch((error) => console.log(error));
-    } else {
-      axios
-        .get(`${process.env.REACT_APP_API_KEY}api/product`)
-        .then((response) => {
-          setProducts(response.data.productData);
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [result.id]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleAddProduct = (product) => {
     if (!token) {
@@ -79,7 +64,7 @@ const Product = () => {
             }
           );
           console.log(response.data.data.cartitem);
-          dispatch({type:'SET_CART', payload:response.data.data.cartitem});
+          dispatch({ type: "SET_CART", payload: response.data.data.cartitem });
         } catch (error) {
           console.log(error);
         }
@@ -89,6 +74,45 @@ const Product = () => {
     }
   };
 
+  useEffect(() => {
+    if (result.id) {
+      axios
+        .get(
+          `${process.env.REACT_APP_API_KEY}api/product/getBrand/${result.id}`
+        )
+        .then((response) => {
+          setProducts(response.data);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      axios
+        .get(`${process.env.REACT_APP_API_KEY}api/product`)
+        .then((response) => {
+          setProducts(response.data.productData);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [result.id]);
+
+  useEffect(() => {
+    console.log(searchParams.get("min"), searchParams.get("max"));
+    if (searchParams.get("min") && searchParams.get("max")) {
+      axios
+        .get(
+          `${
+            process.env.REACT_APP_API_KEY
+          }api/product/sort?minPrice=${searchParams.get(
+            "min"
+          )}&maxPrice=${searchParams.get("max")}`
+        )
+        .then((response) => {
+          console.log(response.data.productData);
+          setProducts(response.data.productData);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [searchParams]);
+
   return (
     <div className={cx("wrapper")}>
       <p className={cx("option")}>
@@ -96,7 +120,7 @@ const Product = () => {
       </p>
 
       <div className={cx("product")}>
-        <Row>
+        <Row className={cx("responsive")}>
           {products.map((product, _id) => (
             <Col xs={12} sm={6} md={6} lg={4} xl={3} key={_id}>
               <div className={cx("box")}>

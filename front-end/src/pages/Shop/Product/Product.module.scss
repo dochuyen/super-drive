@@ -6,6 +6,9 @@
   display: flex;
   justify-content: center;
 }
+.responsive {
+  flex-grow: 1;
+}
 .option {
   display: flex;
   align-items: center;
