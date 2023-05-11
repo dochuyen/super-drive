@@ -16,7 +16,7 @@ const ListNewCar = () => {
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_API_KEY}api/product/getBrand/64416645196081acc2643442`
+        `${process.env.REACT_APP_API_KEY}/api/product/getBrand/64416645196081acc2643442`
       )
       .then((response) => {
         setProducts(response.data);
@@ -32,7 +32,7 @@ const ListNewCar = () => {
       const fetchData = async () => {
         try {
           const response = await axios.put(
-            `${process.env.REACT_APP_API_KEY}api/cart/add`,
+            `${process.env.REACT_APP_API_KEY}/api/cart/add`,
             {
               email: emailUser,
               productId: product._id,

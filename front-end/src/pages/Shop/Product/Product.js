@@ -78,7 +78,7 @@ const Product = () => {
     if (result.id) {
       axios
         .get(
-          `${process.env.REACT_APP_API_KEY}api/product/getBrand/${result.id}`
+          `${process.env.REACT_APP_API_KEY}/api/product/getBrand/${result.id}`
         )
         .then((response) => {
           setProducts(response.data);
@@ -86,7 +86,7 @@ const Product = () => {
         .catch((error) => console.log(error));
     } else {
       axios
-        .get(`${process.env.REACT_APP_API_KEY}api/product`)
+        .get(`${process.env.REACT_APP_API_KEY}/api/product`)
         .then((response) => {
           setProducts(response.data.productData);
         })

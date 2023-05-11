@@ -23,7 +23,7 @@ const Blog = () => {
 
   const fetchComment = () => {
     axios
-      .get(`${process.env.REACT_APP_API_KEY}api/comments/get`)
+      .get(`${process.env.REACT_APP_API_KEY}/api/comments/get`)
       .then((res) => {
         const commentData = res.data;
         setComments(commentData.data);
@@ -46,7 +46,7 @@ const Blog = () => {
       comment: newComment,
     };
 
-    fetch(`${process.env.REACT_APP_API_KEY}api/comments`, {
+    fetch(`${process.env.REACT_APP_API_KEY}/api/comments`, {
       method: "POST",
       headers: {
         Accept: "application/json",

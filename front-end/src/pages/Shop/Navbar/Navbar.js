@@ -32,7 +32,7 @@ const Navbar = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_KEY}api/brand`)
+      .get(`${process.env.REACT_APP_API_KEY}/api/brand`)
       .then((response) => {
         setBrandApi(response.data);
       })
@@ -53,11 +53,10 @@ const Navbar = () => {
     setSearchParams({ min: minPrice, max: maxPrice });
     axios
       .get(
-        `${process.env.REACT_APP_API_KEY}api/product/sort?minPrice=${minPrice}&maxPrice=${maxPrice}`
+        `${process.env.REACT_APP_API_KEY}/api/product/sort?minPrice=${minPrice}&maxPrice=${maxPrice}`
       )
       .then((response) => {
         console.log(response.data.productData);
-        
       })
       .catch((error) => console.log(error));
   };

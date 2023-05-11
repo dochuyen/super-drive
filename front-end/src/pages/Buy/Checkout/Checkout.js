@@ -10,9 +10,8 @@ import Address from "../../../components/Address/Address";
 const cx = classNames.bind(styles);
 const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
 
- 
   const token = JSON.parse(localStorage.getItem("token"));
 
   const total = cartItems.reduce(
@@ -22,7 +21,7 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_KEY}api/cart/get`, {
+      .get(`${process.env.REACT_APP_API_KEY}/api/cart/get`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,7 +37,7 @@ const Checkout = () => {
     const deleteCart = async () => {
       try {
         await axios.delete(
-          `${process.env.REACT_APP_API_KEY}api/cart/delete/${cart.productId}`,
+          `${process.env.REACT_APP_API_KEY}/api/cart/delete/${cart.productId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -50,8 +49,7 @@ const Checkout = () => {
           (item) => item.productId !== cart.productId
         );
         setCartItems(updatedCartItems);
-        dispatch({type:'SET_CART', payload: updatedCartItems});
-        
+        dispatch({ type: "SET_CART", payload: updatedCartItems });
       } catch (error) {
         console.log(error);
       }
@@ -75,7 +73,7 @@ const Checkout = () => {
     ) {
       alert("Vui lòng điền thông tin nhận hàng đầy đủ !");
     } else {
-      fetch(`${process.env.REACT_APP_API_KEY}api/address/add`, {
+      fetch(`${process.env.REACT_APP_API_KEY}/api/address/add`, {
         method: "PUT",
         body: JSON.stringify(inputAddress),
         headers: {
@@ -125,7 +123,6 @@ const Checkout = () => {
             <div className={cx("info-user")}>
               <Address
                 inputAddress={inputAddress}
-         
                 changeAddres={changeAddres}
               />
             </div>
