@@ -1,0 +1,39 @@
+.inbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 20px;
+  background-color: transparent;
+  padding: 0 !important;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+
+}
+.text-email {
+  font-size: 15px;
+  font-weight: 500;
+}
+.mess,
+.email {
+  margin-bottom: 10px;
+  border-radius: 3px;
+  
+}
+.email {
+  height: 35px;
+  width: 100%;
+}
+.mess {
+  height: 100px;
+}
+.btn-submit {
+  border: none;
+  background-color: #f98532;
+  color: #fff;
+  height: 35px;
+  border-radius: 5px;
+  font-weight: 700;
+}
