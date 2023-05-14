@@ -101,7 +101,7 @@ const Product = () => {
         .get(
           `${
             process.env.REACT_APP_API_KEY
-          }api/product/sort?minPrice=${searchParams.get(
+          }/api/product/sort?minPrice=${searchParams.get(
             "min"
           )}&maxPrice=${searchParams.get("max")}`
         )
