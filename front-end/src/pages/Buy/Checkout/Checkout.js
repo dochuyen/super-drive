@@ -13,7 +13,7 @@ const Checkout = () => {
   const dispatch=useDispatch()
 
  
-  const token = JSON.parse(localStorage.getItem("token"));
+    const token = localStorage.getItem("token");
 
   const total = cartItems.reduce(
     (item, crr) => item + crr.price * crr.quantity,
@@ -22,7 +22,7 @@ const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_KEY}api/cart/get`, {
+      .get(`http://localhost:8080/api/cart/get`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,7 +38,7 @@ const Checkout = () => {
     const deleteCart = async () => {
       try {
         await axios.delete(
-          `${process.env.REACT_APP_API_KEY}api/cart/delete/${cart.productId}`,
+          `http://localhost:8080/api/cart/delete/${cart.productId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -75,7 +75,7 @@ const Checkout = () => {
     ) {
       alert("Vui lòng điền thông tin nhận hàng đầy đủ !");
     } else {
-      fetch(`${process.env.REACT_APP_API_KEY}api/address/add`, {
+      fetch(`http://localhost:8080/api/address/add`, {
         method: "PUT",
         body: JSON.stringify(inputAddress),
         headers: {

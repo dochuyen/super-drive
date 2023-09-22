@@ -39,7 +39,7 @@ const Product = () => {
   const [cartLength, setCartLength] = useState();
   const emailUser = useSelector((state) => state.email);
 
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleAddProduct = (product) => {
@@ -50,7 +50,7 @@ const Product = () => {
       const fetchData = async () => {
         try {
           const response = await axios.put(
-            `${process.env.REACT_APP_API_KEY}api/cart/add`,
+            `http://localhost:8080/api/cart/add`,
             {
               productId: product._id,
               title: product.title,
@@ -78,7 +78,7 @@ const Product = () => {
     if (result.id) {
       axios
         .get(
-          `${process.env.REACT_APP_API_KEY}api/product/getBrand/${result.id}`
+          `http://localhost:8080/api/product/getBrand/${result.id}`
         )
         .then((response) => {
           setProducts(response.data);
@@ -86,14 +86,13 @@ const Product = () => {
         .catch((error) => console.log(error));
     } else {
       axios
-        .get(`${process.env.REACT_APP_API_KEY}api/product`)
+        .get(`http://localhost:8080/api/product`)
         .then((response) => {
           setProducts(response.data.productData);
         })
         .catch((error) => console.log(error));
     }
   }, [result.id]);
-
   useEffect(() => {
     console.log(searchParams.get("min"), searchParams.get("max"));
     if (searchParams.get("min") && searchParams.get("max")) {

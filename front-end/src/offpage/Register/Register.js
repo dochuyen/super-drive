@@ -38,7 +38,7 @@ const Register = () => {
     if (!input) {
       alert("Bạn phải nhập đủ username, email và password");
     } else {
-      fetch(`${process.env.REACT_APP_API_KEY}api/user/register`, {
+      fetch(`http://localhost:8080/api/user/register`, {
         method: "POST",
         body: JSON.stringify(input),
         headers: {

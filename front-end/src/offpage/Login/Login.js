@@ -34,7 +34,7 @@ const Login = () => {
 
   const submitLogin = (e) => {
     e.preventDefault();
-    fetch(`${process.env.REACT_APP_API_KEY}api/user/login`, {
+    fetch(`http://localhost:8080/api/user/login`, {
       method: "POST",
       body: JSON.stringify(inputLogin),
       headers: {

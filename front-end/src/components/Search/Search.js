@@ -52,7 +52,7 @@ const Search = () => {
     e.preventDefault();
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_KEY}api/product/search?q=${searchQuery}`
+        `http://localhost:8080/api/product/search?q=${searchQuery}`
       );
       setProducts(response.data.productData);
       setHidden(true);

@@ -47,7 +47,7 @@ const Shopdetail = () => {
   const [products, setProducts] = useState({});
   const [randomProducts, setRandomProducts] = useState([]);
 
-  const token = JSON.parse(localStorage.getItem("token"));
+    const token = localStorage.getItem("token");
 
   const next = useNavigate();
 
@@ -59,7 +59,7 @@ const Shopdetail = () => {
       const fetchData = async () => {
         try {
           const response = await axios.put(
-            `${process.env.REACT_APP_API_KEY}api/cart/add`,
+            `http://localhost:8080/api/cart/add`,
             {
               productId: products._id,
               title: products.title,
@@ -83,7 +83,7 @@ const Shopdetail = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_KEY}api/product/shopdetail/${details.id}`)
+      .get(`http://localhost:8080/api/product/shopdetail/${details.id}`)
       .then((response) => {
         setProducts(response.data);
       })
@@ -91,7 +91,7 @@ const Shopdetail = () => {
   }, [details.id]);
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_API_KEY}api/product`)
+      .get(`http://localhost:8080/api/product`)
       .then((response) => {
         setRandomProducts(response.data.productData);
       })

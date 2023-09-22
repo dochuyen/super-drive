@@ -18,10 +18,10 @@ const Blog = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const username = useSelector((state) => state.username);
-const token = JSON.parse(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
   const fetchComment = useCallback(() => {
     axios
-      .get(`${process.env.REACT_APP_API_KEY}api/comments/get`)
+      .get(`http://localhost:8080/api/comments/get`)
       .then((res) => {
         const commentData = res.data;
         setComments(commentData.data.reverse());
@@ -39,7 +39,7 @@ const token = JSON.parse(localStorage.getItem("token"));
       comment: newComment,
     };
   
-    fetch(`${process.env.REACT_APP_API_KEY}api/comments`, {
+    fetch(`http://localhost:8080/api/comments`, {
       method: "POST",
       headers: {
         Accept: "application/json",

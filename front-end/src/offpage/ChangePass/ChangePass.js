@@ -34,7 +34,7 @@ const ChangePass= () => {
   const [passValid, setPassValid] = useState(true);
 
   const next = useNavigate();
-  const token = JSON.parse(localStorage.getItem("token"));
+    const token = localStorage.getItem("token");
   const submitRegister = (e) => {
     e.preventDefault();
     if (!input) {
@@ -43,7 +43,7 @@ const ChangePass= () => {
       const fetchData = async () => {
         try {
           await axios.put(
-            `${process.env.REACT_APP_API_KEY}api/user/change-password`,
+            `http://localhost:8080/api/user/change-password`,
             {
               currentPassword: input.email,
               newPassword: input.password,
