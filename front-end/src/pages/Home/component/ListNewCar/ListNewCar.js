@@ -11,7 +11,8 @@ import axios from "axios";
 const cx = classNames.bind(styles);
 const ListNewCar = () => {
   const [products, setProducts] = useState([]);
-  const emailUser = useSelector((state) => state.email);
+  const token = localStorage.getItem("token");
+
 
   useEffect(() => {
     axios
@@ -25,7 +26,7 @@ const ListNewCar = () => {
   }, []);
   const next = useNavigate();
   const handleAddProduct = (product) => {
-    if (!emailUser) {
+    if (!token) {
       alert("Bạn cần đăng nhập !");
       next("/login");
     } else {
@@ -34,11 +35,15 @@ const ListNewCar = () => {
           const response = await axios.put(
             `http://localhost:8080/api/cart/add`,
             {
-              email: emailUser,
               productId: product._id,
               title: product.title,
               price: product.price,
               quantity: 1,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             }
           );
         } catch (error) {

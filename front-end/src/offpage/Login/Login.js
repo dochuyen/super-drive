@@ -49,7 +49,7 @@ const Login = () => {
       .then((data) => {
         dispatch({ type: "SET_USERNAME", payload: data.data.username });
         dispatch({type:"SET_CART", payload:data.data.cartitem})
-        localStorage.setItem("token", JSON.stringify(data.data.token));
+        localStorage.setItem("token", data.data.token);
         next("/");
       })
       .catch((err) => {
