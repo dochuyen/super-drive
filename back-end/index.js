@@ -3,7 +3,7 @@ config();
 import express from "express";
 import dbConnect from "./configs/connectDB.js";
 import initRout from "./routes/index.js";
-import cors from 'cors';
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT;

@@ -91,11 +91,13 @@ const Shopdetail = () => {
       })
       .catch((error) => console.log(error));
   }, [details.id]);
+
+  
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_KEY}/api/product`)
       .then((response) => {
-        setRandomProducts(response.data.productData);
+        setRandomProducts(response.data.data);
       })
       .catch((error) => console.log(error));
   }, []);

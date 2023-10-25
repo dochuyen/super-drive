@@ -2,6 +2,21 @@ import Users from "../model/user.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+const getAll = async (req, res) => {
+  try {
+    const user = await Users.find().then((data) => {
+      return res.status(200).json({
+        success: data,
+        data: data,
+      });
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 const getUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -9,6 +24,22 @@ const getUser = async (req, res) => {
     const user = await Users.findById(id);
     res.json(user);
   } catch (error) {}
+};
+const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteUser = await Users.findByIdAndDelete(id);
+    if (!deleteUser) throw new Error("deleteUser not found");
+    return res.status(200).json({
+      success: true,
+      data: deleteUser,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 const userLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -35,9 +66,7 @@ const userLogin = async (req, res) => {
       email,
     },
     process.env.JWT_SECRET,
-    {
- 
-    }
+    {}
   );
 
   // send token to client
@@ -96,17 +125,13 @@ const changePassword = async (req, res) => {
     const { currentPassword, newPassword } = req.body;
     const user = await Users.findById(req.user.id);
 
-    
     const isMatch = await bcrypt.compare(currentPassword, user.password);
     if (!isMatch) {
       return res.status(401).json({ msg: "Mật khẩu hiện tại không đúng" });
-      
     }
-
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
-
 
     user.password = hashedPassword;
     await user.save();
@@ -118,4 +143,4 @@ const changePassword = async (req, res) => {
   }
 };
 
-export { getUser, userLogin, userRegister, changePassword };
+export { getUser, userLogin, userRegister, changePassword, getAll ,deleteUser};

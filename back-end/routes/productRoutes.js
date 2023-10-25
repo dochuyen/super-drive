@@ -10,12 +10,12 @@ productRouter.get("/search", proCtrl.searchProducts);
 
 productRouter.post("/", uploadCloud.array("images", 5), proCtrl.createProducts);
 productRouter.put(
-  "/uploadimage/:pid",
+  "/uploadimage/:id",
   uploadCloud.array("images", 5),
   proCtrl.uploadImageProduct
 );
-productRouter.put("/:pid", proCtrl.updateProducts);
-productRouter.delete("/:pid", proCtrl.deleteProducts);
+productRouter.put("/:id", proCtrl.updateProducts);
+productRouter.delete("/:id", proCtrl.deleteProducts);
 productRouter.get("/sort", proCtrl.sortProducts);
 
 export default productRouter;

@@ -9,7 +9,8 @@ import Checkout from "./pages/Buy/Checkout/Checkout";
 import Shopdetail from "./pages/Buy/Shopdetail/Shopdetail";
 import Login from "./offpage/Login/Login";
 import Register from "./offpage/Register/Register";
-import ChangePass from "./offpage/ChangePass/ChangePass"
+import ChangePass from "./offpage/ChangePass/ChangePass";
+import AdminPage from "../src/layout/Admin/Admin.jsx";
 
 const App = () => {
   const publics = [
@@ -46,7 +47,30 @@ const App = () => {
       path: "/shopdetail/:id",
       pages: Shopdetail,
     },
-   
+    {
+      path: "/admin",
+      pages: AdminPage,
+    },
+    {
+      path: "/user",
+      pages: AdminPage,
+    },
+    {
+      path: "/product",
+      pages: AdminPage,
+    },
+    {
+      path: "/brand",
+      pages: AdminPage,
+    },
+    {
+      path: "/user/:id",
+      pages: AdminPage,
+    },
+    {
+      path: "/product/:id",
+      pages: AdminPage,
+    },
   ];
   return (
     <div>
@@ -69,7 +93,11 @@ const App = () => {
         })}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/change-password" element={<ChangePass></ChangePass>}></Route>
+
+        <Route
+          path="/change-password"
+          element={<ChangePass></ChangePass>}
+        ></Route>
       </Routes>
     </div>
   );

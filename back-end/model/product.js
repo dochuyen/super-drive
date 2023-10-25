@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 // Declare the Schema of the Mongo model
 const productSchema = new mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
       required: true,
       trim: true,

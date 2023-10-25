@@ -1,11 +1,12 @@
 import Products from "../model/product.js";
 
 import slugify from "slugify";
+
 const getAllProducts = async (req, res) => {
   const product = await Products.find({}).then((data) => {
     return res.status(200).json({
       success: data ? true : false,
-      productData: data ? data : "cannot find product",
+      data: data ? data : "cannot find product",
     });
   });
 };
@@ -49,7 +50,7 @@ const createProducts = async (req, res) => {
       );
       return res.status(200).json({
         success: true,
-        createProductData: updatedProduct,
+        data: updatedProduct,
       });
     }
 
@@ -67,7 +68,7 @@ const createProducts = async (req, res) => {
 
 const updateProducts = async (req, res) => {
   try {
-    const { pid } = req.params;
+    const { id } = req.params;
     if (req.body && req.body.title) req.body.slug = slugify(req.body.title);
     const updateProduct = await Products.findByIdAndUpdate(pid, req.body, {
       new: true,
@@ -87,12 +88,12 @@ const updateProducts = async (req, res) => {
 
 const deleteProducts = async (req, res) => {
   try {
-    const { pid } = req.params;
-    const deleteProduct = await Products.findByIdAndDelete(pid);
+    const { id } = req.params;
+    const deleteProduct = await Products.findByIdAndDelete(id);
     if (!deleteProduct) throw new Error("Product not found");
     return res.status(200).json({
       success: true,
-      deleteProductData: deleteProduct,
+      data: deleteProduct,
     });
   } catch (error) {
     return res.status(400).json({
@@ -104,7 +105,7 @@ const deleteProducts = async (req, res) => {
 
 const uploadImageProduct = async (req, res) => {
   try {
-    const { pid } = req.params;
+    const { id } = req.params;
     if (!req.files) throw new Error("Missing Input");
     const response = await Products.findByIdAndUpdate(
       pid,

@@ -10,8 +10,8 @@ import { useState, useEffect } from "react";
 import Canvas from "./Offcanvas/Offcanvas";
 import { useSelector } from "react-redux";
 import Search from "../../components/Search/Search";
-import {store} from '../../store/index.js'
-
+import { store } from "../../store/index.js";
+import { SiAdminer } from "react-icons/si";
 
 const cx = classNames.bind(styles);
 function Header() {
@@ -45,20 +45,20 @@ function Header() {
 
   const [types, setTypes] = useState("Home");
   const [localUsername, setLocalUsername] = useState(false);
-  const [lengthCartItem, setLengthCartItem]=useState()
-  const userName = useSelector(state => state.username);
-  const cartItem = useSelector(state => state.cart);
-  
-  useEffect(()=>{
-    if(!cartItem){
-      setLengthCartItem(0)
-    }else{
-      setLengthCartItem(cartItem.length)
+  const [lengthCartItem, setLengthCartItem] = useState();
+  const userName = useSelector((state) => state.username);
+  const cartItem = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    if (!cartItem) {
+      setLengthCartItem(0);
+    } else {
+      setLengthCartItem(cartItem.length);
     }
-  },[cartItem])
+  }, [cartItem]);
 
   const clearAuthStateAction = {
-    type: 'CLEAR_AUTH_STATE',
+    type: "CLEAR_AUTH_STATE",
   };
 
   useEffect(() => {
@@ -158,11 +158,17 @@ function Header() {
                       </span>
                       Log out
                     </Link>
-                    <Link className={cx("btn-change")} to='/change-password'>
+                    <Link className={cx("btn-change")} to="/change-password">
                       <span>
                         <FaExchangeAlt></FaExchangeAlt>
                       </span>
                       Change Password
+                    </Link>
+                    <Link className={cx("btn-admin")} to="/admin">
+                      <span>
+                        <SiAdminer></SiAdminer>
+                      </span>
+                      Admin
                     </Link>
                   </>
                 )}
@@ -189,7 +195,9 @@ function Header() {
             </div>
           </div>
           <div className={cx("offcanvas")}>
-          <div className={cx('search-offcanvas')}><Search/></div>
+            <div className={cx("search-offcanvas")}>
+              <Search />
+            </div>
 
             <Canvas
               localUsername={localUsername}

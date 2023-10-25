@@ -88,7 +88,7 @@ const Product = () => {
       axios
         .get(`${process.env.REACT_APP_API_KEY}/api/product`)
         .then((response) => {
-          setProducts(response.data.productData);
+          setProducts(response.data.data);
         })
         .catch((error) => console.log(error));
     }
