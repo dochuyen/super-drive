@@ -34,6 +34,7 @@ const addToCart = async (req, res) => {
       // Add new cart item
       user.cartitem.push({ productId, title, quantity, price });
     }
+    
 
     await user.save();
 
