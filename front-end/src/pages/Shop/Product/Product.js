@@ -42,6 +42,8 @@ const Product = () => {
   const token = localStorage.getItem("token");
   const [searchParams, setSearchParams] = useSearchParams();
 
+  
+
   const handleAddProduct = (product) => {
     if (!token) {
       alert("Bạn cần đăng nhập !");
@@ -86,7 +88,7 @@ const Product = () => {
         .catch((error) => console.log(error));
     } else {
       axios
-        .get(`http://localhost:8080/api/product`)
+        .get("http://localhost:8080/api/product")
         .then((response) => {
           setProducts(response.data.productData);
         })
@@ -98,9 +100,7 @@ const Product = () => {
     if (searchParams.get("min") && searchParams.get("max")) {
       axios
         .get(
-          `${
-            process.env.REACT_APP_API_KEY
-          }api/product/sort?minPrice=${searchParams.get(
+          `http://localhost:8080/api/product/sort?minPrice=${searchParams.get(
             "min"
           )}&maxPrice=${searchParams.get("max")}`
         )
