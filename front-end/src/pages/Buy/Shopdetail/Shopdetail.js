@@ -47,7 +47,7 @@ const Shopdetail = () => {
   const [products, setProducts] = useState({});
   const [randomProducts, setRandomProducts] = useState([]);
 
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
 
   const next = useNavigate();
 

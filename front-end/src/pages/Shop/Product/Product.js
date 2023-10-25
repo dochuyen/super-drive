@@ -39,7 +39,7 @@ const Product = () => {
   const [cartLength, setCartLength] = useState();
   const emailUser = useSelector((state) => state.email);
 
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleAddProduct = (product) => {

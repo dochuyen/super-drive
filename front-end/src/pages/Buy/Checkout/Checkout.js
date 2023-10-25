@@ -12,7 +12,7 @@ const Checkout = () => {
   const [cartItems, setCartItems] = useState([]);
   const dispatch = useDispatch();
 
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
 
   const total = cartItems.reduce(
     (item, crr) => item + crr.price * crr.quantity,

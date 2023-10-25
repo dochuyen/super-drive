@@ -34,7 +34,7 @@ const ChangePass= () => {
   const [passValid, setPassValid] = useState(true);
 
   const next = useNavigate();
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
   const submitRegister = (e) => {
     e.preventDefault();
     if (!input) {

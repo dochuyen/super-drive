@@ -17,7 +17,7 @@ const Blog = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const username = useSelector((state) => state.username);
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
   const fetchComment = useCallback(() => {
     axios
       .get(`${process.env.REACT_APP_API_KEY}/api/comments/get`)
