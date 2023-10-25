@@ -5,6 +5,7 @@ import styles from "./ProductAdmin.module.scss"; // Import CSS file
 function ProductForm({ onProductCreated }) {
   const [product, setProduct] = useState({
     title: "",
+    slug: "",
     description: "",
     brand: "",
     price: 0,
@@ -34,11 +35,11 @@ function ProductForm({ onProductCreated }) {
       images: imageUrls,
     });
   };
-  const token = localStorage.getItem("token"); // Lấy token từ localStorage
+  const token = localStorage.getItem("token");
   console.log(token);
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`, // Thêm token vào header
+      Authorization: `Bearer ${token}`,
     },
   };
   const handleSubmit = async (e) => {
@@ -53,22 +54,19 @@ function ProductForm({ onProductCreated }) {
 
       if (response.data.success) {
         onProductCreated(response.data.createProductData);
-        alert("Sản phẩm đã được tạo thành công!");
         setProduct({
           title: "",
-
+          slug: "",
           description: "",
           brand: "",
           price: 0,
-
-          images: [],
+          images: [{}],
         });
+        alert("Sản phẩm đã được tạo thành công!");
       } else {
         alert("Không thể tạo sản phẩm: " + response.data.message);
       }
-    } catch (error) {
-      alert("Lỗi khi tạo sản phẩm: " + error.message);
-    }
+    } catch (error) {}
   };
 
   return (
@@ -81,6 +79,13 @@ function ProductForm({ onProductCreated }) {
         value={product.title}
         onChange={handleChange}
         required
+      />
+      <label htmlFor="slug">slug:</label>
+      <textarea
+        id="slug"
+        name="slug"
+        value={product.slug}
+        onChange={handleChange}
       />
       <label htmlFor="description">Mô tả:</label>
       <textarea
