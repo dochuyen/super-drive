@@ -133,6 +133,7 @@ const Product = () => {
                     src={product.images}
                     alt=""
                     width="100%"
+                    loading="lazy"
                   />
                 </Link>
                 <div className={cx("car")}>

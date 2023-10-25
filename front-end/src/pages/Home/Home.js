@@ -10,7 +10,6 @@ import Sale from "./component/Sale/Sale";
 import Lucky from "./component/Lucky/Lucky";
 import Trend from "./component/Trend/Trend";
 
-
 const cx = classNames.bind(styles);
 const Home = () => {
   return (
@@ -21,6 +20,7 @@ const Home = () => {
             className={cx("d-block w-100 banner-avt")}
             src={bn1}
             alt="First slide"
+            loading="lazy"
           />
           <Carousel.Caption>
             <h3>Ferrari</h3>
@@ -58,12 +58,9 @@ const Home = () => {
         </Carousel.Item>
       </Carousel>
       <Container>
-       
         <Sale />
-        
-
       </Container>
-        <Lucky />
+      <Lucky />
       <Container>
         <div className={cx("new-arrivals")}>
           <p className={cx("small-title")}>LATEST PRODUCTS</p>
