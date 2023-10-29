@@ -1,0 +1,130 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  background-color: #f3f2ee;
+  padding: 40px 0;
+  margin-bottom: 4rem;
+}
+.directional {
+  display: flex;
+  align-items: center;
+}
+.icon-tool {
+  font-size: 12px;
+  margin-right: 5px;
+}
+.end {
+  color: #727171;
+}
+.content {
+  margin: 7rem 0;
+  display: flex;
+}
+.info-user {
+  width: 63%;
+  margin-right: 2rem;
+  & input {
+    height: 50px;
+    width: 100%;
+    border: 1px solid #e1e1e1;
+    font-size: 14px;
+    color: #363535;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    &:focus{
+        outline: none;
+    }
+  }
+  & span{
+    color: #e53637;
+  }
+}
+.title-form {
+  color: #111111;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e1e1e1;
+  padding-bottom: 25px;
+  margin-bottom: 30px;
+}
+.checkout-name{
+    width: 48%;
+}
+.name {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+.bill{
+    width: calc(100% - 65%);
+    background-color: #f3f2ee;
+    padding: 30px;
+    & p{
+        font-size:18px;
+    }
+}
+.bill-order{
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 20px;
+}
+.bill-title{
+    color: #111111;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: 1px solid #d7d7d7;
+    padding-bottom: 25px;
+    margin-bottom: 30px;
+}
+.title-order{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.total{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.total-child{
+    font-size: 18px;
+    color: #e53637;
+}
+.btn-submit{
+    margin-top: 20px;
+    height: 50px;
+    width: 100%;
+    color: #fff;
+    background-color: #ee4d2d;
+    border: none;
+    font-weight: 500;
+}
+.name-product{
+  & p{
+    font-weight: 500;
+  }
+}
+.price{
+  float: right;
+  & p{
+    font-weight: 500;
+  }
+}
+.list-item{
+  display: flex;
+  justify-content: space-between;
+}
+
+.plus{
+  margin-right: 5px;
+}
+.minus{
+  margin-left: 5px;
+}
+.minus, .plus{
+  :hover{
+    cursor: pointer;
+  }
+}

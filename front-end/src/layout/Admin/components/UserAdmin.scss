@@ -1,0 +1,76 @@
+.modal-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  button {
+    color: #fff;
+
+    font-weight: 500;
+    border-radius: 40%;
+    padding: 0 15px;
+    border: none;
+
+    background-color: red;
+  }
+  h2 {
+    color: #0a58ca;
+  }
+}
+.modal-filter {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px 10px 10px;
+  input {
+    border: transparent;
+    border-radius: 10px;
+    margin-right: 90px;
+  }
+  input:hover {
+    border: transparent;
+  }
+}
+.Modal {
+  width: 99%; /* Đặt chiều rộng theo ý muốn */
+  margin: 0 auto 10px auto; /* Căn giữa theo chiều ngang */
+  padding: 20px; /* Khoảng cách bên trong modal */
+  background-color: #fff; /* Màu nền */
+  border: 1px solid #ccc; /* Đường viền */
+  border-radius: 5px; /* Góc bo tròn */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Hiệu ứng bóng đổ */
+
+  .full-table {
+    width: 100%; /* Đặt chiều rộng của bảng là 100% */
+    border-collapse: collapse; /* Gộp các đường viền để tạo giao diện sạch sẽ */
+  }
+
+  .full-table th,
+  .full-table td {
+    padding: 8px; /* Đặt khoảng cách bên trong cột */
+    border: 1px solid #ccc; /* Đường viền */
+    text-align: center; /* Căn giữa nội dung */
+  }
+
+  .btn-action {
+    color: #fff;
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 2px 10px;
+    margin-left: 5px;
+    background-color: red;
+    border: none;
+  }
+  td {
+    max-width: 80px; /* Độ dài tối đa của mỗi ô */
+    word-wrap: unset;
+    overflow: auto;
+  }
+  .pageNumber {
+    margin-top: 20px;
+    display: flex;
+    button {
+      margin: 0 5px;
+      padding: 5px;
+      border: none;
+    }
+  }
+}

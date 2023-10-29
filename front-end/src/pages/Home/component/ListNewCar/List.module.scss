@@ -1,0 +1,99 @@
+.wrapper {
+  margin: 30px 0;
+}
+.box {
+  display: grid;
+  color: #111;
+  text-decoration: none;
+  justify-content: center;
+  width: 230px;
+  height: 360px;
+  margin: 10px;
+  border-radius: 5px;
+  object-fit: cover;
+  transition: transform 400ms;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  &:hover {
+    transform: scale(1.05);
+    color: #111;
+  }
+}
+
+.img-car {
+  border-radius: 5px;
+  width: 100%;
+}
+.picture {
+  max-width: 96%;
+  height: 200px;
+  margin: 2% 2%;
+  border-radius: 3px;
+}
+.car {
+  width: 100%;
+  position: relative;
+  padding: 0px 0 15px 5px;
+}
+.name-car {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+.icons {
+  border-bottom: 1px solid #c1c1c1db;
+}
+.eye,
+.heart {
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 0;
+  margin-right: 15px;
+}
+.price-car {
+  font-size: 15px;
+  font-weight: 700;
+}
+.add {
+  font-size: 20px;
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  border: none;
+  background-color: transparent;
+  transition: transform 400ms;
+  object-fit: cover;
+  color: #717171;
+}
+.info {
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #111;
+  &:hover {
+    color: #111;
+  }
+}
+.title {
+  font-family: Montserrat, sans-serif;
+  font-size: 17px;
+  margin-top: 7px;
+  font-weight: 700;
+}
+
+.price-car,
+.sale-price {
+  font-family: Montserrat, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+.sale-price {
+  text-decoration: line-through;
+}
+.icon-heart {
+  color: rgb(255, 40, 111);
+}
+.eye {
+  color: #111;
+  &:hover {
+    color: #111;
+  }
+}

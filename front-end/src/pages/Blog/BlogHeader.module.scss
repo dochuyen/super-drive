@@ -1,0 +1,30 @@
+
+.headerTitleSm{
+    position: absolute;
+    top:12%;
+    font-size: 23px;
+    font-weight: 600;
+    color: black;
+  margin-left: 20px;
+        cursor: pointer;
+        
+}
+.headerTitleSm:hover{
+  text-decoration: underline;
+}
+.headerImg{
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+}
+
+.blogSearch{
+    position: absolute;
+    background-color:#F6B024;
+    width: 45%;
+    border-radius: 5px;
+    padding: 5px;
+    top:20%;
+    }
+    
+    

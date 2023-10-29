@@ -1,0 +1,14 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  background-color: #f3f2ee;
+  padding: 15px 0;
+}
+.directional {
+  & span {
+    font-weight: 400;
+  }
+}
+.icon-tool {
+  font-size: 12px;
+}

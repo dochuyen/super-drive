@@ -1,0 +1,36 @@
+.info-user {
+    width: 63%;
+    margin-right: 2rem;
+    & input {
+      height: 50px;
+      width: 100%;
+      border: 1px solid #e1e1e1;
+      font-size: 14px;
+      color: #363535;
+      padding-left: 20px;
+      margin-bottom: 20px;
+      &:focus{
+          outline: none;
+      }
+    }
+    & span{
+      color: #e53637;
+    }
+  }
+  .title-form {
+    color: #111111;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 25px;
+    margin-bottom: 30px;
+  }
+  .checkout-name{
+      width: 48%;
+  }
+  .name {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+  }

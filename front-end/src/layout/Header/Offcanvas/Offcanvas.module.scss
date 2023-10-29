@@ -1,0 +1,147 @@
+.btn-canvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background-color: #fff;
+  border: none;
+  color: #333;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+}
+.items {
+  display: grid;
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 3px;
+  width: 70px;
+  font-size: 15px;
+  color: #333;
+  height: 40px;
+  &:hover {
+    color: #333;
+    background-color: #e6e3e3;
+  }
+}
+.btn-log {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 50px;
+  background-color: transparent;
+  cursor: pointer;
+  text-decoration: none;
+
+
+  &:hover .user {
+    display: flex !important;
+    color: #ff9950;
+  }
+}
+.user {
+  position: absolute;
+  display: none !important;
+  left: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #212529;
+  width: 130px;
+
+  border-radius: 3px;
+  & span {
+    margin-bottom: 2px;
+    margin-right: 3px;
+  }
+}
+.user-login,
+.user-register, .btn-logout {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  &:hover {
+    color: #ff9950;
+  }
+}
+
+.btn-user {
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  font-size: 15px;
+  color: white;
+  text-decoration: none;
+
+  &:hover {
+    color: white;
+  }
+}
+.nav {
+  display: flex;
+  align-items: center;
+  color: #000000;
+  margin-left: 3px;
+}
+.child-icon {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #eb2f06;
+  color: #fff;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  right: -1px;
+  top: 0;
+}
+.icon-nav {
+  font-size: 25px;
+  color: #343434;
+}
+.nav-search {
+  display: flex;
+  align-items: center;
+}
+.search {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding: 10px;
+  transition-duration: 500ms;
+  cursor: pointer;
+  font-size: 15px;
+  border: 1px solid #0b0b0b;
+  overflow: hidden;
+  background-image: url(../../../assets/icon/search.svg);
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: 45% 50%;
+  &:hover {
+    border: 1px solid #ff9950;
+  }
+  &:focus {
+    width: 250px;
+    height: 2rem;
+    cursor: text;
+    padding-left: 40px;
+    border-radius: 40px;
+    color: rgb(0, 0, 0);
+    outline: none;
+    background-color: transparent;
+    border: 1px solid #ff9950;
+    background: url(../../../assets/icon/search-13-16.png) no-repeat;
+    background-size: 15px;
+    background-position: 20px 50%;
+  }
+}
