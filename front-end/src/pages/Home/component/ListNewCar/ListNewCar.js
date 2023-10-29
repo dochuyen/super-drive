@@ -52,7 +52,7 @@ const ListNewCar = () => {
   return (
     <Row>
       {products.map((product, _id) => (
-        <Col xs={12} sm={6} md={6} lg={4} xl={3} key={_id}>
+        <Col xs={12} sm={6} md={6} lg={6} xl={4} key={_id}>
           <div className={cx("box")}>
             <Link to={"/shopdetail/" + product._id} className={cx("img-car")}>
               <img

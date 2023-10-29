@@ -71,7 +71,6 @@ export function EditUser({ isModalOpen, closeModal }) {
   });
 
   useEffect(() => {
-    // Gọi API để tải thông tin người dùng dựa trên id
     axios
       .get(`${process.env.REACT_APP_API_KEY}/api/user/${id}`)
       .then((response) => {
@@ -124,7 +123,9 @@ export function EditUser({ isModalOpen, closeModal }) {
             setEditedUser({ ...editedUser, password: e.target.value })
           }
         />
-        <button onClick={handleSave}>Lưu</button>
+        <button className={styles.addButton} onClick={handleSave}>
+          Lưu
+        </button>
         <button className={styles.closeButton} onClick={closeModal}>
           Đóng
         </button>
