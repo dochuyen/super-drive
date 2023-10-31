@@ -1,5 +1,5 @@
 import express from "express";
-import userMiddleware from "../middlewares/userMiddleware.js";
+import {userMiddleware} from "../middlewares/userMiddleware.js";
 
 import * as userCtrls from "../controller/user.js";
 

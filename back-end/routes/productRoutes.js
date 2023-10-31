@@ -1,5 +1,6 @@
 import express from "express";
 import * as proCtrl from "../controller/product.js";
+import { adminMiddleware } from "../middlewares/userMiddleware.js";
 const productRouter = express.Router();
 import uploadCloud from "../configs/cloudinary.config.js";
 
@@ -10,7 +11,7 @@ productRouter.get("/search", proCtrl.searchProducts);
 
 productRouter.post("/", uploadCloud.array("images", 5), proCtrl.createProducts);
 productRouter.put(
-  "/uploadimage/:id",
+  "/uploadimage/:id",adminMiddleware,
   uploadCloud.array("images", 5),
   proCtrl.uploadImageProduct
 );

@@ -28,5 +28,33 @@ const userMiddleware = async (req, res, next) => {
     });
   }
 };
+const adminMiddleware = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization?.replace("Bearer ", "");
+    if (!token) {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
+    }
 
-export default userMiddleware;
+    const { email, role } = jwt.verify(token, process.env.JWT_SECRET);
+    if (email) {
+      const user = await Users.findOne({ email });
+      if (user) {
+        req.user = user;
+        req.role = role;
+        next();
+      } else {
+        throw new Error("Unauthorized");
+      }
+    } else {
+      throw new Error("Unauthorized");
+    }
+  } catch (error) {
+    res.status(401).json({
+      message: error.message,
+    });
+  }
+};
+
+export  {adminMiddleware, userMiddleware};
