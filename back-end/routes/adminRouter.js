@@ -7,7 +7,7 @@ const adminRouter = express.Router();
 adminRouter.get("/",adminMiddleware, adminCtrls.getAll);
 adminRouter.get("/:id", adminCtrls.getUser);
 adminRouter.post("/register", adminCtrls.userRegister);
-adminRouter.post("/login",adminMiddleware, adminCtrls.userLogin);
+adminRouter.post("/login", adminCtrls.userLogin);
 adminRouter.put("/change-password", adminMiddleware, adminCtrls.changePassword);
 adminRouter.delete("/:id", adminCtrls.deleteUser);
 
