@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./UserAdmin.module.scss";
+import styles from "./UserAdmin.scss";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -14,39 +14,24 @@ function UserAdmin({
   indexOfFirst,
   indexOfLast,
   setCurrentPage,
+  searchTerm,
+  setSearchTerm,
 }) {
   const [users, setUsers] = useState([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const currentUsers = users.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(users.length / itemsPerPage);
+
+  const filteredUsers = users.filter((user) => {
+    return user.email.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  const currentUsers = filteredUsers.slice(indexOfFirst, indexOfLast);
+
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
-  const handleAddUser = (newUser) => {
-    // Gọi API để thêm người dùng mới
-    axios
-      .post(`${process.env.REACT_APP_API_KEY}/api/user/register`, newUser)
-      .then((response) => {
-        // Cập nhật danh sách người dùng sau khi thêm thành công
-        setUsers((prevUsers) => [...prevUsers, response.data.data]);
-        setIsAddModalOpen(false); // Đóng modal sau khi thêm thành công
-      })
-      .catch((error) => {
-        console.error("Error adding user: ", error);
-      });
-  };
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_KEY}/api/user`)
-      .then((response) => {
-        setUsers(response.data.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching user data: ", error);
-      });
-  }, []);
 
   const handleDeleteUser = (userId) => {
     axios
@@ -61,6 +46,17 @@ function UserAdmin({
       });
   };
 
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_KEY}/api/user`)
+      .then((response) => {
+        setUsers(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data: ", error);
+      });
+  }, []);
+
   return (
     <article>
       <div className={cx("modal-title")}>
@@ -71,12 +67,18 @@ function UserAdmin({
         <UserAddModal
           isModalOpen={isAddModalOpen}
           closeModal={() => setIsAddModalOpen(false)}
-          handleAddUser={handleAddUser}
+          setUsers={setUsers}
         />
       )}
       <div className={cx("modal-filter")}>
-        <p>Tổng số mục: {users.length}</p>
-        <div className={cx("Filter")}></div>
+        {" "}
+        <p>Tổng số mục: {filteredUsers.length}</p>
+        <input
+          type="text"
+          value={searchTerm}
+          placeholder="Tìm kiếm người dùng..."
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
       <div className={cx("Modal")}>
         <table className={cx("full-table")}>
@@ -102,13 +104,13 @@ function UserAdmin({
                     >
                       Sửa
                     </button>
-                    {isEditModalOpen && (
-                      <EditUser
-                        isModalOpen={isEditModalOpen}
-                        closeModal={() => setIsEditModalOpen(false)}
-                      />
-                    )}
                   </Link>
+                  {isEditModalOpen && (
+                    <EditUser
+                      isModalOpen={isEditModalOpen}
+                      closeModal={() => setIsEditModalOpen(false)}
+                    />
+                  )}
                   <button
                     className={cx("btn-action")}
                     onClick={() => handleDeleteUser(user._id)}

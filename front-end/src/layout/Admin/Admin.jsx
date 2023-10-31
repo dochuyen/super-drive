@@ -23,6 +23,8 @@ function AdminPage() {
   const [itemsPerPage, setItemsPerPage] = useState(4);
   const indexOfLast = currentPage * itemsPerPage;
   const indexOfFirst = indexOfLast - itemsPerPage;
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
     <section className={cx("admin")}>
       <div className={cx("Taskbar")}>
@@ -45,6 +47,8 @@ function AdminPage() {
             indexOfFirst={indexOfFirst}
             indexOfLast={indexOfLast}
             setCurrentPage={setCurrentPage}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
           />
         )}
         {activeModal === "Product" && (
@@ -56,6 +60,8 @@ function AdminPage() {
             indexOfFirst={indexOfFirst}
             indexOfLast={indexOfLast}
             setCurrentPage={setCurrentPage}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
           />
         )}
         {activeModal === "Setting" && <></>}

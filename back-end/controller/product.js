@@ -70,13 +70,13 @@ const updateProducts = async (req, res) => {
   try {
     const { id } = req.params;
     if (req.body && req.body.title) req.body.slug = slugify(req.body.title);
-    const updateProduct = await Products.findByIdAndUpdate(pid, req.body, {
+    const updateProduct = await Products.findByIdAndUpdate(id, req.body, {
       new: true,
     });
     if (!updateProduct) throw new Error("Product not found");
     return res.status(200).json({
       success: true,
-      updateProduct: updateProduct,
+      data: updateProduct,
     });
   } catch (error) {
     return res.status(400).json({
