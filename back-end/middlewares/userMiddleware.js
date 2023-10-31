@@ -1,3 +1,6 @@
+import jwt from "jsonwebtoken";
+import Users from "../model/user.js";
+
 const userMiddleware = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.replace("Bearer ", "");
@@ -11,12 +14,36 @@ const userMiddleware = async (req, res, next) => {
     if (email) {
       const user = await Users.findOne({ email });
       if (user) {
-        if (user.role === "admin") {
-          req.user = user;
-          next();
-        } else {
-          throw new Error("Unauthorized: Insufficient permissions");
-        }
+        req.user = user;
+        next();
+      } else {
+        throw new Error("Unauthorized");
+      }
+    } else {
+      throw new Error("Unauthorized");
+    }
+  } catch (error) {
+    res.status(401).json({
+      message: error.message,
+    });
+  }
+};
+const adminMiddleware = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization?.replace("Bearer ", "");
+    if (!token) {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
+    }
+
+    const { email, role } = jwt.verify(token, process.env.JWT_SECRET);
+    if (email) {
+      const user = await Users.findOne({ email });
+      if (user) {
+        req.user = user;
+        req.role = role;
+        next();
       } else {
         throw new Error("Unauthorized");
       }
@@ -30,4 +57,4 @@ const userMiddleware = async (req, res, next) => {
   }
 };
 
-export default userMiddleware;
+export { adminMiddleware, userMiddleware };

@@ -6,11 +6,7 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-<<<<<<< HEAD
-      unique: false,
-=======
       unique: true,
->>>>>>> admin
       index: true,
     },
     email: {
