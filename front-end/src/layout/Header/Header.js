@@ -164,12 +164,6 @@ function Header() {
                       </span>
                       Change Password
                     </Link>
-                    <Link className={cx("btn-admin")} to="/admin">
-                      <span>
-                        <SiAdminer></SiAdminer>
-                      </span>
-                      Admin
-                    </Link>
                   </>
                 )}
               </div>
