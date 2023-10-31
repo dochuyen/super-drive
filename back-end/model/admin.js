@@ -1,16 +1,12 @@
 import mongoose from "mongoose";
 
 // Declare the Schema of the Mongo model
-const userSchema = new mongoose.Schema(
+const adminSchema = new mongoose.Schema(
   {
     username: {
       type: String,
       required: true,
-<<<<<<< HEAD
-      unique: false,
-=======
       unique: true,
->>>>>>> admin
       index: true,
     },
     email: {
@@ -30,16 +26,9 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      default: "user",
+      default: "admin",
     },
-    cartitem: {
-      type: Array,
-      default: [],
-    },
-    address: {
-      type: Array,
-      default: [],
-    },
+    
 
     refreshToken: {
       type: String,
@@ -59,4 +48,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("User", userSchema);
+export default mongoose.model("Admin", adminSchema);
