@@ -50,6 +50,7 @@ const Login = () => {
         dispatch({ type: "SET_USERNAME", payload: data.data.username });
         dispatch({ type: "SET_CART", payload: data.data.cartitem });
         localStorage.setItem("token", data.data.token);
+        localStorage.setItem("role", data.data.role);
         next("/");
       })
       .catch((err) => {

@@ -77,6 +77,7 @@ const userLogin = async (req, res) => {
     data: {
       token,
       email,
+      role: user.role,
       username: user.username,
       cartitem: user.cartitem,
     },
@@ -86,12 +87,15 @@ const userRegister = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    const passwordHash = bcrypt.hashSync(password, 10);
-
     const user = await Users.findOne({ email });
     if (user) {
-      throw new Error("Email is already taken");
+      return res.status(409).json({
+        message: "Email đã tồn tại",
+        data: null,
+      });
     }
+
+    const passwordHash = bcrypt.hashSync(password, 10);
 
     const newUser = await Users.create({
       username,
@@ -100,26 +104,29 @@ const userRegister = async (req, res) => {
     });
 
     if (!newUser) {
-      throw new Error("Register failed");
+      return res.status(500).json({
+        message: "Đăng ký thất bại",
+        data: null,
+      });
     }
 
     res.status(201).json({
-      message: "Register success",
+      message: "Đăng ký thành công",
       data: {
         _id: newUser._id,
         username,
         email,
-        password: passwordHash,
       },
     });
   } catch (error) {
-    console.log(error);
-    res.status(400).json({
-      message: "Fail",
+    console.error(error);
+    res.status(500).json({
+      message: "Đăng ký thất bại",
       data: null,
     });
   }
 };
+
 const changePassword = async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
@@ -143,4 +150,4 @@ const changePassword = async (req, res) => {
   }
 };
 
-export { getUser, userLogin, userRegister, changePassword, getAll ,deleteUser};
+export { getUser, userLogin, userRegister, changePassword, getAll, deleteUser };

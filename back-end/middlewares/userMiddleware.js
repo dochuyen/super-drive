@@ -1,6 +1,3 @@
-import jwt from "jsonwebtoken";
-import Users from "../model/user.js";
-
 const userMiddleware = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.replace("Bearer ", "");
@@ -14,8 +11,12 @@ const userMiddleware = async (req, res, next) => {
     if (email) {
       const user = await Users.findOne({ email });
       if (user) {
-        req.user = user;
-        next();
+        if (user.role === "admin") {
+          req.user = user;
+          next();
+        } else {
+          throw new Error("Unauthorized: Insufficient permissions");
+        }
       } else {
         throw new Error("Unauthorized");
       }
