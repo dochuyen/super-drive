@@ -77,6 +77,7 @@ const userLogin = async (req, res) => {
     data: {
       token,
       email,
+      role:user.role,
       username: user.username,
       cartitem: user.cartitem,
     },
