@@ -50,12 +50,28 @@ function UserAdmin({
     axios
       .get(`${process.env.REACT_APP_API_KEY}/api/user`)
       .then((response) => {
-        setUsers(response.data.data);
+        const allUsers = response.data.data;
+        const usersWithUserRole = allUsers.filter(
+          (user) => user.role === "user"
+        );
+        setUsers(usersWithUserRole);
       })
       .catch((error) => {
         console.error("Error fetching user data: ", error);
       });
   }, []);
+  const handleAddUser = (newUser) => {
+    axios
+      .post(`${process.env.REACT_APP_API_KEY}/api/user/register`, newUser)
+      .then((response) => {
+        setUsers((prevUsers) => [...prevUsers, response.data.data]);
+        setIsAddModalOpen(false);
+      })
+
+      .catch((error) => {
+        console.error("Error adding user: ", error);
+      });
+  };
 
   return (
     <article>
@@ -68,11 +84,19 @@ function UserAdmin({
           isModalOpen={isAddModalOpen}
           closeModal={() => setIsAddModalOpen(false)}
           setUsers={setUsers}
+          handleAddUser={handleAddUser}
         />
       )}
       <div className={cx("modal-filter")}>
-        {" "}
-        <p>Tổng số mục: {filteredUsers.length}</p>
+        {filteredUsers.length === 0 ? (
+          <>
+            <p>Tổng số mục: {filteredUsers.length}</p>
+            <p>Không có người dùng...</p>
+          </>
+        ) : (
+          <p>Tổng số mục: {filteredUsers.length}</p>
+        )}
+
         <input
           type="text"
           value={searchTerm}
@@ -85,6 +109,7 @@ function UserAdmin({
           <thead>
             <tr>
               <th>ID</th>
+              <th>Username</th>
               <th>Email</th>
               <th>Password</th>
               <th>Actions</th>
@@ -94,6 +119,7 @@ function UserAdmin({
             {currentUsers.map((user, index) => (
               <tr key={user._id}>
                 <td>{index + 1}</td>
+                <td>{user.username}</td>
                 <td>{user.email}</td>
                 <td>{user.password}</td>
                 <td>

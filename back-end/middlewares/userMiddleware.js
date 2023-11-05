@@ -57,4 +57,4 @@ const adminMiddleware = async (req, res, next) => {
   }
 };
 
-export  {adminMiddleware, userMiddleware};
+export { adminMiddleware, userMiddleware };

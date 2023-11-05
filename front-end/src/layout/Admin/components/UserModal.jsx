@@ -10,6 +10,10 @@ export const UserAddModal = ({ isModalOpen, closeModal, handleAddUser }) => {
     password: "",
   });
 
+
+
+
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewUser({
@@ -62,7 +66,7 @@ export const UserAddModal = ({ isModalOpen, closeModal, handleAddUser }) => {
 };
 
 export function EditUser({ isModalOpen, closeModal }) {
-  const { id } = useParams(); // Lấy id từ đường dẫn
+  const { id } = useParams();
   const [user, setUser] = useState({});
   const [editedUser, setEditedUser] = useState({
     username: "",

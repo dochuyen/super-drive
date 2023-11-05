@@ -14,9 +14,16 @@ const getOne = async (req, res) => {
 const getAll = async (req, res) => {
   try {
     const brand = await Brand.find();
-    console.log({ brand });
-    res.json(brand);
-  } catch (error) {}
+    return res.status(200).json({
+      success: true,
+      data: brand,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 const createBrand = async (req, res) => {

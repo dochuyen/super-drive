@@ -11,7 +11,8 @@ productRouter.get("/search", proCtrl.searchProducts);
 
 productRouter.post("/", uploadCloud.array("images", 5), proCtrl.createProducts);
 productRouter.put(
-  "/uploadimage/:id",adminMiddleware,
+  "/uploadimage/:id",
+  adminMiddleware,
   uploadCloud.array("images", 5),
   proCtrl.uploadImageProduct
 );

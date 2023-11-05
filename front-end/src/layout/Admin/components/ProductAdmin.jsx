@@ -15,7 +15,6 @@ function ProductAdmin({
   setCurrentPage,
   searchTerm,
   setSearchTerm,
-  search,
 }) {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -55,6 +54,56 @@ function ProductAdmin({
         console.error("Error deleting product: ", error);
       });
   };
+  const token = localStorage.getItem("token");
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const handleAddProduct = async (newProduct) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("title", newProduct.title);
+      formData.append("slug", newProduct.slug);
+      formData.append("description", newProduct.description);
+      formData.append("brand", newProduct.brand);
+      formData.append("price", newProduct.price);
+
+      newProduct.images.forEach((image, index) => {
+        formData.append(`images[${index}]`, image);
+      });
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_KEY}/api/product`,
+
+        formData,
+        config,
+
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.data.success) {
+        axios
+          .get(`${process.env.REACT_APP_API_KEY}/api/product`)
+          .then((response) => {
+            setProducts(response.data.data);
+            setIsAddModalOpen(false);
+          })
+          .catch((error) => {
+            console.error("Error fetching updated product data: ", error);
+          });
+      }
+    } catch (error) {
+      console.error("Error adding product: ", error);
+      alert("Có lỗi xảy ra khi thêm sản phẩm. Vui lòng thử lại sau.");
+    }
+  };
 
   return (
     <article>
@@ -67,6 +116,7 @@ function ProductAdmin({
           isModalOpen={isAddModalOpen}
           setIsAddModalOpen={setIsAddModalOpen}
           closeModal={() => setIsAddModalOpen(false)}
+          handleAddProduct={handleAddProduct}
         />
       )}
       <div className={cx("modal-filter")}>

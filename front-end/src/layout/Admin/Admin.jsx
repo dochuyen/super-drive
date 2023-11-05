@@ -20,7 +20,7 @@ function AdminPage() {
     setActiveModal(null);
   };
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(4);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const indexOfLast = currentPage * itemsPerPage;
   const indexOfFirst = indexOfLast - itemsPerPage;
   const [searchTerm, setSearchTerm] = useState("");

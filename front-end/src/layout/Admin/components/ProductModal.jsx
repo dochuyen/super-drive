@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./ProductModal.module.scss"; // Import CSS file
 import { useParams } from "react-router-dom";
 
-export function ProductForm({ onProductCreated, isModalOpen, closeModal }) {
-  const [product, setProduct] = useState({
+export function ProductForm({ isModalOpen, closeModal, handleAddProduct }) {
+  const [brand, setBrand] = useState([]);
+  const [newProduct, setnewProduct] = useState({
     title: "",
     slug: "",
     description: "",
@@ -14,62 +15,42 @@ export function ProductForm({ onProductCreated, isModalOpen, closeModal }) {
     images: [],
   });
 
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_KEY}/api/brand`)
+      .then((response) => {
+        setBrand(response.data.data);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching  data: ", error);
+      });
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProduct({
-      ...product,
+    setnewProduct({
+      ...newProduct,
       [name]: value,
     });
   };
 
   const handleImageChange = (e) => {
     const files = e.target.files;
-    const imageUrls = [];
+    const imageFiles = [];
 
     for (let i = 0; i < files.length; i++) {
-      const imageUrl = URL.createObjectURL(files[i]);
-      imageUrls.push(imageUrl);
+      imageFiles.push(files[i]);
     }
 
-    setProduct({
-      ...product,
-      images: imageUrls,
+    setnewProduct({
+      ...newProduct,
+      images: imageFiles,
     });
   };
-  const token = localStorage.getItem("token");
-  console.log(token);
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+  const handleAdd = () => {
+    handleAddProduct(newProduct);
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_KEY}/api/product`,
-        product,
-        config
-      );
-
-      if (response.data.success) {
-        onProductCreated(response.data.createProductData);
-        setProduct({
-          title: "",
-          slug: "",
-          description: "",
-          brand: "",
-          price: 0,
-          images: [{}],
-        });
-        alert("Sản phẩm đã được tạo thành công!");
-      } else {
-        alert("Không thể tạo sản phẩm: " + response.data.message);
-      }
-    } catch (error) {}
-  };
-
   return (
     <div className={isModalOpen ? styles.modalEdit : styles.modalHidden}>
       <div className={styles.formContainer}>
@@ -79,7 +60,7 @@ export function ProductForm({ onProductCreated, isModalOpen, closeModal }) {
           type="text"
           id="title"
           name="title"
-          value={product.title}
+          value={newProduct.title}
           onChange={handleChange}
           required
         />
@@ -90,7 +71,7 @@ export function ProductForm({ onProductCreated, isModalOpen, closeModal }) {
           type="text"
           id="slug"
           name="slug"
-          value={product.slug}
+          value={newProduct.slug}
           onChange={handleChange}
           style={{ display: "none" }}
         />
@@ -98,25 +79,29 @@ export function ProductForm({ onProductCreated, isModalOpen, closeModal }) {
         <textarea
           id="description"
           name="description"
-          value={product.description}
+          value={newProduct.description}
           onChange={handleChange}
           required
         />
         <label htmlFor="brand">Nhãn hiệu:</label>
-        <input
-          type="text"
-          id="brand"
-          name="brand"
-          value={product.brand}
-          onChange={handleChange}
-          required
-        />
+
+        {brand && brand.length > 0 && (
+          <select name="brand" onChange={handleChange}>
+            <option value="">Chọn nhãn hiệu</option>
+            {brand.map((brands, index) => (
+              <option key={index} value={brands._id}>
+                {brands.name}
+              </option>
+            ))}
+          </select>
+        )}
+
         <label htmlFor="price">Giá:</label>
         <input
           type="number"
           id="price"
           name="price"
-          value={product.price}
+          value={newProduct.price}
           onChange={handleChange}
           required
         />
@@ -130,16 +115,8 @@ export function ProductForm({ onProductCreated, isModalOpen, closeModal }) {
           multiple
           onChange={handleImageChange}
         />
-        <div className={styles.imagePreview}>
-          {product.images.map((imageUrl, index) => (
-            <img key={index} src={imageUrl} alt={` ${index}`} />
-          ))}
-        </div>
-        <button
-          type="submit"
-          className={styles.addButton}
-          onClick={handleSubmit}
-        >
+
+        <button type="submit" className={styles.addButton} onClick={handleAdd}>
           Tạo sản phẩm
         </button>
         <button className={styles.closeButton} onClick={closeModal}>
@@ -166,7 +143,7 @@ export const EditProduct = ({
   });
   const { id } = useParams();
   console.log(id);
-
+  const brands = ["BMW", "Ferrari", "Lamborghini"];
   const handleImageChange = (e) => {
     const files = e.target.files;
     const imageUrls = [];
@@ -224,14 +201,20 @@ export const EditProduct = ({
             setEditProduct({ ...editProduct, description: e.target.value })
           }
         />
-        <label>Thương hiệu (brand):</label>
-        <input
-          type="text"
+        <select
+          name="brand"
           value={editProduct.brand}
           onChange={(e) =>
             setEditProduct({ ...editProduct, brand: e.target.value })
           }
-        />
+        >
+          <option value="">Chọn nhãn hiệu</option>
+          {brands.map((brand, index) => (
+            <option key={index} value={brand}>
+              {brand}
+            </option>
+          ))}
+        </select>
         <label>Giá:</label>
         <input
           type="number"
@@ -252,11 +235,6 @@ export const EditProduct = ({
           multiple
           onChange={handleImageChange}
         />
-        <div className={styles.imagePreview}>
-          {editProduct.images.map((imageUrl, index) => (
-            <img key={index} src={imageUrl} alt={`${index}`} />
-          ))}
-        </div>
         <button className={styles.addButton} onClick={handleEdit}>
           Lưu
         </button>

@@ -74,7 +74,7 @@ function Header() {
     store.dispatch(clearAuthStateAction);
     setLocalUsername(true);
   };
-
+  const role = localStorage.getItem("role");
   return (
     <div
       className={cx("wrapper")}
@@ -89,7 +89,7 @@ function Header() {
         <div className={cx("header")}>
           <div className={cx("header-logo")}>
             <Link to="/" className={cx("logo")}>
-              <img className={cx("logo-avt")} src={logo} />
+              <image className={cx("logo-avt")} src={logo} />
             </Link>
             <Link to="/" className={cx("title")}>
               SuperDrive
@@ -164,7 +164,11 @@ function Header() {
                       </span>
                       Change Password
                     </Link>
-                    <Link className={cx("btn-admin")} to="/admin">
+                    <Link
+                      className={cx("btn-admin")}
+                      to="/admin"
+                      style={{ display: role === "admin" ? "block" : "none" }}
+                    >
                       <span>
                         <SiAdminer></SiAdminer>
                       </span>
