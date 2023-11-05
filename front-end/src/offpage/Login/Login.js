@@ -50,9 +50,10 @@ const Login = () => {
         dispatch({ type: "SET_USERNAME", payload: data.data.username });
         dispatch({ type: "SET_CART", payload: data.data.cartitem });
         localStorage.setItem("token", data.data.token);
-        if(data.data.role==='admin'){
+        localStorage.setItem("role", data.data.role);
+        if (data.data.role === "admin") {
           next("/admin");
-        }else if(data.data.role==='user'){
+        } else if (data.data.role === "user") {
           next("/");
         }
       })

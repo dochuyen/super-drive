@@ -89,8 +89,10 @@ function UserAdmin({
       )}
       <div className={cx("modal-filter")}>
         {filteredUsers.length === 0 ? (
-          <p>Không có người dùng có vai trò là "user".</p>
-          <p>Tổng số mục: {filteredUsers.length}</p>
+          <>
+            <p>Tổng số mục: {filteredUsers.length}</p>
+            <p>Không có người dùng...</p>
+          </>
         ) : (
           <p>Tổng số mục: {filteredUsers.length}</p>
         )}

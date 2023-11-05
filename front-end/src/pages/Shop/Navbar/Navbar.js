@@ -34,7 +34,7 @@ const Navbar = () => {
     axios
       .get(`${process.env.REACT_APP_API_KEY}/api/brand`)
       .then((response) => {
-        setBrandApi(response.data);
+        setBrandApi(response.data.data);
       })
       .catch((error) => console.log(error));
   }, []);
