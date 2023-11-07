@@ -152,7 +152,7 @@ function Header() {
                       </span>
                       {userName}
                     </Link>
-                    <Link onClick={handleLogOut} className={cx("btn-log")}>
+                    <Link  to="/" onClick={handleLogOut} className={cx("btn-log")}>
                       <span>
                         <BiLogOut />
                       </span>

@@ -63,29 +63,10 @@ function ProductAdmin({
   };
   const handleAddProduct = async (newProduct) => {
     try {
-      const formData = new FormData();
-
-      formData.append("title", newProduct.title);
-      formData.append("slug", newProduct.slug);
-      formData.append("description", newProduct.description);
-      formData.append("brand", newProduct.brand);
-      formData.append("price", newProduct.price);
-
-      newProduct.images.forEach((image, index) => {
-        formData.append(`images[${index}]`, image);
-      });
-
       const response = await axios.post(
         `${process.env.REACT_APP_API_KEY}/api/product`,
-
-        formData,
-        config,
-
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        newProduct,
+        config
       );
 
       if (response.data.success) {
@@ -95,6 +76,7 @@ function ProductAdmin({
             setProducts(response.data.data);
             setIsAddModalOpen(false);
           })
+
           .catch((error) => {
             console.error("Error fetching updated product data: ", error);
           });
