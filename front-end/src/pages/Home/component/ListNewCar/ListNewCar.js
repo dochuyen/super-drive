@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames/bind";
 import styles from "./List.module.scss";
 import { Col, Row } from "react-bootstrap";
@@ -11,8 +11,9 @@ import axios from "axios";
 const cx = classNames.bind(styles);
 const ListNewCar = () => {
   const [products, setProducts] = useState([]);
-  const emailUser = useSelector((state) => state.email);
+  const token = localStorage.getItem("token");
 
+  const dispatch = useDispatch();
   useEffect(() => {
     axios
       .get(
@@ -25,7 +26,7 @@ const ListNewCar = () => {
   }, []);
   const next = useNavigate();
   const handleAddProduct = (product) => {
-    if (!emailUser) {
+    if (!token) {
       alert("Bạn cần đăng nhập !");
       next("/login");
     } else {
@@ -34,13 +35,18 @@ const ListNewCar = () => {
           const response = await axios.put(
             `${process.env.REACT_APP_API_KEY}/api/cart/add`,
             {
-              email: emailUser,
               productId: product._id,
               title: product.title,
               price: product.price,
               quantity: 1,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
             }
           );
+          dispatch({ type: "SET_CART", payload: response.data.data.cartitem });
         } catch (error) {
           console.log(error);
         }
