@@ -34,14 +34,20 @@ const Product = () => {
     },
   ];
 
-  const [pageAction, setPageAction] = useState(1);
   const [products, setProducts] = useState([]);
   const [cartLength, setCartLength] = useState();
   const emailUser = useSelector((state) => state.email);
-
+  const [pageAction, setPageAction] = useState(1);
   const token = localStorage.getItem("token");
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const productsPerPage = 8;
+  const totalPages = Math.ceil(products.length / productsPerPage);
+  const startIndex = (pageAction - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const displayedProducts = products.slice(startIndex, endIndex);
+  const goToPage = (pageNumber) => {
+    setPageAction(pageNumber);
+  };
   const handleAddProduct = (product) => {
     if (!token) {
       alert("Bạn cần đăng nhập !");
@@ -121,7 +127,7 @@ const Product = () => {
 
       <div className={cx("product")}>
         <Row className={cx("responsive")}>
-          {products.map((product, _id) => (
+          {displayedProducts.map((product, _id) => (
             <Col xs={12} sm={6} md={6} lg={4} xl={3} key={_id}>
               <div className={cx("box")}>
                 <Link
@@ -167,22 +173,18 @@ const Product = () => {
       </div>
 
       <div className={cx("page")}>
-        {pages.map((page, index) => (
-          <span
-            key={index}
-            style={
-              pageAction === page.page
-                ? {
-                    border: "1px solid #5d5d5d",
-                  }
-                : {}
-            }
-            onClick={() => setPageAction(page.page)}
-            className={cx("item-page")}
-          >
-            {page.page}
-          </span>
-        ))}
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+          (page, index) => (
+            <span
+              key={index}
+              style={pageAction === page ? { border: "1px solid #5d5d5d" } : {}}
+              onClick={() => goToPage(page)}
+              className={cx("item-page")}
+            >
+              {page}
+            </span>
+          )
+        )}
       </div>
     </div>
   );

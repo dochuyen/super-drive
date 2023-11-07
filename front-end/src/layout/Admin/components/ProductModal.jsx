@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import styles from "./ProductModal.module.scss"; // Import CSS file
 import { useParams } from "react-router-dom";
 
 export function ProductForm({ isModalOpen, closeModal, handleAddProduct }) {
-  const [brand, setBrand] = useState([]);
   const [newProduct, setnewProduct] = useState({
     title: "",
     slug: "",
@@ -14,19 +13,7 @@ export function ProductForm({ isModalOpen, closeModal, handleAddProduct }) {
 
     images: [],
   });
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_KEY}/api/brand`)
-      .then((response) => {
-        setBrand(response.data.data);
-        console.log(response.data.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching  data: ", error);
-      });
-  }, []);
-
+  const brands = ["BMW", "Ferrari", "Lamborghini"];
   const handleChange = (e) => {
     const { name, value } = e.target;
     setnewProduct({
@@ -37,15 +24,16 @@ export function ProductForm({ isModalOpen, closeModal, handleAddProduct }) {
 
   const handleImageChange = (e) => {
     const files = e.target.files;
-    const imageFiles = [];
+    const imageUrls = [];
 
     for (let i = 0; i < files.length; i++) {
-      imageFiles.push(files[i]);
+      const imageUrl = URL.createObjectURL(files[i]);
+      imageUrls.push(imageUrl);
     }
 
     setnewProduct({
       ...newProduct,
-      images: imageFiles,
+      images: imageUrls,
     });
   };
   const handleAdd = () => {
@@ -85,17 +73,14 @@ export function ProductForm({ isModalOpen, closeModal, handleAddProduct }) {
         />
         <label htmlFor="brand">Nhãn hiệu:</label>
 
-        {brand && brand.length > 0 && (
-          <select name="brand" onChange={handleChange}>
-            <option value="">Chọn nhãn hiệu</option>
-            {brand.map((brands, index) => (
-              <option key={index} value={brands._id}>
-                {brands.name}
-              </option>
-            ))}
-          </select>
-        )}
-
+        <select name="brand" onChange={handleChange}>
+          <option value="">Chọn nhãn hiệu</option>
+          {brands.map((brand, index) => (
+            <option key={index} value={brand}>
+              {brand}
+            </option>
+          ))}
+        </select>
         <label htmlFor="price">Giá:</label>
         <input
           type="number"
@@ -115,7 +100,11 @@ export function ProductForm({ isModalOpen, closeModal, handleAddProduct }) {
           multiple
           onChange={handleImageChange}
         />
-
+        <div className={styles.imagePreview}>
+          {newProduct.images.map((imageUrl, index) => (
+            <img key={index} src={imageUrl} alt={` ${index}`} />
+          ))}
+        </div>
         <button type="submit" className={styles.addButton} onClick={handleAdd}>
           Tạo sản phẩm
         </button>
@@ -235,6 +224,11 @@ export const EditProduct = ({
           multiple
           onChange={handleImageChange}
         />
+        <div className={styles.imagePreview}>
+          {editProduct.images.map((imageUrl, index) => (
+            <img key={index} src={imageUrl} alt={`${index}`} />
+          ))}
+        </div>
         <button className={styles.addButton} onClick={handleEdit}>
           Lưu
         </button>

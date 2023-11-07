@@ -64,9 +64,7 @@ function Canvas({
               </div>
             ))}
           </>
-          <div className={cx("nav-search")}>
-            {/* <Search/> */}
-          </div>
+          <div className={cx("nav-search")}>{/* <Search/> */}</div>
           <div>
             <div className={cx("btn-log")}>
               <BiUser />
@@ -94,13 +92,17 @@ function Canvas({
                       </span>
                       {paserUsername}
                     </Link>
-                    <Link onClick={handleLogOut} className={cx("btn-logout")}>
+                    <Link
+                      to="/"
+                      onClick={handleLogOut}
+                      className={cx("btn-logout")}
+                    >
                       <span>
                         <BiLogOut />
                       </span>
                       Log out
                     </Link>
-                    <Link className={cx("btn-logout")} to='/change-password'>
+                    <Link className={cx("btn-logout")} to="/change-password">
                       <span>
                         <FaExchangeAlt></FaExchangeAlt>
                       </span>
